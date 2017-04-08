@@ -36,7 +36,6 @@
         <property name="dfjz.slow.method.time" description="慢方法时间(秒)" defaultValue="2"/>
         <property name="dfjz.slow.interface.time" description="慢接口时间(秒)" defaultValue="2"/>
         <property name="dfjz.cache.open" description="是否开启缓存,Y:开启,N:不开启" defaultValue="Y"/>
-        <property name="dfjz.file.root.path" description="文件根目录" defaultValue="/Users/kyg/code2/dfjz/dfjz-web/src/main/webapp/WEB-INF/"/>
     </group>
     <script>
         <generate template="app.properties" charset="UTF-8"/>

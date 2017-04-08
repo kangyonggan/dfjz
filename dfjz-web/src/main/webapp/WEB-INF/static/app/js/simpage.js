@@ -93,18 +93,20 @@
          * @param url
          */
         function getUrl(url) {
-            console.log(url);
             // 开始加载
             startLoading();
             $.ajax({
                 'url': url,
-                'cache': false,
-                success: function (result) {
-                    stopLoading(true);
-                    console.log(result);
-                    // 内容替换
-                    // $contentArea.empty().html(result);
-                }
+                'cache': false
+            }).error(function () {
+                // 停止加载
+                stopLoading(false);
+                getUrl(getContentUrl("404"));
+            }).done(function (result) {
+                // 停止加载
+                stopLoading(true);
+                // 内容替换
+                $contentArea.empty().html(result);
             });
         }
 
