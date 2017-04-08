@@ -42,7 +42,7 @@
         </javaClientGenerator>
 
         <!--table name-->
-        <table tableName="article">
+        <table tableName="table_name">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
     </context>
