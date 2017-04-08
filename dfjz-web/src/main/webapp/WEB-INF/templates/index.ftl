@@ -3,7 +3,7 @@
 <div class="article-list">
     <div class="article-item">
         <h1>
-            <a href="#" class="article-title">从零开始搭建NexT主题的Hexo博客</a>
+            <a href="#article/1" class="article-title">从零开始搭建NexT主题的Hexo博客</a>
             <div class="article-title-line article-title-line-hide"></div>
         </h1>
 
