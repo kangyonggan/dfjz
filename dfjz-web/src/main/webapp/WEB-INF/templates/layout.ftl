@@ -17,7 +17,20 @@
 </head>
 <body>
 
+<#include "navbar.ftl">
+
+<div class="height-170"></div>
+
 <div class="sim-page"></div>
+
+<div class="height-80"></div>
+
+<#include "footer.ftl">
+
+<div class="scroll-bar">
+    <a href="javascript:scroll(0,0)" class="top">&uarr;</a>
+    <a href="javascript:scroll(0, 9999999999)" class="bottom">&darr;</a>
+</div>
 
 <script>var ctx = '${ctx}';</script>
 <script src="${ctx}/static/app/js/simpage.js"></script>

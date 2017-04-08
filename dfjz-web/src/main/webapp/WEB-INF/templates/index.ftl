@@ -1,19 +1,132 @@
 <#assign ctx="${(rca.contextPath)!''}">
 
-<div id="header">
-    <div>
-        <a href="#index">东方娇子</a>
-        <ul>
-            <li><a href="#index">首页</a></li>
-            <li><a href="#categories">分类</a></li>
-            <li><a href="#archives">归档</a></li>
-            <li><a href="#rss">订阅</a></li>
-            <li><a href="#map">地图</a></li>
-            <li><a href="#stat">统计</a></li>
-            <li><a href="#about">关于</a></li>
-        </ul>
-        <form action="" method="get" novalidate>
-            <input type="text" name="k" placeholder="搜一搜:空格分词,支持拼音..." autocomplete="off"/>
-        </form>
+<div class="article-list">
+    <div class="article-item">
+        <h1>
+            <a href="#" class="article-title">从零开始搭建NexT主题的Hexo博客</a>
+            <div class="article-title-line article-title-line-hide"></div>
+        </h1>
+
+        <div class="article-info">
+            <span>发表于 2017-4-8</span>
+            <span>分类于 <a href="#">综合</a></span>
+            <span>评论 <a href="#">5</a></span>
+        </div>
+
+        <div class="article-summary">
+            文章摘要...
+        </div>
+
+        <a class="article-more" href="#">阅读全文 »</a>
+    </div>
+    <div class="article-item">
+        <h1>
+            <a href="#" class="article-title">从零开始搭建NexT主题的Hexo博客</a>
+            <div class="article-title-line article-title-line-hide"></div>
+        </h1>
+
+        <div class="article-info">
+            <span>发表于 2017-4-8</span>
+            <span>分类于 <a href="#">综合</a></span>
+            <span>评论 <a href="#">5</a></span>
+        </div>
+
+        <div class="article-summary">
+            文章摘要...
+        </div>
+
+        <a class="article-more" href="#">阅读全文 »</a>
+    </div>
+    <div class="article-item">
+        <h1>
+            <a href="#" class="article-title">从零开始搭建NexT主题的Hexo博客</a>
+            <div class="article-title-line article-title-line-hide"></div>
+        </h1>
+
+        <div class="article-info">
+            <span>发表于 2017-4-8</span>
+            <span>分类于 <a href="#">综合</a></span>
+            <span>评论 <a href="#">5</a></span>
+        </div>
+
+        <div class="article-summary">
+            文章摘要...
+        </div>
+
+        <a class="article-more" href="#">阅读全文 »</a>
+    </div>
+    <div class="article-item">
+        <h1>
+            <a href="#" class="article-title">从零开始搭建NexT主题的Hexo博客</a>
+            <div class="article-title-line article-title-line-hide"></div>
+        </h1>
+
+        <div class="article-info">
+            <span>发表于 2017-4-8</span>
+            <span>分类于 <a href="#">综合</a></span>
+            <span>评论 <a href="#">5</a></span>
+        </div>
+
+        <div class="article-summary">
+            文章摘要...
+        </div>
+
+        <a class="article-more" href="#">阅读全文 »</a>
+    </div>
+    <div class="article-item">
+        <h1>
+            <a href="#" class="article-title">从零开始搭建NexT主题的Hexo博客</a>
+            <div class="article-title-line article-title-line-hide"></div>
+        </h1>
+
+        <div class="article-info">
+            <span>发表于 2017-4-8</span>
+            <span>分类于 <a href="#">综合</a></span>
+            <span>评论 <a href="#">5</a></span>
+        </div>
+
+        <div class="article-summary">
+            文章摘要...
+        </div>
+
+        <a class="article-more" href="#">阅读全文 »</a>
+    </div>
+    <div class="article-item">
+        <h1>
+            <a href="#" class="article-title">从零开始搭建NexT主题的Hexo博客</a>
+            <div class="article-title-line article-title-line-hide"></div>
+        </h1>
+
+        <div class="article-info">
+            <span>发表于 2017-4-8</span>
+            <span>分类于 <a href="#">综合</a></span>
+            <span>评论 <a href="#">5</a></span>
+        </div>
+
+        <div class="article-summary">
+            文章摘要...
+        </div>
+
+        <a class="article-more" href="#">阅读全文 »</a>
+    </div>
+
+    <div class="pagination hidden-sm">
+        <a href="#">&lt;</a>
+        <a href="#">1</a>
+        <a href="javascript:" class="active">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">&gt;</a>
+    </div>
+
+    <div class="pagination hidden-lg">
+        <a href="#">&lt;</a>
+        <a href="#">1</a>
+        <a href="javascript:" class="active">2</a>
+        <a href="#">3</a>
+        <a href="#">&gt;</a>
     </div>
 </div>
+
+<script src="${ctx}/static/app/js/index.js"></script>

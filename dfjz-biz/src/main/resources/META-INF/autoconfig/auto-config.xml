@@ -24,7 +24,7 @@
 
         <!--mail-->
         <property name="dfjz.mail.host" description="邮件服务器地址" defaultValue="smtp.163.com"/>
-        <property name="dfjz.mail.username" description="邮件服务器用户名" defaultValue="kyg2017@163.com"/>
+        <property name="dfjz.mail.username" description="邮件服务器用户名" defaultValue="kangyg2017@163.com"/>
         <property name="dfjz.mail.password" description="邮件服务器密码" defaultValue="123456"/>
         <property name="dfjz.mail.timeout" description="邮件发送超时时间" defaultValue="25000"/>
         <property name="dfjz.mail.receiver" description="错误日志邮件接收人" defaultValue="kangyonggan@gmail.com"/>

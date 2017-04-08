@@ -2,9 +2,22 @@ body {
     margin: 0;
 }
 
+.hidden {
+    display: none;
+}
+
+.sim-page {
+    margin: 0 auto;
+}
+
 /*header*/
 #header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     height: 90px;
+    z-index: 9999;
     background: #f5f5f5;
 }
 
@@ -12,7 +25,7 @@ body {
     margin: 0 auto;
 }
 
-#header > div > a {
+#header > div > a.logo {
     margin-top: 25px;
     padding: 0 3px;
     float: left;
@@ -27,6 +40,7 @@ body {
     text-decoration: none;
     border-top: 2px solid #000;
     border-bottom: 2px solid #000;
+    margin-left: 10px;
 }
 
 #header > div > ul {
@@ -54,6 +68,10 @@ body {
     border-radius: 2px;
 }
 
+#header > div > ul > li > a.active {
+    border-bottom: 1px solid #000;
+}
+
 #header > div > ul > li > a:hover {
     background: #e1e1e1;
 }
@@ -70,16 +88,262 @@ body {
     font-size: 13px;
     background: #f5f5f5;
     float: right;
+    margin-right: 10px;
+}
+
+#header > div > a.menu-button {
+    margin-top: 10px;
+    margin-right: 10px;
+    height: 36px;
+    width: 40px;
+    float: right;
+}
+
+#header > div > a.menu-button > div.line {
+    border-bottom: 2px solid #000;
+    width: 90%;
+    height: 10px;
+    margin: 0 auto;
+}
+
+.line-border-radius {
+    border-radius: 30%;
+}
+
+.menu-list {
+    width: 100%;
+    margin-top: 10px;
+    float: left;
+    background: #f5f5f5;
+    border-top: 1px solid #999;
+}
+
+.menu-list > ul {
+    margin-top: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.menu-list > ul > li > a {
+    display: block;
+    margin: 5px 15px;
+    padding: 5px;
+    color: #000;
+    text-decoration: none;
+}
+
+.menu-list > ul > li > a.active {
+    border-bottom: 1px solid #000;
+}
+
+.menu-list > ul > li > a:hover {
+    background: #e1e1e1;
+}
+
+.menu-list > form > input {
+    display: block;
+    border-radius: 20px;
+    border: 1px solid #333;
+    text-indent: 15px;
+    outline: none;
+    padding: 3px 0;
+    width: 230px;
+    margin: 0 auto;
+    margin-top: 10px;
+    height: 22px;
+    font-size: 13px;
+    background: #f5f5f5;
+}
+
+.height-170 {
+    clear: both;
+    height: 170px;
+}
+
+.height-80 {
+    clear: both;
+    height: 80px;
+}
+
+/*list*/
+.article-list {
+    padding: 0 10px;
+}
+
+.article-list > .article-item {
+    margin-bottom: 80px;
+}
+
+.article-list > .article-item > h1 > .article-title {
+    display: inline-block;
+    color: #555;
+    text-decoration: none;
+    font-size: 26px;
+    font-weight: 400;
+}
+
+.article-title-line {
+    transform: rotateY(90deg);
+}
+
+.article-title-line-hide {
+    border-bottom: 2px solid #fff;
+}
+
+.article-title-line-show {
+    border-bottom: 2px solid #000;
+}
+
+.article-list > .article-item > .article-info {
+    color: #999;
+    font-size: 12px;
+}
+
+.article-list > .article-item > .article-info > span::after {
+    content: " | ";
+}
+
+.article-list > .article-item > .article-info > span:last-child::after {
+    content: "";
+}
+
+.article-list > .article-item > .article-info > span > a {
+    color: #555;
+}
+
+.article-list > .article-item > .article-summary {
+    margin-top: 20px;
+}
+
+.article-list > .article-item > .article-more {
+    display: inline-block;
+    margin-top: 20px;
+    color: #555;
+    font-size: 15px;
+    line-height: 1.5;
+    text-decoration: none;
+    border-bottom: 2px solid #666;
+}
+
+/*pagination*/
+.pagination {
+    border-top: 1px solid #eee
+}
+.pagination > a {
+    display: inline-block;
+    text-decoration: none;
+    border-top: 1px solid #fff;
+    color: #222;
+    padding: 4px 10px;
+    margin-right: 10px;
+}
+.pagination > a.active {
+    background: #ccc;
+    color: #fff;
+}
+.pagination > a:hover {
+    border-top: 1px solid #333;
+}
+.pagination > a.active:hover {
+    border-top: 1px solid #fff;
+}
+
+/*footer*/
+#footer {
+    position: relative;
+    height: 80px;
+    background: #f5f5f5;
+    font-size: 14px;
+    color: #333;
+    letter-spacing: 1px;
+}
+
+#footer > div {
+    margin: 0 auto;
+    padding: 10px;
+}
+
+#footer > div > div > img {
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    margin-right: 5px;
+}
+
+#footer > div > div > a {
+    color: #333;
+}
+
+#footer > div > div{
+    margin-top: 10px;
+}
+
+#footer > div > img{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    right: 100px;
+    bottom: 5px;
+    z-index: 100;
+    transform:rotate(9deg);
+}
+
+/*scoll*/
+
+.scroll-bar {
+    position: fixed;
+    bottom: 120px;
+    right: 50px;
+    z-index: 99999;
+}
+
+.scroll-bar > a {
+    display: block;
+    width: 30px;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    color: #000;
+}
+
+.scroll-bar > a.top {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 0;
+}
+
+.scroll-bar > a.bottom {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 /*small screen*/
-@media (max-width: 1000px) {
-
+@media (max-width: 1200px) {
+    #header {
+        height: 60px;
+    }
+    #header > div > a.logo {
+        margin-top: 10px;
+    }
+    .hidden-sm {
+        display: none;
+    }
 }
 
 /*large screen*/
-@media (min-width: 1001px) {
+@media (min-width: 1201px) {
     #header > div {
-        width: 1000px;
+        width: 1200px;
+    }
+    #footer > div {
+        width: 1200px;
+    }
+    .sim-page {
+        width: 1200px;
+    }
+    .hidden-lg {
+        display: none;
     }
 }
