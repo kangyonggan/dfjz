@@ -1,6 +1,14 @@
 $(function () {
     $(".sim-page").simPage();
 
+    $(window).scroll(function () {
+        if ($(window).scrollTop() >= 100) { //向下滚动像素大于这个值时，即出现浮窗~
+            $('.scroll-bar').fadeIn(1000);
+        } else {
+            $('.scroll-bar').fadeOut(1000);
+        }
+    });
+
     var showMenuList = false;
     $(".menu-button").click(function () {
         var $this = $(this);

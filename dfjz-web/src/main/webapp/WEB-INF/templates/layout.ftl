@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="${ctx}/static/app/css/app.css"/>
 
     <script src="${ctx}/static/app/js/jquery.min.js"></script>
-<@block name="app-style"/>
+    <script>var ctx = '${ctx}';</script>
 </head>
 <body>
 
@@ -27,14 +27,12 @@
 
 <#include "footer.ftl">
 
-<div class="scroll-bar">
+<div class="scroll-bar hidden">
     <a href="javascript:scroll(0,0)" class="top">&uarr;</a>
     <a href="javascript:scroll(0, 9999999999)" class="bottom">&darr;</a>
 </div>
 
-<script>var ctx = '${ctx}';</script>
 <script src="${ctx}/static/app/js/simpage.js"></script>
 <script src="${ctx}/static/app/js/app.js"></script>
-<@block name="app-script"/>
 </body>
 </html>
