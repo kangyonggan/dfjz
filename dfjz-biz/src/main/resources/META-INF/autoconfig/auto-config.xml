@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <group>
+        <!--app-->
+        <property name="dfjz.app.name" description="项目名字" defaultValue="东方娇子"/>
+        <property name="dfjz.app.author" description="项目负责人" defaultValue="康永敢"/>
+        <property name="dfjz.app.ba.no" description="备案号" defaultValue="皖ICP备16017743号-1"/>
+
+        <!-- redis -->
+        <property name="dfjz.redis.maxTotal" description="redis最大连接数" defaultValue="1000"/>
+        <property name="dfjz.redis.minIdle" description="redis最小等待数" defaultValue="50"/>
+        <property name="dfjz.redis.maxIdle" description="redis最大等待数" defaultValue="100"/>
+        <property name="dfjz.redis.testOnBorrow" description="redis测试支持" defaultValue="true"/>
+        <property name="dfjz.redis.host" description="redis主机ip" defaultValue="127.0.0.1"/>
+        <property name="dfjz.redis.port" description="redis主机端口" defaultValue="6379"/>
+        <property name="dfjz.redis.password" description="redis密码" defaultValue="123456"/>
+        <property name="dfjz.redis.prefix" description="redis的key的前缀" defaultValue="dfjz"/>
+
+        <!--jdbc-->
+        <property name="dfjz.jdbc.driver" description="jdbc驱动" defaultValue="com.mysql.jdbc.Driver"/>
+        <property name="dfjz.jdbc.url" description="jdbc地址" defaultValue="jdbc:mysql://127.0.0.1:3306/dfjz?useUnicode=true&amp;amp;characterEncoding=UTF-8"/>
+        <property name="dfjz.jdbc.username" description="jdbc用户名" defaultValue="root"/>
+        <property name="dfjz.jdbc.password" description="jdbc密码" defaultValue="123456"/>
+
+        <!--mail-->
+        <property name="dfjz.mail.host" description="邮件服务器地址" defaultValue="smtp.163.com"/>
+        <property name="dfjz.mail.username" description="邮件服务器用户名" defaultValue="kyg2017@163.com"/>
+        <property name="dfjz.mail.password" description="邮件服务器密码" defaultValue="123456"/>
+        <property name="dfjz.mail.timeout" description="邮件发送超时时间" defaultValue="25000"/>
+        <property name="dfjz.mail.receiver" description="错误日志邮件接收人" defaultValue="kangyonggan@gmail.com"/>
+        <property name="dfjz.mail.bufferSize" description="错误日志邮件缓冲区大小(单位:k)" defaultValue="50"/>
+
+        <!-- log4j2 -->
+        <property name="dfjz.log4j2.home" description="log4j2日志的文件主目录" defaultValue="/Users/kyg/logs/dfjz"/>
+
+        <property name="dfjz.slow.method.time" description="慢方法时间(秒)" defaultValue="2"/>
+        <property name="dfjz.slow.interface.time" description="慢接口时间(秒)" defaultValue="2"/>
+        <property name="dfjz.cache.open" description="是否开启缓存,Y:开启,N:不开启" defaultValue="Y"/>
+        <property name="dfjz.file.root.path" description="文件根目录" defaultValue="/Users/kyg/code2/dfjz/dfjz-web/src/main/webapp/WEB-INF/"/>
+    </group>
+    <script>
+        <generate template="app.properties" charset="UTF-8"/>
+        <generate template="applicationContext-datasource.xml" charset="UTF-8"/>
+        <generate template="applicationContext-redis.xml" charset="UTF-8"/>
+        <generate template="applicationContext-mail.xml" charset="UTF-8"/>
+        <generate template="log4j2.xml"/>
+    </script>
+</config>

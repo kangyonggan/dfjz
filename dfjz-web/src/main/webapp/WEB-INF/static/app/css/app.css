@@ -1,0 +1,85 @@
+body {
+    margin: 0;
+}
+
+/*header*/
+#header {
+    height: 90px;
+    background: #f5f5f5;
+}
+
+#header > div {
+    margin: 0 auto;
+}
+
+#header > div > a {
+    margin-top: 25px;
+    padding: 0 3px;
+    float: left;
+    display: block;
+    height: 36px;
+    width: 90px;
+    text-align: center;
+    line-height: 36px;
+    font-size: 22px;
+    font-weight: bolder;
+    color: #000;
+    text-decoration: none;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+}
+
+#header > div > ul {
+    float: left;
+    list-style: none;
+    padding-left: 0;
+    margin-left: 20px;
+    height: 26px;
+    margin-top: 30px;
+}
+
+#header > div > ul > li {
+    float: left;
+}
+
+#header > div > ul > li > a {
+    display: inline-block;
+    padding: 0 15px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    margin-right: 3px;
+    text-decoration: none;
+    color: #000000;
+    border-radius: 2px;
+}
+
+#header > div > ul > li > a:hover {
+    background: #e1e1e1;
+}
+
+#header > div > form > input {
+    border-radius: 20px;
+    border: 1px solid #333;
+    text-indent: 15px;
+    outline: none;
+    padding: 3px 0;
+    margin-top: 28px;
+    width: 220px;
+    height: 22px;
+    font-size: 13px;
+    background: #f5f5f5;
+    float: right;
+}
+
+/*small screen*/
+@media (max-width: 1000px) {
+
+}
+
+/*large screen*/
+@media (min-width: 1001px) {
+    #header > div {
+        width: 1000px;
+    }
+}
