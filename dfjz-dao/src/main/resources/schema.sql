@@ -92,8 +92,6 @@ CREATE TABLE comment
   COMMENT '评论者姓名',
   email        VARCHAR(64)                           NOT NULL                    DEFAULT ''
   COMMENT '评论者邮箱',
-  pid          BIGINT(20)                            NOT NULL                    DEFAULT 0
-  COMMENT '父评论ID',
   is_deleted   TINYINT                               NOT NULL                    DEFAULT 0
   COMMENT '逻辑删除:{0:未删除, 1:已删除}',
   created_time TIMESTAMP                             NOT NULL                    DEFAULT CURRENT_TIMESTAMP

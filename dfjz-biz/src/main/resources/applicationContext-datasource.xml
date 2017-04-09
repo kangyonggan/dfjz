@@ -74,7 +74,7 @@
     <!--扫描basePackage下所有以@Repository注解的接口  -->
     <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-        <property name="basePackage" value="com.kangyonggan.archetype.dfjz.mapper"/>
+        <property name="basePackage" value="com.kangyonggan.app.dfjz.mapper"/>
         <property name="annotationClass" value="org.springframework.stereotype.Repository"/>
         <property name="properties">
             <value>

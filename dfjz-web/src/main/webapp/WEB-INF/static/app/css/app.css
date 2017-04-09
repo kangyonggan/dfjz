@@ -168,6 +168,17 @@ body {
 }
 
 /*list*/
+.article-list-empty {
+    min-height: 600px;
+    line-height: 600px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.article-list {
+    min-height: 600px;
+}
+
 .article-list > .article-item {
     margin-bottom: 80px;
 }
@@ -221,6 +232,48 @@ body {
     line-height: 1.5;
     text-decoration: none;
     border-bottom: 2px solid #666;
+}
+
+/*markdown*/
+.markdown p {
+    color: #555;
+    line-height: 2;
+}
+
+.markdown blockquote {
+    padding: 0 15px;
+    color: #666;
+    border-left: 6px solid #ddd;
+    margin-left: 0;
+    height: 35px;
+    font-size: 14px;
+    line-height: 35px;
+}
+
+.markdown a {
+    color: #666;
+}
+
+.markdown code {
+    color: #555;
+    background: #eee;
+    padding: 2px 4px;
+    font-size: 13px;
+    border-radius: 13px;
+    height: 20px;
+    font-family: consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace;
+    line-height: 1.6;
+}
+
+.markdown pre {
+    background: #1d1f21;
+    padding: 10px 15px;
+    overflow-x: auto;
+}
+
+.markdown pre > code {
+    background: #1d1f21;
+    color: #c5c8c6;
 }
 
 /*pagination*/
@@ -354,20 +407,20 @@ body {
 .detail-main {
     margin-top: 80px;
     background: #ccc;
-    height: 600px;
 }
 
 .detail-main .detail-content {
-    background: #f60;
     float: left;
 }
 
 .detail-main .detail-toc {
-    background: #06f;
     float: right;
 }
 
 /*detail pay*/
+.clear-float {
+    clear: both;
+}
 .detail-pay {
     margin-top: 50px;
     text-align: center;
@@ -424,11 +477,11 @@ body {
     text-decoration: underline;
 }
 
-.detail-nears > a:first-child {
+.detail-nears > a.left {
     float: left;
 }
 
-.detail-nears > a:last-child {
+.detail-nears > a.right {
     float: right;
 }
 

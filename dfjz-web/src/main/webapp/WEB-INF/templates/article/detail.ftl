@@ -1,22 +1,30 @@
 <#assign ctx="${(rca.contextPath)!''}">
 
 <div class="detail-header">
-    <h1>从零开始搭建NexT主题的Hexo博客</h1>
+    <h1>${article.title}</h1>
     <div class="detail-info">
-        <span>发表于 2017-4-8</span>
-        <span>分类于 <a href="#">综合</a></span>
-        <span>评论 <a href="#">5</a></span>
+        <span>发表于 ${article.createdTime?date}</span>
+        <span>分类于 <a href="#category/${article.categoryCode}">${article.categoryName}</a></span>
+        <span>访问量 <a href="#">${article.visitCount}</a></span>
+        <span>评论数 <a href="#">${article.commentCount}</a></span>
     </div>
 </div>
 
 <div class="detail-main">
     <div class="detail-toc">
-        文章目录、 热评、推荐
+        <#list toc.childrens as t>
+            ${t.sort + 1}. ${t.name}<br/>
+            <#list t.childrens as tt>
+                ${tt.sort + 1}. ${tt.name}<br/>
+            </#list>
+        </#list>
     </div>
-    <div class="detail-content">
-        文章的内容
+    <div class="detail-content markdown">
+    ${article.content}
     </div>
 </div>
+
+<div class="clear-float"></div>
 
 <div class="detail-pay">
     <a href="javascript:">赏</a>
@@ -29,55 +37,46 @@
 <div class="detail-bottom-line"></div>
 
 <div class="detail-nears">
-    <a href="#" title="从零开始搭建NexT主题的Hexo博客">< 从零开始搭建NexT主题的Hexo博客</a>
-    <a href="#" title="MySQL报错：数据库结构错误">MySQL报错：数据库结构错误 ></a>
+<#if provArticle??>
+    <a class="left" href="#article/${provArticle.id}" title="${provArticle.title}">< ${provArticle.title}</a>
+</#if>
+<#if nextArticle??>
+    <a class="right" href="#article/${nextArticle.id}" title="${nextArticle.title}">${nextArticle.title} ></a>
+</#if>
 </div>
 
 <div class="detail-comment">
-    <form action="${ctx}/article/12/comment" method="post">
+    <form action="${ctx}/article/${article.id}/comment" method="post">
         <input type="text" name="username" placeholder="姓名..."/>
         <input type="email" name="email" placeholder="电子邮箱..."/>
-        <textarea name="content" placeholder="评论...（markdown语法）"></textarea>
+        <textarea name="content" placeholder="不要吝啬你的表扬..."></textarea>
         <input type="submit" value="提交评论"/>
     </form>
 </div>
 
+<#if comments?? && comments?size gt 0>
 <div class="detail-comment-list">
     <div class="detail-comment-info">最新评论</div>
 
-    <div class="detail-comment-item">
-        <div class="left">
-            康
-        </div>
-        <div class="right">
-            <div class="username-time">
-                <span>康永敢[kangyonggan@gmail.com]</span>
-                <span>刚刚</span>
+    <#list comments as comment>
+        <div class="detail-comment-item">
+            <div class="left">
+                ${comment.username?substring(0, 1)}
             </div>
-            <div class="content">会不会影响性能啊？</div>
-            <div class="tool">
-                <a href="#">赞(4)</a>
-                <a href="#">踩(6)</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="detail-comment-item">
-        <div class="left">
-            马
-        </div>
-        <div class="right">
-            <div class="username-time">
-                <span>马小跳[@maxiaotiaogmail.com]</span>
-                <span>一小时前</span>
-            </div>
-            <div class="content">肯定会的，只是不知道会有多大影响</div>
-            <div class="tool">
-                <a href="#">赞(43)</a>
-                <a href="#">踩(0)</a>
+            <div class="right">
+                <div class="username-time">
+                    <span>${comment.username}[${comment.email}]</span>
+                    <span><@c.relative_date datetime=comment.createdTime/></span>
+                </div>
+                <div class="content">${comment.content}</div>
+                <div class="tool">
+                    <a href="#">赞(4)</a>
+                    <a href="#">踩(6)</a>
+                </div>
             </div>
         </div>
-    </div>
+    </#list>
 </div>
+</#if>
 
 <script src="${ctx}/static/app/js/detail.js"></script>

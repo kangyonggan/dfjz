@@ -16,6 +16,8 @@ $(function () {
         clearInterval(task);
         task = setInterval("mouseOut()", 10);
     });
+
+    $(".article-item .article-summary a").attr("target", "_blank");
 });
 
 var $line, deg = 90, task;

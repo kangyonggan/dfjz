@@ -1,9 +1,16 @@
 package com.kangyonggan.app.dfjz.web.controller;
 
-import lombok.extern.log4j.Log4j2;
+import com.github.pagehelper.PageInfo;
+import com.kangyonggan.app.dfjz.biz.service.ArticleService;
+import com.kangyonggan.app.dfjz.model.vo.Article;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 /**
  * @author kangyonggan
@@ -11,12 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 @RequestMapping("/")
-@Log4j2
 public class IndexController extends BaseController {
+
+    @Autowired
+    private ArticleService articleService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String layout() {
-        log.info("layout");
         return "layout";
     }
 
@@ -26,8 +34,12 @@ public class IndexController extends BaseController {
      * @return
      */
     @RequestMapping(value = "index", method = RequestMethod.GET)
-    public String index() {
-        log.info("index");
+    public String index(@RequestParam(value = "p", required = false, defaultValue = "1") int pageNum,
+                        Model model) {
+        List<Article> articles = articleService.findArticlesByPage(pageNum);
+        PageInfo<Article> page = new PageInfo(articles);
+
+        model.addAttribute("page", page);
         return getPathRoot();
     }
 
@@ -38,10 +50,7 @@ public class IndexController extends BaseController {
      */
     @RequestMapping(value = "about", method = RequestMethod.GET)
     public String about() {
-        log.info("about");
         return "about";
     }
-
-
 
 }

@@ -10,7 +10,6 @@
         <result column="content" property="content" jdbcType="VARCHAR"/>
         <result column="username" property="username" jdbcType="VARCHAR"/>
         <result column="email" property="email" jdbcType="VARCHAR"/>
-        <result column="pid" property="pid" jdbcType="BIGINT"/>
         <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
         <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>
         <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP"/>

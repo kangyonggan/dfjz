@@ -37,11 +37,6 @@ public class Comment implements Serializable {
     private String email;
 
     /**
-     * 父评论ID
-     */
-    private Long pid;
-
-    /**
      * 逻辑删除:{0:未删除, 1:已删除}
      */
     @Column(name = "is_deleted")

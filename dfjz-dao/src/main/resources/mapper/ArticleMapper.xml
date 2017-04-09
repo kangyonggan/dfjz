@@ -18,4 +18,12 @@
         <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP"/>
         <result column="content" property="content" jdbcType="LONGVARCHAR"/>
     </resultMap>
+
+    <select id="selectNextArticle" parameterType="Long" resultMap="BaseResultMap">
+        SELECT id, title FROM article WHERE is_deleted = 0 AND id &gt; #{id}
+    </select>
+
+    <select id="selectPrevArticle" parameterType="Long" resultMap="BaseResultMap">
+        SELECT id, title FROM article WHERE is_deleted = 0 AND id &lt; #{id}
+    </select>
 </mapper>
