@@ -12,12 +12,7 @@
 
 <div class="detail-main">
     <div class="detail-toc">
-        <#list toc.childrens as t>
-            ${t.sort + 1}. ${t.name}<br/>
-            <#list t.childrens as tt>
-                ${tt.sort + 1}. ${tt.name}<br/>
-            </#list>
-        </#list>
+        <@c.toc toc=toc/>
     </div>
     <div class="detail-content markdown">
     ${article.content}

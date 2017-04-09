@@ -8,8 +8,6 @@ import org.pegdown.PegDownProcessor;
  */
 public class MarkdownUtil {
 
-    private static PegDownProcessor processor = new PegDownProcessor(Integer.MAX_VALUE);
-
     /**
      * markdown语法转html语法
      *
@@ -17,7 +15,7 @@ public class MarkdownUtil {
      * @return
      */
     public static String markdownToHtml(String markdown) {
-        return processor.markdownToHtml(markdown);
+        return new PegDownProcessor(Integer.MAX_VALUE).markdownToHtml(markdown);
     }
 
 }

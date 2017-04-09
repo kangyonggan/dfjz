@@ -104,3 +104,16 @@
         <#t><#else>刚刚
     </#if>
 </#macro>
+
+<#--目录-->
+<#macro toc toc p=''>
+    <#list toc.childrens as t>
+    <div class="toc-line level-${t.level}">
+        <#list 2..t.level as deep>
+            <span class="toc-space"></span>
+        </#list>
+    ${p}${t.sort+1}
+        <a href="javascript:">${t.name}</a></div>
+        <@c.toc toc=t p='${p}${t.sort+1}.'/>
+    </#list>
+</#macro>

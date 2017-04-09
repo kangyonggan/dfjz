@@ -20,10 +20,10 @@
     </resultMap>
 
     <select id="selectNextArticle" parameterType="Long" resultMap="BaseResultMap">
-        SELECT id, title FROM article WHERE is_deleted = 0 AND id &gt; #{id}
+        SELECT id, title FROM article WHERE is_deleted = 0 AND id &gt; #{id} LIMIT 1
     </select>
 
     <select id="selectPrevArticle" parameterType="Long" resultMap="BaseResultMap">
-        SELECT id, title FROM article WHERE is_deleted = 0 AND id &lt; #{id}
+        SELECT id, title FROM article WHERE is_deleted = 0 AND id &lt; #{id} LIMIT 1
     </select>
 </mapper>

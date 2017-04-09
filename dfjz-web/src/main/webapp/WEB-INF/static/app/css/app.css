@@ -411,10 +411,58 @@ body {
 
 .detail-main .detail-content {
     float: left;
+    padding-right: 10px;
 }
 
 .detail-main .detail-toc {
     float: right;
+}
+
+.detail-toc .toc-space {
+    display: inline-block;
+    width: 10px;
+}
+
+.detail-toc .toc-line {
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+}
+
+.detail-toc .level-2 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.detail-toc .level-3 {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.detail-toc .level-4 {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.detail-toc .level-4 {
+    font-size: 15px;
+}
+
+.detail-toc .level-5 {
+    font-size: 14px;
+}
+
+.detail-toc .level-6 {
+    font-size: 13px;
+}
+
+.detail-toc .level-7 {
+    font-size: 12px;
+}
+
+.detail-toc .toc-line a {
+    margin-left: 5px;
+    color: #767676;
 }
 
 /*detail pay*/
@@ -610,11 +658,11 @@ body {
     }
 
     .detail-main .detail-content {
-        width: 900px;
+        width: 899px;
     }
 
     .detail-main .detail-toc {
-        width: 300px;
+        width: 290px;
     }
 
     .hidden-lg {

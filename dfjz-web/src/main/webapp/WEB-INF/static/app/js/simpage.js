@@ -129,6 +129,7 @@
             if (!hash || hash.length == 0) {
                 return;
             }
+
             // 异步加载url
             loadUrl(hash);
         });
