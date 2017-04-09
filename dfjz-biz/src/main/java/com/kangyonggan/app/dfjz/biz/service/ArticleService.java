@@ -50,4 +50,25 @@ public interface ArticleService {
      * @return
      */
     Toc extraArticleToc(String content);
+
+    /**
+     * 评论排行榜
+     *
+     * @return
+     */
+    List<Article> findArticlesOrderByComment();
+
+    /**
+     * 阅读排行榜
+     *
+     * @return
+     */
+    List<Article> findArticlesOrderByVisit();
+
+    /**
+     * 推荐排行榜
+     *
+     * @return
+     */
+    List<Article> findArticlesOrderByStick();
 }

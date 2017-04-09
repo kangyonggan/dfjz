@@ -70,6 +70,24 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
         return toc;
     }
 
+    @Override
+    @LogTime
+    public List<Article> findArticlesOrderByComment() {
+        return articleMapper.selectArticlesOrderByComment();
+    }
+
+    @Override
+    @LogTime
+    public List<Article> findArticlesOrderByVisit() {
+        return articleMapper.selectArticlesOrderByVisit();
+    }
+
+    @Override
+    @LogTime
+    public List<Article> findArticlesOrderByStick() {
+        return articleMapper.selectArticlesOrderByStick();
+    }
+
     private void processLines(List<Toc> childrens, String lines[], int startLine, String level) {
         if (level.length() == 7) {
             return;

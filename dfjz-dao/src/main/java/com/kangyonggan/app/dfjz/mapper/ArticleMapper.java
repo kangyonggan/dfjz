@@ -24,4 +24,25 @@ public interface ArticleMapper extends MyMapper<Article> {
      * @return
      */
     Article selectPrevArticle(@Param("id") Long id);
+
+    /**
+     * 评论排行榜
+     *
+     * @return
+     */
+    List<Article> selectArticlesOrderByComment();
+
+    /**
+     * 阅读排行榜
+     *
+     * @return
+     */
+    List<Article> selectArticlesOrderByVisit();
+
+    /**
+     * 推荐排行榜
+     *
+     * @return
+     */
+    List<Article> selectArticlesOrderByStick();
 }

@@ -465,6 +465,29 @@ body {
     color: #767676;
 }
 
+.detail-main .detail-hot {
+    margin-top: 50px;
+}
+
+.detail-main .detail-hot a {
+    display: block;
+    color: #555;
+    margin-top: 15px;
+}
+
+.detail-toc img {
+    display: block;
+    width: 240px;
+    height: 240px;
+    margin: 0 auto;
+    padding: 2px;
+    border: 2px solid #333;
+}
+
+.detail-toc p {
+    text-align: center;
+}
+
 /*detail pay*/
 .clear-float {
     clear: both;
@@ -662,7 +685,7 @@ body {
     }
 
     .detail-main .detail-toc {
-        width: 290px;
+        width: 270px;
     }
 
     .hidden-lg {

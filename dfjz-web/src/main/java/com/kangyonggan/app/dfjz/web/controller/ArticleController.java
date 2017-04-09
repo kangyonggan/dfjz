@@ -41,11 +41,18 @@ public class ArticleController extends BaseController {
 
         List<Comment> comments = commentService.findCommentsByArticleId(id);
 
+        List<Article> commentArticles = articleService.findArticlesOrderByComment();
+        List<Article> visitArticles = articleService.findArticlesOrderByVisit();
+        List<Article> stickArticles = articleService.findArticlesOrderByStick();
+
         model.addAttribute("article", article);
         model.addAttribute("provArticle", provArticle);
         model.addAttribute("nextArticle", nextArticle);
         model.addAttribute("comments", comments);
         model.addAttribute("toc", toc);
+        model.addAttribute("commentArticles", commentArticles);
+        model.addAttribute("visitArticles", visitArticles);
+        model.addAttribute("stickArticles", stickArticles);
         return getPathDetail();
     }
 }

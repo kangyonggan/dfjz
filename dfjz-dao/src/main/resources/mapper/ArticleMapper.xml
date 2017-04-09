@@ -26,4 +26,16 @@
     <select id="selectPrevArticle" parameterType="Long" resultMap="BaseResultMap">
         SELECT id, title FROM article WHERE is_deleted = 0 AND id &lt; #{id} LIMIT 1
     </select>
+
+    <select id="selectArticlesOrderByComment" resultMap="BaseResultMap">
+        SELECT id, title, comment_count FROM article WHERE is_deleted = 0 ORDER BY comment_count DESC LIMIT 6
+    </select>
+
+    <select id="selectArticlesOrderByVisit" resultMap="BaseResultMap">
+        SELECT id, title, visit_count FROM article WHERE is_deleted = 0 ORDER BY visit_count DESC LIMIT 6
+    </select>
+
+    <select id="selectArticlesOrderByStick" resultMap="BaseResultMap">
+        SELECT id, title, is_stick FROM article WHERE is_deleted = 0 ORDER BY is_stick DESC, id DESC LIMIT 6
+    </select>
 </mapper>
