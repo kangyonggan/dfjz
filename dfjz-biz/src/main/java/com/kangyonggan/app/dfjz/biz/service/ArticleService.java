@@ -120,4 +120,10 @@ public interface ArticleService {
      * 生成博客的rss
      */
     void genBlogRss();
+
+    /**
+     * 生成网站地图
+     */
+    void genSiteMap();
+
 }

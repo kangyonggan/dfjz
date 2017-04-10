@@ -194,6 +194,62 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
         genRssFile(super.selectByExample(example));
     }
 
+    @Override
+    @LogTime
+    public void genSiteMap() {
+        Example example = new Example(Article.class);
+        example.createCriteria().andEqualTo("isDeleted", AppConstants.IS_DELETED_NO);
+        example.setOrderByClause("id desc");
+
+        genSiteMap(super.selectByExample(example));
+    }
+
+    private void genSiteMap(List<Article> articles) {
+        StringBuilder rss = new StringBuilder("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">");
+
+        for (Article article : articles) {
+            rss.append("<url>");
+            rss.append("<loc>http://kangyonggan.com#article/").append(article.getId()).append("</loc>");
+            rss.append("<lastmod>").append(DateUtil.toXmlDateTime(article.getUpdatedTime())).append("</lastmod>");
+
+            rss.append("<data>");
+            rss.append("<display>");
+            rss.append("<title>").append(article.getTitle()).append("</title>");
+            rss.append("<pubTime>").append(DateUtil.toXmlDateTime(article.getCreatedTime())).append("</pubTime>");
+            rss.append("<tag>").append(article.getCategoryCode()).append("</tag>");
+            rss.append("<tag>").append(article.getCategoryName()).append("</tag>");
+            rss.append("</display>");
+            rss.append("</data>");
+            rss.append("</url>");
+        }
+
+        rss.append("</urlset>");
+
+        File file = new File(PropertiesUtil.getProperties("file.root.path") + "upload/rss/sitemap.xml");
+
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs();
+        }
+
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter(file));
+            writer.write(rss.toString());
+            writer.flush();
+        } catch (Exception e) {
+            log.error("生成SiteMap异常, 文件路径：" + PropertiesUtil.getProperties("file.root.path") + "upload/rss/sitemap.xml", e);
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                    writer = null;
+                } catch (Exception e) {
+                    log.error("写sitemap后关闭输入流异常", e);
+                }
+            }
+        }
+    }
+
     private void genRssFile(List<Article> articles) {
         StringBuilder rss = new StringBuilder("<feed xmlns=\"http://www.w3.org/2005/Atom\"><title>");
         rss.append(PropertiesUtil.getProperties("app.name")).append("</title>");
