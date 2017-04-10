@@ -46,4 +46,8 @@
     <select id="selectArticles4Archives" resultMap="BaseResultMap">
         SELECT id, title, created_time FROM article WHERE is_deleted = 0 ORDER BY id DESC
     </select>
+
+    <update id="updateArticleVisitCount" parameterType="Long">
+        UPDATE article SET visit_count = visit_count + 1 WHERE id = #{articleId}
+    </update>
 </mapper>

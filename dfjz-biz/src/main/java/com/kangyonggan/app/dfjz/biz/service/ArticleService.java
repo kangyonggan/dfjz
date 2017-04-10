@@ -97,4 +97,12 @@ public interface ArticleService {
      * @return
      */
     List<Article> searchArticles(String question, int pageNum);
+
+    /**
+     * 更新浏览量
+     *
+     * @param articleId
+     * @param ip
+     */
+    void updateArticleVisitCount(Long articleId, String ip);
 }

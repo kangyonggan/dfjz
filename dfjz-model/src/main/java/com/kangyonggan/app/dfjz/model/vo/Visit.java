@@ -22,15 +22,44 @@ public class Visit implements Serializable {
     private Long articleId;
 
     /**
-     * 访问者IP
+     * IP地址
      */
     private String ip;
 
     /**
-     * ip所在地
+     * 响应码
      */
-    @Column(name = "ip_addr")
-    private String ipAddr;
+    private String code;
+
+    /**
+     * 响应消息
+     */
+    private String msg;
+
+    /**
+     * 国家
+     */
+    private String country;
+
+    /**
+     * 地区
+     */
+    private String area;
+
+    /**
+     * 省份
+     */
+    private String region;
+
+    /**
+     * 城市
+     */
+    private String city;
+
+    /**
+     * 运营商
+     */
+    private String isp;
 
     /**
      * 逻辑删除:{0:未删除, 1:已删除}

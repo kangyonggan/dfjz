@@ -58,9 +58,21 @@ CREATE TABLE visit
   article_id   BIGINT(20)                            NOT NULL
   COMMENT '文章ID',
   ip           VARCHAR(15)                           NOT NULL
-  COMMENT '访问者IP',
-  ip_addr      VARCHAR(32)                           NOT NULL
-  COMMENT 'ip所在地',
+  COMMENT 'IP地址',
+  code         VARCHAR(32)                           NOT NULL
+  COMMENT '响应码',
+  msg          VARCHAR(64)                           NOT NULL                    DEFAULT ''
+  COMMENT '响应消息',
+  country      VARCHAR(32)                           NOT NULL                    DEFAULT ''
+  COMMENT '国家',
+  area         VARCHAR(32)                           NOT NULL                    DEFAULT ''
+  COMMENT '地区',
+  region       VARCHAR(32)                           NOT NULL                    DEFAULT ''
+  COMMENT '省份',
+  city         VARCHAR(32)                           NOT NULL                    DEFAULT ''
+  COMMENT '城市',
+  isp          VARCHAR(32)                           NOT NULL                    DEFAULT ''
+  COMMENT '运营商',
   is_deleted   TINYINT                               NOT NULL                    DEFAULT 0
   COMMENT '逻辑删除:{0:未删除, 1:已删除}',
   created_time TIMESTAMP                             NOT NULL                    DEFAULT CURRENT_TIMESTAMP
@@ -69,8 +81,8 @@ CREATE TABLE visit
   COMMENT '更新时间'
 )
   COMMENT '访问记录表';
-CREATE UNIQUE INDEX uid_article_ip
-  ON visit (article_id, ip);
+CREATE INDEX id_article_id
+  ON visit (article_id);
 CREATE INDEX id_created_time
   ON visit (created_time);
 

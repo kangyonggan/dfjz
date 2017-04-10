@@ -60,4 +60,11 @@ public interface ArticleMapper extends MyMapper<Article> {
      * @return
      */
     List<Article> selectArticles4Archives();
+
+    /**
+     * 更新文章浏览量
+     *
+     * @param articleId
+     */
+    void updateArticleVisitCount(@Param("articleId") Long articleId);
 }

@@ -1,16 +1,22 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kangyonggan.app.dfjz.mapper.VisitMapper">
     <resultMap id="BaseResultMap" type="com.kangyonggan.app.dfjz.model.vo.Visit">
         <!--
           WARNING - @mbggenerated
         -->
-        <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="article_id" property="articleId" jdbcType="BIGINT"/>
-        <result column="ip" property="ip" jdbcType="VARCHAR"/>
-        <result column="ip_addr" property="ipAddr" jdbcType="VARCHAR"/>
-        <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
-        <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>
-        <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP"/>
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="article_id" jdbcType="BIGINT" property="articleId"/>
+        <result column="ip" jdbcType="VARCHAR" property="ip"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="msg" jdbcType="VARCHAR" property="msg"/>
+        <result column="country" jdbcType="VARCHAR" property="country"/>
+        <result column="area" jdbcType="VARCHAR" property="area"/>
+        <result column="region" jdbcType="VARCHAR" property="region"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="isp" jdbcType="VARCHAR" property="isp"/>
+        <result column="is_deleted" jdbcType="TINYINT" property="isDeleted"/>
+        <result column="created_time" jdbcType="TIMESTAMP" property="createdTime"/>
+        <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime"/>
     </resultMap>
 </mapper>

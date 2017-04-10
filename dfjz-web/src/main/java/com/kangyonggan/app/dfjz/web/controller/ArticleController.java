@@ -2,6 +2,8 @@ package com.kangyonggan.app.dfjz.web.controller;
 
 import com.kangyonggan.app.dfjz.biz.service.ArticleService;
 import com.kangyonggan.app.dfjz.biz.service.CommentService;
+import com.kangyonggan.app.dfjz.biz.service.RedisService;
+import com.kangyonggan.app.dfjz.common.IPUtil;
 import com.kangyonggan.app.dfjz.common.MarkdownUtil;
 import com.kangyonggan.app.dfjz.model.dto.Toc;
 import com.kangyonggan.app.dfjz.model.vo.Article;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author kangyonggan
@@ -29,8 +33,19 @@ public class ArticleController extends BaseController {
     @Autowired
     private CommentService commentService;
 
+    @Autowired
+    private RedisService redisService;
+
+    /**
+     * 文章详情
+     *
+     * @param id
+     * @param request
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "{id:[\\d]+}", method = RequestMethod.GET)
-    public String detail(@PathVariable("id") Long id, Model model) {
+    public String detail(@PathVariable("id") Long id, HttpServletRequest request, Model model) {
         Article article = articleService.findArticleById(id);
         Toc toc = articleService.extraArticleToc(article.getContent());
 
@@ -44,6 +59,15 @@ public class ArticleController extends BaseController {
         List<Article> commentArticles = articleService.findArticlesOrderByComment();
         List<Article> visitArticles = articleService.findArticlesOrderByVisit();
         List<Article> stickArticles = articleService.findArticlesOrderByStick();
+
+        // 访问量控制
+        String ip = IPUtil.getIp(request);
+
+        Object flag = redisService.get("article_id_" + id + "_ip_" + ip);
+        if (flag == null) {
+            articleService.updateArticleVisitCount(id, ip);
+            redisService.set("article_id_" + id + "_ip_" + ip, id, 30);
+        }
 
         model.addAttribute("article", article);
         model.addAttribute("provArticle", provArticle);

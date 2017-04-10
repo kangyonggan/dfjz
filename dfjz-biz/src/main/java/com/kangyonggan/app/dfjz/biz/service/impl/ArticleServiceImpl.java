@@ -2,6 +2,7 @@ package com.kangyonggan.app.dfjz.biz.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.kangyonggan.app.dfjz.biz.service.ArticleService;
+import com.kangyonggan.app.dfjz.biz.service.VisitService;
 import com.kangyonggan.app.dfjz.common.MarkdownUtil;
 import com.kangyonggan.app.dfjz.common.StringUtil;
 import com.kangyonggan.app.dfjz.mapper.ArticleMapper;
@@ -25,6 +26,9 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
 
     @Autowired
     private ArticleMapper articleMapper;
+
+    @Autowired
+    private VisitService visitService;
 
     @Override
     @LogTime
@@ -130,6 +134,14 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
         processQueryKey(articles, question);
 
         return articles;
+    }
+
+    @Override
+    @LogTime
+    public void updateArticleVisitCount(Long articleId, String ip) {
+        visitService.saveVisit(articleId, ip);
+
+        articleMapper.updateArticleVisitCount(articleId);
     }
 
     private void processQueryKey(List<Article> articles, String question) {
