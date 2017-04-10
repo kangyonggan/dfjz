@@ -115,4 +115,9 @@ public interface ArticleService {
      * @param ip
      */
     void updateArticleCommentCount(Comment comment, String ip);
+
+    /**
+     * 生成博客的rss
+     */
+    void genBlogRss();
 }

@@ -4,6 +4,8 @@ import com.github.pagehelper.PageHelper;
 import com.kangyonggan.app.dfjz.biz.service.ArticleService;
 import com.kangyonggan.app.dfjz.biz.service.CommentService;
 import com.kangyonggan.app.dfjz.biz.service.VisitService;
+import com.kangyonggan.app.dfjz.biz.util.PropertiesUtil;
+import com.kangyonggan.app.dfjz.common.DateUtil;
 import com.kangyonggan.app.dfjz.common.IPUtil;
 import com.kangyonggan.app.dfjz.common.MarkdownUtil;
 import com.kangyonggan.app.dfjz.common.StringUtil;
@@ -13,12 +15,23 @@ import com.kangyonggan.app.dfjz.model.constants.AppConstants;
 import com.kangyonggan.app.dfjz.model.dto.Toc;
 import com.kangyonggan.app.dfjz.model.vo.Article;
 import com.kangyonggan.app.dfjz.model.vo.Comment;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +40,7 @@ import java.util.Map;
  * @since 2017/4/9 0009
  */
 @Service
+@Log4j2
 public class ArticleServiceImpl extends BaseService<Article> implements ArticleService {
 
     @Autowired
@@ -168,6 +182,64 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
         commentService.saveComment(comment);
 
         articleMapper.updateArticleCommentCount(comment.getArticleId());
+    }
+
+    @Override
+    @LogTime
+    public void genBlogRss() {
+        Example example = new Example(Article.class);
+        example.createCriteria().andEqualTo("isDeleted", AppConstants.IS_DELETED_NO);
+        example.setOrderByClause("id desc");
+
+        genRssFile(super.selectByExample(example));
+    }
+
+    private void genRssFile(List<Article> articles) {
+        StringBuilder rss = new StringBuilder("<feed xmlns=\"http://www.w3.org/2005/Atom\"><title>");
+        rss.append(PropertiesUtil.getProperties("app.name")).append("</title>");
+        rss.append("<link href=\"/upload/rss/blog.xml\" rel=\"self\"/>").append("<link href=\"http://kangyonggan.com/\"/>");
+        rss.append("<updated>").append(DateUtil.toXmlDateTime(new Date())).append("</updated>");
+        rss.append("<id>http://kangyonggan.com/</id>");
+        rss.append("<author><name>").append(PropertiesUtil.getProperties("app.author")).append("</name></author>");
+
+        for (Article article : articles) {
+            rss.append("<entry><title>").append(article.getTitle()).append("</title>");
+            rss.append("<link href=\"http://kangyonggan.com#article/").append(article.getId()).append("\"/>");
+            rss.append("<id>http://kangyonggan.com#article/").append(article.getId()).append("</id>");
+            rss.append("<published>").append(DateUtil.toXmlDateTime(article.getCreatedTime())).append("</published>");
+            rss.append("<updated>").append(DateUtil.toXmlDateTime(article.getUpdatedTime())).append("</updated>");
+            rss.append("<content type=\"html\"><![CDATA[").append(MarkdownUtil.markdownToHtml(article.getContent())).append("]]></content>");
+            String summary = article.getContent().substring(0, article.getContent().indexOf("<!-- more -->"));
+            rss.append("<summary type=\"html\"><![CDATA[").append(MarkdownUtil.markdownToHtml(summary)).append("]]></summary>");
+            rss.append("<category term=\"").append(article.getCategoryName()).append("\" scheme=\"http://kangyonggan.com/category/").append(article.getCategoryCode()).append("/\"/>");
+            rss.append("</entry>");
+        }
+
+        rss.append("</feed>");
+
+        File file = new File(PropertiesUtil.getProperties("file.root.path") + "upload/rss/blog.xml");
+
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs();
+        }
+
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter(file));
+            writer.write(rss.toString());
+            writer.flush();
+        } catch (Exception e) {
+            log.error("生成博客rss异常, 文件路径：" + PropertiesUtil.getProperties("file.root.path") + "upload/rss/blog.xml", e);
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                    writer = null;
+                } catch (Exception e) {
+                    log.error("写rss后关闭输入流异常", e);
+                }
+            }
+        }
     }
 
     private void processQueryKey(List<Article> articles, String question) {
