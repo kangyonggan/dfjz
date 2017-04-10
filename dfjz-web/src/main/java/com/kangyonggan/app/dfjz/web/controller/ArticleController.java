@@ -67,7 +67,7 @@ public class ArticleController extends BaseController {
         Object flag = redisService.get("article_id_" + id + "_ip_" + ip);
         if (flag == null) {
             articleService.updateArticleVisitCount(id, ip);
-            redisService.set("article_id_" + id + "_ip_" + ip, id, 30);
+            redisService.set("article_id_" + id + "_ip_" + ip, id, 30 * 60);// 30分钟之内同一个ip只能算访问一次
         }
 
         model.addAttribute("article", article);
