@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/")
-public class IndexController extends BaseController {
+public class IndexController {
 
     @Autowired
     private ArticleService articleService;
@@ -40,7 +40,7 @@ public class IndexController extends BaseController {
         PageInfo<Article> page = new PageInfo(articles);
 
         model.addAttribute("page", page);
-        return getPathRoot();
+        return "index";
     }
 
     /**

@@ -78,7 +78,7 @@
     <form action="${ctx}/article/${article.id}/comment" method="post">
         <input type="text" name="username" placeholder="姓名..."/>
         <input type="email" name="email" placeholder="电子邮箱..."/>
-        <textarea name="content" placeholder="不要吝啬你的表扬..."></textarea>
+        <textarea name="content" placeholder="不要吝啬你的夸奖..."></textarea>
         <input class="submit" type="submit" value="提交评论"/>
     </form>
 </div>

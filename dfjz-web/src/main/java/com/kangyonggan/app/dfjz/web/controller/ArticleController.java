@@ -21,7 +21,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("article")
-public class ArticleController extends BaseController {
+public class ArticleController {
 
     @Autowired
     private ArticleService articleService;
@@ -53,6 +53,6 @@ public class ArticleController extends BaseController {
         model.addAttribute("commentArticles", commentArticles);
         model.addAttribute("visitArticles", visitArticles);
         model.addAttribute("stickArticles", stickArticles);
-        return getPathDetail();
+        return "detail";
     }
 }

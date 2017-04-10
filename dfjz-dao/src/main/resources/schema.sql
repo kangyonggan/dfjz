@@ -175,4 +175,11 @@ CREATE UNIQUE INDEX uid_pcode_code
 CREATE INDEX id_created_time
   ON dictionary (created_time);
 
+INSERT INTO category (code, name, sort)
+VALUES
+  ('java', 'Java后台', 0),
+  ('web', 'Web前端', 1),
+  ('db', '数据库', 2),
+  ('sys', '系统运维', 3),
+  ('other', '综合', 4);
 

@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 
 .hidden {
@@ -261,7 +262,6 @@ body {
 .markdown code {
     color: #555;
     background: #eee;
-    padding: 2px 4px;
     font-size: 13px;
     border-radius: 13px;
     height: 20px;
@@ -650,8 +650,34 @@ body {
     margin-left: 10px;
 }
 
-
-
+/*categories*/
+.categories h1 {
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #555;
+}
+.categories p {
+    text-align: center;
+    font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 14px;
+    line-height: 2;
+    color: #555;
+}
+.categories ul {
+    padding-left: 0;
+    list-style: none;
+    margin-top: 30px;
+}
+.categories ul li a {
+    color: #555;
+    text-decoration: none;
+    border-bottom: 1px solid #999;
+    word-wrap: break-word;
+    font-size: 14px;
+    display: inline-block;
+    margin-top: 20px;
+}
 
 
 /*small screen*/

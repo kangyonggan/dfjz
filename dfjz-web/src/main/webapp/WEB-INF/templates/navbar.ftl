@@ -5,7 +5,7 @@
         <a href="#index" class="logo">东方娇子</a>
         <ul class="hidden-sm">
             <li><a href="#index" class="active">首页</a></li>
-            <li><a href="#categories">分类</a></li>
+            <li><a href="#category">分类</a></li>
             <li><a href="#archives">归档</a></li>
             <li><a href="#rss">订阅</a></li>
             <li><a href="#map">地图</a></li>
