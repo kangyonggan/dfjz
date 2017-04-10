@@ -5,8 +5,8 @@
     <div class="detail-info">
         <span>发表于 ${article.createdTime?date}</span>
         <span>分类于 <a href="#category/${article.categoryCode}">${article.categoryName}</a></span>
-        <span>访问量 <a href="#">${article.visitCount}</a></span>
-        <span>评论数 <a href="#">${article.commentCount}</a></span>
+        <span>访问量 <a href="javascript:">${article.visitCount}</a></span>
+        <span>评论数 <a href="javascript:">${article.commentCount}</a></span>
     </div>
 </div>
 
@@ -75,10 +75,11 @@
 
 <#if article.isComment==1>
 <div class="detail-comment">
-    <form action="${ctx}/article/${article.id}/comment" method="post">
-        <input type="text" name="username" placeholder="姓名..."/>
-        <input type="email" name="email" placeholder="电子邮箱..."/>
-        <textarea name="content" placeholder="不要吝啬你的夸奖..."></textarea>
+    <form action="#article/comment" method="post">
+        <input type="hidden" name="articleId" value="${article.id}"/>
+        <input type="text" name="username" placeholder="姓名..." required/>
+        <input type="email" name="email" placeholder="电子邮箱..." required/>
+        <textarea name="content" placeholder="不要吝啬你的夸奖..." required></textarea>
         <input class="submit" type="submit" value="提交评论"/>
     </form>
 </div>
@@ -99,8 +100,7 @@
                     </div>
                     <div class="content">${comment.content}</div>
                     <div class="tool">
-                        <a href="#">赞(4)</a>
-                        <a href="#">踩(6)</a>
+                        <a href="javascript:">${comment.city}</a>
                     </div>
                 </div>
             </div>

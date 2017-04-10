@@ -2,7 +2,9 @@ package com.kangyonggan.app.dfjz.biz.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.kangyonggan.app.dfjz.biz.service.ArticleService;
+import com.kangyonggan.app.dfjz.biz.service.CommentService;
 import com.kangyonggan.app.dfjz.biz.service.VisitService;
+import com.kangyonggan.app.dfjz.common.IPUtil;
 import com.kangyonggan.app.dfjz.common.MarkdownUtil;
 import com.kangyonggan.app.dfjz.common.StringUtil;
 import com.kangyonggan.app.dfjz.mapper.ArticleMapper;
@@ -10,12 +12,15 @@ import com.kangyonggan.app.dfjz.model.annotation.LogTime;
 import com.kangyonggan.app.dfjz.model.constants.AppConstants;
 import com.kangyonggan.app.dfjz.model.dto.Toc;
 import com.kangyonggan.app.dfjz.model.vo.Article;
+import com.kangyonggan.app.dfjz.model.vo.Comment;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author kangyonggan
@@ -29,6 +34,9 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
 
     @Autowired
     private VisitService visitService;
+
+    @Autowired
+    private CommentService commentService;
 
     @Override
     @LogTime
@@ -142,6 +150,24 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
         visitService.saveVisit(articleId, ip);
 
         articleMapper.updateArticleVisitCount(articleId);
+    }
+
+    @Override
+    @LogTime
+    public void updateArticleCommentCount(Comment comment, String ip) {
+        Map<String, String> resultMap = IPUtil.getIpInfo(ip);
+
+        String city = resultMap.get("city");
+        if (StringUtils.isEmpty(city)) {
+            city = "未知地";
+        }
+        city += "网友";
+
+        comment.setIp(ip);
+        comment.setCity(city);
+        commentService.saveComment(comment);
+
+        articleMapper.updateArticleCommentCount(comment.getArticleId());
     }
 
     private void processQueryKey(List<Article> articles, String question) {

@@ -1,17 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kangyonggan.app.dfjz.mapper.CommentMapper">
-    <resultMap id="BaseResultMap" type="com.kangyonggan.app.dfjz.model.vo.Comment">
-        <!--
-          WARNING - @mbggenerated
-        -->
-        <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="article_id" property="articleId" jdbcType="BIGINT"/>
-        <result column="content" property="content" jdbcType="VARCHAR"/>
-        <result column="username" property="username" jdbcType="VARCHAR"/>
-        <result column="email" property="email" jdbcType="VARCHAR"/>
-        <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
-        <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>
-        <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP"/>
-    </resultMap>
+  <resultMap id="BaseResultMap" type="com.kangyonggan.app.dfjz.model.vo.Comment">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="article_id" jdbcType="BIGINT" property="articleId" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
 </mapper>

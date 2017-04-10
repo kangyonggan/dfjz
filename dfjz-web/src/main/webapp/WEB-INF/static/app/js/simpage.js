@@ -91,13 +91,21 @@
          * 加载url
          *
          * @param url
+         * @param method
+         * @param data
          */
-        function getUrl(url) {
+        function getUrl(url, method, data) {
+            if (!method) {
+                method = "get";
+            }
+
             // 开始加载
             startLoading();
             $.ajax({
                 'url': url,
-                'cache': false
+                'cache': false,
+                "method": method,
+                "data": data
             }).error(function () {
                 // 停止加载
                 stopLoading(false);
@@ -143,31 +151,28 @@
         $contentArea.css("position", "relative");
 
         // 监听表单提交
-        $("form").submit(function (e) {
-            e.preventDefault();
-
+        $(document).on("submit", "form", function (e) {
             var $form = $(this);
 
             var hash = $form.attr("action");
             var method = $form.attr("method");
 
+            if (hash.substring(0, 1) == "#") {
+                e.preventDefault();
+            } else {
+                return true;
+            }
+
             // 处理get方法
             if (method.toLowerCase() == "get") {
-                var params = "?";
-
-                var inputs = $form.find("input");
-                for (var i = 0; i < inputs.length; i++) {
-                    var $input = $(inputs[i]);
-
-                    if (i != 0) {
-                        params += "&";
-                    }
-
-                    params += $.trim($input.attr("name")) + "=" + $.trim($input.val());
-                }
-                var url = window.location.origin + window.location.pathname + hash + params;
+                var params = $form.serialize();
+                var url = window.location.origin + window.location.pathname + hash + "?" + params;
 
                 window.location.href = url;
+            } else if (method.toLowerCase() == "post") {
+                var url = window.location.origin + window.location.pathname + hash.substring(1);
+
+                getUrl(url, "post", $form.serialize());
             }
 
             return false;

@@ -25,4 +25,10 @@ public class CommentServiceImpl extends BaseService<Comment> implements CommentS
         example.setOrderByClause("id desc");
         return super.selectByExample(example);
     }
+
+    @Override
+    @LogTime
+    public void saveComment(Comment comment) {
+        super.insertSelective(comment);
+    }
 }

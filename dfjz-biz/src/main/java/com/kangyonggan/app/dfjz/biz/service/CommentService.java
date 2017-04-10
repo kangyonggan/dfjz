@@ -18,4 +18,11 @@ public interface CommentService {
      */
     List<Comment> findCommentsByArticleId(Long articleId);
 
+    /**
+     * 保存评论
+     *
+     * @param comment
+     */
+    void saveComment(Comment comment);
+
 }

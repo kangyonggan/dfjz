@@ -37,6 +37,16 @@ public class Comment implements Serializable {
     private String email;
 
     /**
+     * 评论者IP
+     */
+    private String ip;
+
+    /**
+     * 评论者所在城市
+     */
+    private String city;
+
+    /**
      * 逻辑删除:{0:未删除, 1:已删除}
      */
     @Column(name = "is_deleted")

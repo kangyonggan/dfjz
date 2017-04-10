@@ -50,4 +50,8 @@
     <update id="updateArticleVisitCount" parameterType="Long">
         UPDATE article SET visit_count = visit_count + 1 WHERE id = #{articleId}
     </update>
+
+    <update id="updateArticleCommentCount" parameterType="Long">
+        UPDATE article SET comment_count = comment_count + 1 WHERE id = #{articleId}
+    </update>
 </mapper>

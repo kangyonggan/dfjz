@@ -2,7 +2,9 @@ package com.kangyonggan.app.dfjz.biz.service;
 
 import com.kangyonggan.app.dfjz.model.dto.Toc;
 import com.kangyonggan.app.dfjz.model.vo.Article;
+import com.kangyonggan.app.dfjz.model.vo.Comment;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -105,4 +107,12 @@ public interface ArticleService {
      * @param ip
      */
     void updateArticleVisitCount(Long articleId, String ip);
+
+    /**
+     * 更新评论数
+     *
+     * @param comment
+     * @param ip
+     */
+    void updateArticleCommentCount(Comment comment, String ip);
 }

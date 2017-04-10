@@ -67,4 +67,11 @@ public interface ArticleMapper extends MyMapper<Article> {
      * @param articleId
      */
     void updateArticleVisitCount(@Param("articleId") Long articleId);
+
+    /**
+     * 更新文章评论数
+     *
+     * @param articleId
+     */
+    void updateArticleCommentCount(@Param("articleId") Long articleId);
 }

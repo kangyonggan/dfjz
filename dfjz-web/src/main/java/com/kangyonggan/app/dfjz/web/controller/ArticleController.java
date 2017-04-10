@@ -11,13 +11,14 @@ import com.kangyonggan.app.dfjz.model.vo.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author kangyonggan
@@ -78,5 +79,18 @@ public class ArticleController extends BaseController {
         model.addAttribute("visitArticles", visitArticles);
         model.addAttribute("stickArticles", stickArticles);
         return getPathDetail();
+    }
+
+    /**
+     * 评论
+     *
+     * @param comment
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "comment", method = RequestMethod.POST)
+    public String comment(@ModelAttribute("comment") @Valid Comment comment, HttpServletRequest request) {
+        articleService.updateArticleCommentCount(comment, IPUtil.getIp(request));
+        return "redirect:/article/" + comment.getArticleId();
     }
 }

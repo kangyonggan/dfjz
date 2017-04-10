@@ -17,6 +17,10 @@ body {
     min-height: 400px;
 }
 
+.sim-page-loading {
+    color: #ff0000 !important;
+}
+
 /*header*/
 #header {
     position: fixed;
