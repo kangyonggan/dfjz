@@ -17,4 +17,11 @@ public interface CategoryService {
      */
     List<Category> findAllCategories();
 
+    /**
+     * 查找分类
+     *
+     * @param code
+     * @return
+     */
+    Category findCategoryByCode(String code);
 }

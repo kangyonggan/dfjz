@@ -45,4 +45,12 @@ public interface ArticleMapper extends MyMapper<Article> {
      * @return
      */
     List<Article> selectArticlesOrderByStick();
+
+    /**
+     * 查询某栏目的文章
+     *
+     * @param categoryCode
+     * @return
+     */
+    List<Article> selectArticlesByCategory(@Param("categoryCode") String categoryCode);
 }

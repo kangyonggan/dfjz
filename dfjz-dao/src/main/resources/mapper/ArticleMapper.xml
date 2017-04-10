@@ -38,4 +38,8 @@
     <select id="selectArticlesOrderByStick" resultMap="BaseResultMap">
         SELECT id, title, is_stick FROM article WHERE is_deleted = 0 ORDER BY is_stick DESC, id DESC LIMIT 6
     </select>
+
+    <select id="selectArticlesByCategory" parameterType="String" resultMap="BaseResultMap">
+        SELECT id, title FROM article WHERE is_deleted = 0 AND category_code = #{categoryCode} ORDER BY id DESC
+    </select>
 </mapper>

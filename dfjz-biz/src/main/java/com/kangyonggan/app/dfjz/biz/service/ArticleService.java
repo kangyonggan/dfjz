@@ -71,4 +71,13 @@ public interface ArticleService {
      * @return
      */
     List<Article> findArticlesOrderByStick();
+
+    /**
+     * 查找某栏目的文章
+     *
+     * @param categoryCode
+     * @param pageNum
+     * @return
+     */
+    List<Article> findArticlesByCategory(String categoryCode, int pageNum);
 }

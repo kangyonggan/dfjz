@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/")
-public class IndexController {
+public class IndexController extends BaseController {
 
     @Autowired
     private ArticleService articleService;
@@ -40,7 +40,7 @@ public class IndexController {
         PageInfo<Article> page = new PageInfo(articles);
 
         model.addAttribute("page", page);
-        return "index";
+        return getPathIndex();
     }
 
     /**
@@ -50,7 +50,7 @@ public class IndexController {
      */
     @RequestMapping(value = "about", method = RequestMethod.GET)
     public String about() {
-        return "about";
+        return getPathRoot() + "/about";
     }
 
 }

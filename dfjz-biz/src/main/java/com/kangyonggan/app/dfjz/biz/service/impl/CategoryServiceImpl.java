@@ -25,4 +25,13 @@ public class CategoryServiceImpl extends BaseService<Category> implements Catego
 
         return super.selectByExample(example);
     }
+
+    @Override
+    @LogTime
+    public Category findCategoryByCode(String code) {
+        Category category = new Category();
+        category.setCode(code);
+
+        return super.selectOne(category);
+    }
 }

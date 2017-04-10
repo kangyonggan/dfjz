@@ -88,6 +88,13 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
         return articleMapper.selectArticlesOrderByStick();
     }
 
+    @Override
+    @LogTime
+    public List<Article> findArticlesByCategory(String categoryCode, int pageNum) {
+        PageHelper.startPage(pageNum, AppConstants.PAGE_SIZE * 2);
+        return articleMapper.selectArticlesByCategory(categoryCode);
+    }
+
     private void processLines(List<Toc> childrens, String lines[], int startLine, String level) {
         if (level.length() == 7) {
             return;
