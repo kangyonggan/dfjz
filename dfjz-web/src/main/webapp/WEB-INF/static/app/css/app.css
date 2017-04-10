@@ -282,6 +282,8 @@ body {
 
 /*pagination*/
 .pagination {
+    clear: both;
+    margin-top: 30px;
     border-top: 1px solid #eee
 }
 
@@ -679,6 +681,54 @@ body {
     margin-top: 20px;
 }
 
+/*list-line*/
+.list-line div {
+    border-left: 4px solid #f5f5f5;
+    padding-bottom: 20px;
+}
+.list-line div a {
+    color: #555;
+    border-bottom: 1px dashed #ccc;
+    text-decoration: none;
+    display: inline-block;
+    width: 80%;
+    height: 50px;
+    line-height: 60px;
+}
+
+.list-line div::before {
+    content: " ";
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    border-radius: 100%;
+    background: #bbb;
+    margin-left: -5px;
+    margin-right: 20px;
+}
+
+.list-line div:hover::before {
+    background: #000;
+}
+
+.list-line div.title::before {
+    width: 8px;
+    height: 8px;
+    margin-left: -6px;
+}
+
+.list-line .title {
+    padding-bottom: 50px;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1.5;
+    font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: #555;
+}
+.list-line .title small {
+    color: #bbb;
+    margin-left: 5px;
+}
 
 /*small screen*/
 @media (max-width: 1250px) {
