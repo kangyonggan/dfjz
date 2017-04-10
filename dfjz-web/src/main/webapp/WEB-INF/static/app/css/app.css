@@ -11,6 +11,14 @@ body {
     color: #f00 !important;
 }
 
+.color-grey {
+    color: grey;
+}
+
+.align-center {
+    text-align: center;
+}
+
 .sim-page {
     margin: 0 auto;
     padding: 0 10px;
