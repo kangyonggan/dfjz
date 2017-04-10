@@ -12,6 +12,7 @@ import com.kangyonggan.app.dfjz.common.StringUtil;
 import com.kangyonggan.app.dfjz.mapper.ArticleMapper;
 import com.kangyonggan.app.dfjz.model.annotation.LogTime;
 import com.kangyonggan.app.dfjz.model.constants.AppConstants;
+import com.kangyonggan.app.dfjz.model.dto.ArticleCountDto;
 import com.kangyonggan.app.dfjz.model.dto.Toc;
 import com.kangyonggan.app.dfjz.model.vo.Article;
 import com.kangyonggan.app.dfjz.model.vo.Comment;
@@ -202,6 +203,12 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
         example.setOrderByClause("id desc");
 
         genSiteMap(super.selectByExample(example));
+    }
+
+    @Override
+    @LogTime
+    public List<ArticleCountDto> findArticleCountDto() {
+        return articleMapper.selectArticleCountDto();
     }
 
     private void genSiteMap(List<Article> articles) {

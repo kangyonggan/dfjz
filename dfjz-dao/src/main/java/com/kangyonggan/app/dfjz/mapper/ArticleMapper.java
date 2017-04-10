@@ -1,5 +1,6 @@
 package com.kangyonggan.app.dfjz.mapper;
 
+import com.kangyonggan.app.dfjz.model.dto.ArticleCountDto;
 import com.kangyonggan.app.dfjz.model.vo.Article;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -74,4 +75,12 @@ public interface ArticleMapper extends MyMapper<Article> {
      * @param articleId
      */
     void updateArticleCommentCount(@Param("articleId") Long articleId);
+
+    /**
+     * 查找各个栏目文章数量
+     *
+     * @return
+     */
+    List<ArticleCountDto> selectArticleCountDto();
+
 }

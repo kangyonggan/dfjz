@@ -2,6 +2,7 @@ package com.kangyonggan.app.dfjz.model.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +12,9 @@ import java.util.List;
  * @since 2017/4/9 0009
  */
 @Data
-public class Toc {
+public class Toc implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * 层次级别

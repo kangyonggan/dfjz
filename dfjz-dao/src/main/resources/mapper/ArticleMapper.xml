@@ -54,4 +54,8 @@
     <update id="updateArticleCommentCount" parameterType="Long">
         UPDATE article SET comment_count = comment_count + 1 WHERE id = #{articleId}
     </update>
+
+    <select id="selectArticleCountDto" resultType="com.kangyonggan.app.dfjz.model.dto.ArticleCountDto">
+        SELECT category_code AS categoryCode, COUNT(*) AS articleCount FROM article WHERE is_deleted = 0 GROUP BY category_code;
+    </select>
 </mapper>

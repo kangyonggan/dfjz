@@ -1,5 +1,6 @@
 package com.kangyonggan.app.dfjz.biz.service;
 
+import com.kangyonggan.app.dfjz.model.dto.ArticleCountDto;
 import com.kangyonggan.app.dfjz.model.dto.Toc;
 import com.kangyonggan.app.dfjz.model.vo.Article;
 import com.kangyonggan.app.dfjz.model.vo.Comment;
@@ -125,5 +126,12 @@ public interface ArticleService {
      * 生成网站地图
      */
     void genSiteMap();
+
+    /**
+     * 查找各个栏目文章数量
+     *
+     * @return
+     */
+    List<ArticleCountDto> findArticleCountDto();
 
 }

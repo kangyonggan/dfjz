@@ -1,9 +1,13 @@
 package com.kangyonggan.app.dfjz.biz.service.impl;
 
+import com.kangyonggan.app.dfjz.biz.service.ArticleService;
 import com.kangyonggan.app.dfjz.biz.service.CategoryService;
+import com.kangyonggan.app.dfjz.mapper.CategoryMapper;
 import com.kangyonggan.app.dfjz.model.annotation.LogTime;
 import com.kangyonggan.app.dfjz.model.constants.AppConstants;
+import com.kangyonggan.app.dfjz.model.dto.ArticleCountDto;
 import com.kangyonggan.app.dfjz.model.vo.Category;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
@@ -15,6 +19,12 @@ import java.util.List;
  */
 @Service
 public class CategoryServiceImpl extends BaseService<Category> implements CategoryService {
+
+    @Autowired
+    private CategoryMapper categoryMapper;
+
+    @Autowired
+    private ArticleService articleService;
 
     @Override
     @LogTime
@@ -33,5 +43,24 @@ public class CategoryServiceImpl extends BaseService<Category> implements Catego
         category.setCode(code);
 
         return super.selectOne(category);
+    }
+
+    @Override
+    @LogTime
+    public void updateCategoriesArticleCount() {
+        List<ArticleCountDto> articleCountDtoList = articleService.findArticleCountDto();
+
+        for (ArticleCountDto dto : articleCountDtoList) {
+            updateCategoriesArticleCount(dto);
+        }
+    }
+
+    private void updateCategoriesArticleCount(ArticleCountDto dto) {
+        Category category = new Category();
+        category.setArticleCount(dto.getArticleCount());
+
+        Example example = new Example(Category.class);
+        example.createCriteria().andEqualTo("code", dto.getCategoryCode());
+        categoryMapper.updateByExampleSelective(category, example);
     }
 }

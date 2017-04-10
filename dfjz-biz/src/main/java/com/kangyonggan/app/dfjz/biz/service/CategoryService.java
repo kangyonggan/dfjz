@@ -1,5 +1,6 @@
 package com.kangyonggan.app.dfjz.biz.service;
 
+import com.kangyonggan.app.dfjz.model.dto.ArticleCountDto;
 import com.kangyonggan.app.dfjz.model.vo.Category;
 
 import java.util.List;
@@ -24,4 +25,10 @@ public interface CategoryService {
      * @return
      */
     Category findCategoryByCode(String code);
+
+    /**
+     * 更新栏目文章数量
+     */
+    void updateCategoriesArticleCount();
+
 }
