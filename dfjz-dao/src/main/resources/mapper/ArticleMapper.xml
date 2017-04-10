@@ -24,7 +24,7 @@
     </select>
 
     <select id="selectPrevArticle" parameterType="Long" resultMap="BaseResultMap">
-        SELECT id, title FROM article WHERE is_deleted = 0 AND id &lt; #{id} LIMIT 1
+        SELECT id, title FROM article WHERE is_deleted = 0 AND id &lt; #{id} ORDER BY id DESC LIMIT 1
     </select>
 
     <select id="selectArticlesOrderByComment" resultMap="BaseResultMap">

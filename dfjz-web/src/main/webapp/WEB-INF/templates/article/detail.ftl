@@ -11,19 +11,23 @@
 </div>
 
 <div class="detail-main">
-    <div class="detail-toc">
-        <h3>文章目录</h3>
-    <@c.toc toc=toc/>
-    </div>
+    <#if toc.childrens?size gt 0>
+        <div class="detail-toc">
+            <h3>文章目录</h3>
+            <@c.toc toc=toc/>
+        </div>
+    </#if>
     <div class="detail-content markdown">
     ${article.content}
     </div>
     <div class="detail-toc">
-        <h3>作者信息</h3>
+        <div class="detail-hot">
+            <h3>作者信息</h3>
 
-        <img src="${ctx}/static/app/images/avatar.png">
+            <img src="${ctx}/static/app/images/avatar.png">
 
-        <p>二逼青年欢乐多</p>
+            <p>二逼青年欢乐多</p>
+        </div>
 
         <div class="detail-hot">
             <h3>评论排行榜</h3>
@@ -75,7 +79,7 @@
         <input type="text" name="username" placeholder="姓名..."/>
         <input type="email" name="email" placeholder="电子邮箱..."/>
         <textarea name="content" placeholder="不要吝啬你的表扬..."></textarea>
-        <input type="submit" value="提交评论"/>
+        <input class="submit" type="submit" value="提交评论"/>
     </form>
 </div>
 

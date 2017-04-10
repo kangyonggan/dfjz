@@ -20,6 +20,7 @@ $(function () {
         payOut();
     });
 
+    $(".markdown a").attr("target", "_blank");
 
 });
 

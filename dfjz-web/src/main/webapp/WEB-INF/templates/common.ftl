@@ -16,77 +16,62 @@
 <#--分页组件-->
 <#macro pagination url param="">
     <#if (page.list)?? && page.pages gt 1>
-    <div class="pull-right">
-        <ul class="pagination">
-            <li><a href="javascript:" class="page-info">第 ${page.startRow}~${page.endRow} 条, 共 ${page.total} 条,
-                第 ${page.pageNum} 页,
-                共 ${page.pages} 页</a></li>
-        </ul>
+    <div class="pagination hidden-sm">
+        <#if page.hasPreviousPage>
+            <a href="${url}?p=${page.prePage}<#if param?has_content>&${param}</#if>">&lt;</a>
+        </#if>
+
+        <#list page.navigatepageNums as nav>
+            <#if nav_index==0 && nav gt 2>
+                <a href="${url}?p=1<#if param?has_content>&${param}</#if>">1</a>
+                <a href="javascript:">...</a>
+            </#if>
+            <#if nav == page.pageNum>
+                <a href="javascript:" class="active">${nav}</a>
+            <#else>
+                <a href="${url}?p=${nav}<#if param?has_content>&${param}</#if>">${nav}</a>
+            </#if>
+            <#if !nav_has_next && nav lt page.pages-1>
+                <a href="javascript:">...</a>
+                <a href="${url}?p=${page.pages}<#if param?has_content>&${param}</#if>">${page.pages}</a>
+            </#if>
+        </#list>
+
+        <#if page.hasNextPage>
+            <a href="${url}?p=${page.nextPage}<#if param?has_content>&${param}</#if>">&gt;</a>
+        </#if>
     </div>
-    <div class="pull-left">
-        <ul class="pagination">
-            <#if page.hasPreviousPage>
-                <li>
-                    <a href="${url}?p=1<#if param?has_content>&${param}</#if>">
-                        <i class="ace-icon fa fa-angle-double-left"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="${url}?p=${page.prePage}<#if param?has_content>&${param}</#if>">
-                        <i class="ace-icon fa fa-angle-left"></i>
-                    </a>
-                </li>
-            <#else>
-                <li>
-                    <a href="javascript:">
-                        <i class="ace-icon fa fa-angle-double-left"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:">
-                        <i class="ace-icon fa fa-angle-left"></i>
-                    </a>
-                </li>
+
+    <div class="pagination hidden-lg">
+        <#if page.hasPreviousPage>
+            <a href="${url}?p=${page.prePage}<#if param?has_content>&${param}</#if>">&lt;</a>
+        </#if>
+
+        <#if page.pageNum == page.pages>
+            <#if page.pageNum-2 gt 0>
+                <a href="${url}?p=${page.pageNum-2}<#if param?has_content>&${param}</#if>">${page.pageNum-2}</a>
             </#if>
+        </#if>
 
-            <#list page.navigatepageNums as nav>
-                <#if nav == page.pageNum>
-                    <li class="active">
-                        <a href="javascript:">${nav}</a>
-                    </li>
-                <#else>
-                    <li>
-                        <a href="${url}?p=${nav}<#if param?has_content>&${param}</#if>">${nav}</a>
-                    </li>
-                </#if>
-            </#list>
+        <#if page.pageNum gt 1>
+            <a href="${url}?p=${page.pageNum-1}<#if param?has_content>&${param}</#if>">${page.pageNum-1}</a>
+        </#if>
 
-            <#if page.hasNextPage>
-                <li>
-                    <a href="${url}?p=${page.nextPage}<#if param?has_content>&${param}</#if>">
-                        <i class="ace-icon fa fa-angle-right"></i>
-                    </a>
-                </li>
+        <a href="javascript:" class="active">${page.pageNum}</a>
 
-                <li>
-                    <a href="${url}?p=${page.pages}<#if param?has_content>&${param}</#if>">
-                        <i class="ace-icon fa fa-angle-double-right"></i>
-                    </a>
-                </li>
-            <#else>
-                <li>
-                    <a href="javascript:">
-                        <i class="ace-icon fa fa-angle-right"></i>
-                    </a>
-                </li>
+        <#if page.pageNum lt page.pages>
+            <a href="${url}?p=${page.pageNum+1}<#if param?has_content>&${param}</#if>">${page.pageNum+1}</a>
+        </#if>
 
-                <li>
-                    <a href="javascript:">
-                        <i class="ace-icon fa fa-angle-double-right"></i>
-                    </a>
-                </li>
+        <#if page.pageNum == 1>
+            <#if page.pageNum+2 lte page.pages>
+                <a href="${url}?p=${page.pageNum+2}<#if param?has_content>&${param}</#if>">${page.pageNum+2}</a>
             </#if>
-        </ul>
+        </#if>
+
+        <#if page.hasNextPage>
+            <a href="${url}?p=${page.nextPage}<#if param?has_content>&${param}</#if>">&gt;</a>
+        </#if>
     </div>
     </#if>
 </#macro>

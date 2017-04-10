@@ -240,6 +240,10 @@ body {
     line-height: 2;
 }
 
+.markdown img {
+    max-width: 100%;
+}
+
 .markdown blockquote {
     padding: 0 15px;
     color: #666;
@@ -359,9 +363,9 @@ body {
     text-align: center;
     height: 30px;
     line-height: 30px;
-    border: 1px solid #333;
+    border: 1px solid #f60;
     border-radius: 5px;
-    color: #000;
+    color: #f60;
 }
 
 .scroll-bar > a.top {
@@ -467,6 +471,7 @@ body {
 
 .detail-main .detail-hot {
     margin-top: 50px;
+    text-align: center;
 }
 
 .detail-main .detail-hot a {
@@ -567,7 +572,7 @@ body {
     width: 90%;
     margin: 0 auto;
     margin-top: 20px;
-    height: 30px;
+    height: 35px;
     text-indent: 10px;
 }
 
@@ -577,6 +582,12 @@ body {
     margin: 0 auto;
     margin-top: 20px;
     height: 150px;
+}
+
+.detail-comment > form > input[type="submit"].submit {
+    height: 35px!important;
+    border: 1px solid #666;
+    background: #f5f5f5;
 }
 
 .detail-comment-list {

@@ -28,25 +28,7 @@
         </div>
     </#list>
 
-    <#if (page.list)?? && page.pages gt 1>
-        <div class="pagination hidden-sm">
-            <a href="#">&lt;</a>
-            <a href="#">1</a>
-            <a href="javascript:" class="active">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">&gt;</a>
-        </div>
-
-        <div class="pagination hidden-lg">
-            <a href="#">&lt;</a>
-            <a href="#">1</a>
-            <a href="javascript:" class="active">2</a>
-            <a href="#">3</a>
-            <a href="#">&gt;</a>
-        </div>
-    </#if>
+    <@c.pagination url="#index"/>
 </div>
 </#if>
 
