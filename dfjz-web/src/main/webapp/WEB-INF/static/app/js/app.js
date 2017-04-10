@@ -33,4 +33,20 @@ $(function () {
         showMenuList = false;
         return true;
     });
+
+    $("#header form input").keypress(function (e) {
+        if (e.keyCode == 13) {// 回车
+
+            var $form = $(this).parent("form");
+
+            var val = $(this).val();
+            if ($.trim(val).length < 2) {
+                return false;
+            }
+
+            $form.submit();
+            return false;
+        }
+    });
+
 });

@@ -1,4 +1,5 @@
 <#assign ctx="${(rca.contextPath)!''}">
+<#assign q = RequestParameters.q!'' />
 
 <#if !page?? || !page.list?? || page.list?size lte 0>
 <div class="article-list-empty">
@@ -32,4 +33,5 @@
 </div>
 </#if>
 
+<script>var q = '${q!''}';</script>
 <script src="${ctx}/static/app/js/index.js"></script>

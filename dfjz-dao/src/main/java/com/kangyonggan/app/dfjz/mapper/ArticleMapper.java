@@ -53,4 +53,11 @@ public interface ArticleMapper extends MyMapper<Article> {
      * @return
      */
     List<Article> selectArticlesByCategory(@Param("categoryCode") String categoryCode);
+
+    /**
+     * 查找归档文章
+     *
+     * @return
+     */
+    List<Article> selectArticles4Archives();
 }

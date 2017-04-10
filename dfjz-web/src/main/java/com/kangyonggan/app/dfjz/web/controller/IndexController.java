@@ -31,6 +31,8 @@ public class IndexController extends BaseController {
     /**
      * 首页
      *
+     * @param pageNum
+     * @param model
      * @return
      */
     @RequestMapping(value = "index", method = RequestMethod.GET)
@@ -52,5 +54,52 @@ public class IndexController extends BaseController {
     public String about() {
         return getPathRoot() + "/about";
     }
+
+    /**
+     * 归档
+     *
+     * @param pageNum
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "archives", method = RequestMethod.GET)
+    public String archives(@RequestParam(value = "p", required = false, defaultValue = "1") int pageNum,
+                           Model model) {
+        List<Article> articles = articleService.findArticles4Archives(pageNum);
+        PageInfo<Article> page = new PageInfo(articles);
+
+        model.addAttribute("page", page);
+        return getPathRoot() + "/archives";
+    }
+
+    /**
+     * 订阅
+     *
+     * @return
+     */
+    @RequestMapping(value = "rss", method = RequestMethod.GET)
+    public String rss() {
+        return getPathRoot() + "/rss";
+    }
+
+    /**
+     * 搜索
+     *
+     * @param question
+     * @param pageNum
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "search", method = RequestMethod.GET)
+    public String search(@RequestParam(value = "q") String question,
+                         @RequestParam(value = "p", required = false, defaultValue = "1") int pageNum,
+                         Model model) {
+        List<Article> articles = articleService.searchArticles(question, pageNum);
+        PageInfo<Article> page = new PageInfo(articles);
+
+        model.addAttribute("page", page);
+        return getPathIndex();
+    }
+
 
 }

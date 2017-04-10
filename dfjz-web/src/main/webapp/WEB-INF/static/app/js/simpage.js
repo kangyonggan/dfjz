@@ -141,6 +141,37 @@
         loadUrl(hash);
         // 相对定位，给【加载中...】使用
         $contentArea.css("position", "relative");
+
+        // 监听表单提交
+        $("form").submit(function (e) {
+            e.preventDefault();
+
+            var $form = $(this);
+
+            var hash = $form.attr("action");
+            var method = $form.attr("method");
+
+            // 处理get方法
+            if (method.toLowerCase() == "get") {
+                var params = "?";
+
+                var inputs = $form.find("input");
+                for (var i = 0; i < inputs.length; i++) {
+                    var $input = $(inputs[i]);
+
+                    if (i != 0) {
+                        params += "&";
+                    }
+
+                    params += $.trim($input.attr("name")) + "=" + $.trim($input.val());
+                }
+                var url = window.location.origin + window.location.pathname + hash + params;
+
+                window.location.href = url;
+            }
+
+            return false;
+        });
     }
 
     /**

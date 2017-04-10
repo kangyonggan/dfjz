@@ -18,6 +18,10 @@ $(function () {
     });
 
     $(".markdown a").attr("target", "_blank");
+
+    if (q != '') {
+        $("#header form input").val(q);
+    }
 });
 
 var $line, deg = 90, task;

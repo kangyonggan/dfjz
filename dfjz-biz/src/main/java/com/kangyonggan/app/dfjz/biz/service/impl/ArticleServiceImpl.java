@@ -3,6 +3,7 @@ package com.kangyonggan.app.dfjz.biz.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.kangyonggan.app.dfjz.biz.service.ArticleService;
 import com.kangyonggan.app.dfjz.common.MarkdownUtil;
+import com.kangyonggan.app.dfjz.common.StringUtil;
 import com.kangyonggan.app.dfjz.mapper.ArticleMapper;
 import com.kangyonggan.app.dfjz.model.annotation.LogTime;
 import com.kangyonggan.app.dfjz.model.constants.AppConstants;
@@ -35,7 +36,9 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
         PageHelper.startPage(pageNum, AppConstants.PAGE_SIZE);
         List<Article> articles = super.selectByExample(example);
 
-        return processSummary(articles);
+        processSummary(articles);
+
+        return articles;
     }
 
     @Override
@@ -95,6 +98,48 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
         return articleMapper.selectArticlesByCategory(categoryCode);
     }
 
+    @Override
+    @LogTime
+    public List<Article> findArticles4Archives(int pageNum) {
+        PageHelper.startPage(pageNum, AppConstants.PAGE_SIZE * 2);
+        return articleMapper.selectArticles4Archives();
+    }
+
+    @Override
+    @LogTime
+    public List<Article> searchArticles(String question, int pageNum) {
+        Example example = new Example(Article.class);
+        Example.Criteria criteria1 = example.createCriteria();
+
+        criteria1.andEqualTo("isDeleted", AppConstants.IS_DELETED_NO);
+        criteria1.andLike("title", StringUtil.toLikeString(question));
+
+        Example.Criteria criteria2 = example.createCriteria();
+        criteria2.andEqualTo("isDeleted", AppConstants.IS_DELETED_NO);
+        criteria2.andLike("title", StringUtil.toLikeString(question));
+
+        example.or(criteria2);
+        example.setOrderByClause("id desc");
+
+        PageHelper.startPage(pageNum, AppConstants.PAGE_SIZE);
+        List<Article> articles = super.selectByExample(example);
+
+        processSummary(articles);
+
+        // 关键字标红(有风险)
+        processQueryKey(articles, question);
+
+        return articles;
+    }
+
+    private void processQueryKey(List<Article> articles, String question) {
+        String replacement = "<span class='red'>" + question + "</span>";
+        for (Article article : articles) {
+            article.setTitle(article.getTitle().replaceAll("(?i)" + question, replacement));
+            article.setContent(article.getContent().replaceAll("(?i)" + question, replacement));
+        }
+    }
+
     private void processLines(List<Toc> childrens, String lines[], int startLine, String level) {
         if (level.length() == 7) {
             return;
@@ -140,12 +185,11 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
      * @param articles
      * @return
      */
-    private List<Article> processSummary(List<Article> articles) {
+    private void processSummary(List<Article> articles) {
         for (Article article : articles) {
             String content = article.getContent();
             String summary = content.substring(0, content.indexOf("<!-- more -->"));
             article.setContent(MarkdownUtil.markdownToHtml(summary));
         }
-        return articles;
     }
 }

@@ -42,4 +42,8 @@
     <select id="selectArticlesByCategory" parameterType="String" resultMap="BaseResultMap">
         SELECT id, title FROM article WHERE is_deleted = 0 AND category_code = #{categoryCode} ORDER BY id DESC
     </select>
+
+    <select id="selectArticles4Archives" resultMap="BaseResultMap">
+        SELECT id, title, created_time FROM article WHERE is_deleted = 0 ORDER BY id DESC
+    </select>
 </mapper>

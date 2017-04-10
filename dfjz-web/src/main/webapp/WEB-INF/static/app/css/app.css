@@ -7,9 +7,14 @@ body {
     display: none;
 }
 
+.red {
+    color: #f00 !important;
+}
+
 .sim-page {
     margin: 0 auto;
     padding: 0 10px;
+    min-height: 400px;
 }
 
 /*header*/
@@ -170,8 +175,6 @@ body {
 
 /*list*/
 .article-list-empty {
-    min-height: 600px;
-    line-height: 600px;
     font-size: 20px;
     text-align: center;
 }
@@ -686,6 +689,7 @@ body {
     border-left: 4px solid #f5f5f5;
     padding-bottom: 20px;
 }
+
 .list-line div a {
     color: #555;
     border-bottom: 1px dashed #ccc;
@@ -694,6 +698,11 @@ body {
     width: 80%;
     height: 50px;
     line-height: 60px;
+}
+
+.list-line div a span {
+    font-size: 12px;
+    line-height: 2;
 }
 
 .list-line div::before {
@@ -715,6 +724,27 @@ body {
     width: 8px;
     height: 8px;
     margin-left: -6px;
+}
+
+.list-line div.total::before {
+    width: 8px;
+    height: 8px;
+    margin-left: -6px;
+}
+
+.list-line .total {
+    padding-bottom: 50px;
+    line-height: 1.5;
+    font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: #555;
+}
+
+.list-line .tag {
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1.5;
+    font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: #555;
 }
 
 .list-line .title {

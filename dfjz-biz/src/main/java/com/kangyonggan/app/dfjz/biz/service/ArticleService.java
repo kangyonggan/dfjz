@@ -80,4 +80,21 @@ public interface ArticleService {
      * @return
      */
     List<Article> findArticlesByCategory(String categoryCode, int pageNum);
+
+    /**
+     * 查找归档文章
+     *
+     * @param pageNum
+     * @return
+     */
+    List<Article> findArticles4Archives(int pageNum);
+
+    /**
+     * 搜索
+     *
+     * @param question
+     * @param pageNum
+     * @return
+     */
+    List<Article> searchArticles(String question, int pageNum);
 }
