@@ -45,6 +45,11 @@ $(function () {
             }
 
             $form.submit();
+
+            $(".menu-list").addClass("hidden");
+            $(".menu-button div").removeClass("line-border-radius");
+
+            showMenuList = false;
             return false;
         }
     });

@@ -448,37 +448,40 @@ body {
     height: 30px;
     line-height: 30px;
     font-size: 14px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .detail-toc .level-2 {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 600;
 }
 
 .detail-toc .level-3 {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 500;
 }
 
 .detail-toc .level-4 {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
 }
 
 .detail-toc .level-4 {
-    font-size: 15px;
-}
-
-.detail-toc .level-5 {
-    font-size: 14px;
-}
-
-.detail-toc .level-6 {
     font-size: 13px;
 }
 
-.detail-toc .level-7 {
+.detail-toc .level-5 {
     font-size: 12px;
+}
+
+.detail-toc .level-6 {
+    font-size: 11px;
+}
+
+.detail-toc .level-7 {
+    font-size: 10px;
 }
 
 .detail-toc .toc-line a {

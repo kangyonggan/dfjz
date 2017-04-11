@@ -100,7 +100,7 @@
             </#list>
         </#if>
     ${p}${t.sort+1}
-        <a href="javascript:">${t.name}</a></div>
+        <a href="javascript:" title="${t.name}">${t.name}</a></div>
         <@c.toc toc=t p='${p}${t.sort+1}.'/>
     </#list>
 </#macro>
