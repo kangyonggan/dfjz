@@ -791,6 +791,14 @@ body {
     height: 30px;
 }
 
+/*share*/
+.share-btns div {
+    display: block;
+    width: 300px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
 /*small screen*/
 @media (max-width: 1250px) {
     #header {
