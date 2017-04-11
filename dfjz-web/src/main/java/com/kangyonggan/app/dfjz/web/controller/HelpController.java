@@ -8,6 +8,7 @@ import com.kangyonggan.app.dfjz.biz.util.PropertiesUtil;
 import com.kangyonggan.app.dfjz.common.IPUtil;
 import com.kangyonggan.app.dfjz.model.vo.Article;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -50,7 +51,7 @@ public class HelpController {
         String articlePublishIp = PropertiesUtil.getProperties("article.publish.ip");
         log.info("发布文章的ip白名单为：{}", articlePublishIp);
 
-        if (articlePublishIp.indexOf(ip) > -1) {
+        if (isContainsIp(ip, articlePublishIp)) {
             articleService.saveArticle(article);
             refreshTask(request);
             log.info("文章发布成功");
@@ -75,7 +76,7 @@ public class HelpController {
         String taskRefreshIp = PropertiesUtil.getProperties("task.refresh.ip");
         log.info("手动刷新所有任务的ip白名单为：{}", taskRefreshIp);
 
-        if (taskRefreshIp.indexOf(ip) > -1) {
+        if (isContainsIp(ip, taskRefreshIp)) {
             categoryArticleCountTask.execute();
             rssTask.execute();
             siteMapTask.execute();
@@ -96,6 +97,22 @@ public class HelpController {
     public String refreshConfig() {
         PropertiesUtil.refresh();
         return "ok";
+    }
+
+    private boolean isContainsIp(String ip, String ips) {
+        if (StringUtils.isEmpty(ip) || StringUtils.isEmpty(ips)) {
+            return false;
+        }
+
+        String ipArr[] = ips.split(",");
+
+        for (String i : ipArr) {
+            if (ip.equals(i)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }
