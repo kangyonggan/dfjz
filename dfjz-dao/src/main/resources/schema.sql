@@ -137,10 +137,6 @@ CREATE TABLE category
   COMMENT '栏目名称',
   sort          INTEGER(11)                           NOT NULL
   COMMENT '栏目排序',
-  pcode         VARCHAR(16)                           NOT NULL                    DEFAULT ''
-  COMMENT '父栏目代码',
-  picture       VARCHAR(128)                          NOT NULL                    DEFAULT ''
-  COMMENT '栏目头图',
   article_count INTEGER(11)                           NOT NULL                    DEFAULT 0
   COMMENT '文章数量',
   is_deleted    TINYINT                               NOT NULL                    DEFAULT 0
@@ -151,51 +147,17 @@ CREATE TABLE category
   COMMENT '更新时间'
 )
   COMMENT '栏目表';
-CREATE UNIQUE INDEX uid_pcode_code
-  ON category (pcode, code);
+CREATE UNIQUE INDEX uid_code
+  ON category (code);
 CREATE INDEX id_created_time
   ON category (created_time);
-
--- ----------------------------
---  Table structure for dictionary
--- ----------------------------
-DROP TABLE
-IF EXISTS dictionary;
-
-CREATE TABLE dictionary
-(
-  id           BIGINT(20) PRIMARY KEY AUTO_INCREMENT NOT NULL
-  COMMENT '主键, 自增',
-  type         VARCHAR(16)                           NOT NULL
-  COMMENT '类型',
-  code         VARCHAR(16)                           NOT NULL
-  COMMENT '代码',
-  name         VARCHAR(32)                           NOT NULL
-  COMMENT '名称',
-  sort         INTEGER(11)                           NOT NULL
-  COMMENT '排序',
-  pcode        VARCHAR(16)                           NOT NULL                    DEFAULT ''
-  COMMENT '父代码',
-  is_deleted   TINYINT                               NOT NULL                    DEFAULT 0
-  COMMENT '逻辑删除:{0:未删除, 1:已删除}',
-  created_time TIMESTAMP                             NOT NULL                    DEFAULT CURRENT_TIMESTAMP
-  COMMENT '创建时间',
-  updated_time TIMESTAMP                             NOT NULL                    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-  COMMENT '更新时间'
-)
-  COMMENT '字典表';
-CREATE UNIQUE INDEX uid_type
-  ON dictionary (type);
-CREATE UNIQUE INDEX uid_pcode_code
-  ON dictionary (pcode, code);
-CREATE INDEX id_created_time
-  ON dictionary (created_time);
 
 INSERT INTO category (code, name, sort)
 VALUES
   ('java', 'Java后台', 0),
   ('web', 'Web前端', 1),
   ('db', '数据库', 2),
-  ('sys', '系统运维', 3),
-  ('other', '综合', 4);
+  ('code', '代码片段', 3),
+  ('sys', '系统运维', 4),
+  ('other', '综合', 5);
 

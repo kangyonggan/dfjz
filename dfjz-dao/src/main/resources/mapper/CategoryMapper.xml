@@ -9,8 +9,6 @@
         <result column="code" property="code" jdbcType="VARCHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="sort" property="sort" jdbcType="INTEGER"/>
-        <result column="pcode" property="pcode" jdbcType="VARCHAR"/>
-        <result column="picture" property="picture" jdbcType="VARCHAR"/>
         <result column="article_count" property="articleCount" jdbcType="INTEGER"/>
         <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
         <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>

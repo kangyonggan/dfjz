@@ -31,16 +31,6 @@ public class Category implements Serializable {
     private Integer sort;
 
     /**
-     * 父栏目代码
-     */
-    private String pcode;
-
-    /**
-     * 栏目头图
-     */
-    private String picture;
-
-    /**
      * 文章数量
      */
     @Column(name = "article_count")
