@@ -361,8 +361,12 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
     private void processSummary(List<Article> articles) {
         for (Article article : articles) {
             String content = article.getContent();
-            String summary = content.substring(0, content.indexOf("<!-- more -->"));
-            article.setContent(MarkdownUtil.markdownToHtml(summary));
+            int index = content.indexOf("<!-- more -->");
+            if (index > -1) {
+                article.setContent(MarkdownUtil.markdownToHtml(content.substring(0, index)));
+            } else {
+                article.setContent(MarkdownUtil.markdownToHtml(content));
+            }
         }
     }
 }
