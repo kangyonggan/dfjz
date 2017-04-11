@@ -3,7 +3,6 @@ package com.kangyonggan.app.dfjz.web.controller;
 import com.kangyonggan.app.dfjz.biz.service.ArticleService;
 import com.kangyonggan.app.dfjz.biz.service.CommentService;
 import com.kangyonggan.app.dfjz.biz.service.RedisService;
-import com.kangyonggan.app.dfjz.biz.util.PropertiesUtil;
 import com.kangyonggan.app.dfjz.common.IPUtil;
 import com.kangyonggan.app.dfjz.common.MarkdownUtil;
 import com.kangyonggan.app.dfjz.model.dto.Toc;
@@ -107,28 +106,5 @@ public class ArticleController extends BaseController {
 
         articleService.updateArticleCommentCount(comment, ip);
         return "redirect:/article/" + comment.getArticleId();
-    }
-
-    /**
-     * 保存文章
-     *
-     * @param article
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "save", method = RequestMethod.POST)
-    public String save(@ModelAttribute("article") @Valid Article article, HttpServletRequest request) {
-        String ip = IPUtil.getIp(request);
-        log.info("发布文章的ip实际地址为：{}", ip);
-        String ipWhite = PropertiesUtil.getProperties("article.publish.ip.white");
-        log.info("发布文章的ip白名单为：{}", ipWhite);
-
-        if (ipWhite.indexOf(ip) > -1) {
-            log.info("文章发布成功");
-        } else {
-            log.error("{}不在ip白名单中，企图发布文章，已报警！", ip);
-        }
-
-        return "redirect:/index";
     }
 }

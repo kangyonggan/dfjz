@@ -31,7 +31,7 @@ public class LogAop {
     private Long slowMethodTime;
 
     public LogAop() {
-        String val = PropertiesUtil.getPropertiesOrDefault("slow.method.time", "10");
+        String val = PropertiesUtil.getPropertiesWithDefault("slow.method.time", "10");
         slowMethodTime = Long.parseLong(val);
     }
 

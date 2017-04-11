@@ -37,9 +37,10 @@
         <property name="dfjz.slow.method.time" description="慢方法时间(秒)" defaultValue="2"/>
         <property name="dfjz.slow.interface.time" description="慢接口时间(秒)" defaultValue="2"/>
         <property name="dfjz.cache.open" description="是否开启缓存,Y:开启,N:不开启" defaultValue="Y"/>
+        <property name="dfjz.article.publish.ip" description="发布文章的ip白名单（以逗号分隔）" defaultValue="0:0:0:0:0:0:0:1"/>
+        <property name="dfjz.task.refresh.ip" description="刷新任务的ip白名单（以逗号分隔）" defaultValue="0:0:0:0:0:0:0:1"/>
     </group>
     <script>
-        <generate template="app.properties" charset="UTF-8"/>
         <generate template="applicationContext-datasource.xml" charset="UTF-8"/>
         <generate template="applicationContext-redis.xml" charset="UTF-8"/>
         <generate template="applicationContext-mail.xml" charset="UTF-8"/>

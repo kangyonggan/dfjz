@@ -134,4 +134,10 @@ public interface ArticleService {
      */
     List<ArticleCountDto> findArticleCountDto();
 
+    /**
+     * 保存文章
+     *
+     * @param article
+     */
+    void saveArticle(Article article);
 }

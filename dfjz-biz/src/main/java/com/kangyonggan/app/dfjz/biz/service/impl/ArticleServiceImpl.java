@@ -2,6 +2,7 @@ package com.kangyonggan.app.dfjz.biz.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.kangyonggan.app.dfjz.biz.service.ArticleService;
+import com.kangyonggan.app.dfjz.biz.service.CategoryService;
 import com.kangyonggan.app.dfjz.biz.service.CommentService;
 import com.kangyonggan.app.dfjz.biz.service.VisitService;
 import com.kangyonggan.app.dfjz.biz.util.PropertiesUtil;
@@ -15,6 +16,7 @@ import com.kangyonggan.app.dfjz.model.constants.AppConstants;
 import com.kangyonggan.app.dfjz.model.dto.ArticleCountDto;
 import com.kangyonggan.app.dfjz.model.dto.Toc;
 import com.kangyonggan.app.dfjz.model.vo.Article;
+import com.kangyonggan.app.dfjz.model.vo.Category;
 import com.kangyonggan.app.dfjz.model.vo.Comment;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
@@ -52,6 +54,9 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     @Override
     @LogTime
@@ -211,6 +216,15 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
         return articleMapper.selectArticleCountDto();
     }
 
+    @Override
+    @LogTime
+    public void saveArticle(Article article) {
+        Category category = categoryService.findCategoryByCode(article.getCategoryCode());
+        article.setCategoryName(category.getName());
+
+        super.insertSelective(article);
+    }
+
     private void genSiteMap(List<Article> articles) {
         StringBuilder rss = new StringBuilder("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">");
 
@@ -272,8 +286,15 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
             rss.append("<published>").append(DateUtil.toXmlDateTime(article.getCreatedTime())).append("</published>");
             rss.append("<updated>").append(DateUtil.toXmlDateTime(article.getUpdatedTime())).append("</updated>");
             rss.append("<content type=\"html\"><![CDATA[").append(MarkdownUtil.markdownToHtml(article.getContent())).append("]]></content>");
-            String summary = article.getContent().substring(0, article.getContent().indexOf("<!-- more -->"));
-            rss.append("<summary type=\"html\"><![CDATA[").append(MarkdownUtil.markdownToHtml(summary)).append("]]></summary>");
+
+            int index = article.getContent().indexOf("<!-- more -->");
+            if (index > -1) {
+                String summary = article.getContent().substring(0, index);
+                rss.append("<summary type=\"html\"><![CDATA[").append(MarkdownUtil.markdownToHtml(summary)).append("]]></summary>");
+            } else {
+                rss.append("<summary type=\"html\"><![CDATA[").append(MarkdownUtil.markdownToHtml(article.getContent())).append("]]></summary>");
+            }
+
             rss.append("<category term=\"").append(article.getCategoryName()).append("\" scheme=\"http://kangyonggan.com/category/").append(article.getCategoryCode()).append("/\"/>");
             rss.append("</entry>");
         }

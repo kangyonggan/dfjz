@@ -75,18 +75,6 @@ public class IndexController extends BaseController {
     }
 
     /**
-     * 订阅
-     *
-     * @return
-     */
-    @RequestMapping(value = "rss", method = RequestMethod.GET)
-    @ResponseBody
-    public String rss() {
-        articleService.genBlogRss();
-        return "ok";
-    }
-
-    /**
      * 搜索
      *
      * @param question
@@ -103,18 +91,6 @@ public class IndexController extends BaseController {
 
         model.addAttribute("page", page);
         return getPathIndex();
-    }
-
-    /**
-     * 手动刷新所有任务
-     *
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "refresh", method = RequestMethod.GET)
-    @ResponseBody
-    public String runTask(HttpServletRequest request) {
-        return "ok";
     }
 
 }
