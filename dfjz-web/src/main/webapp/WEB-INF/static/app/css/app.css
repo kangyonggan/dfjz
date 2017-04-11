@@ -295,6 +295,15 @@ body {
     color: #c5c8c6;
 }
 
+.markdown table {
+    border-collapse: collapse;
+}
+
+.markdown table tr td,th {
+    border: 1px solid #555;
+    padding: 6px 10px;
+}
+
 /*pagination*/
 .pagination {
     clear: both;
