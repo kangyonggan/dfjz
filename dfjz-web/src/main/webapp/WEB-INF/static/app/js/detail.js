@@ -22,6 +22,10 @@ $(function () {
 
     $(".markdown a").attr("target", "_blank");
 
+    $(".detail-comment form").submit(function () {
+        $(".detail-comment .submit").val("正在提交...").attr("disabled", "disabled");
+    });
+
 });
 
 var taskPay, degPay = 0;

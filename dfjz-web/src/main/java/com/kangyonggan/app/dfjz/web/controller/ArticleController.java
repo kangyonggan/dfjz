@@ -67,10 +67,10 @@ public class ArticleController extends BaseController {
         // 访问量控制
         String ip = IPUtil.getIp(request);
 
-        Object flag = redisService.get("article_id_" + id + "_ip_" + ip);
+        Object flag = redisService.get("article_visit_id_" + id + "_ip_" + ip);
         if (flag == null) {
             articleService.updateArticleVisitCount(id, ip);
-            redisService.set("article_id_" + id + "_ip_" + ip, id, 30 * 60);// 30分钟之内同一个ip只能算访问一次
+            redisService.set("article_visit_id_" + id + "_ip_" + ip, id, 30 * 60);// 30分钟之内同一个ip只能算访问一次
         }
 
         model.addAttribute("article", article);
@@ -93,7 +93,19 @@ public class ArticleController extends BaseController {
      */
     @RequestMapping(value = "comment", method = RequestMethod.POST)
     public String comment(@ModelAttribute("comment") @Valid Comment comment, HttpServletRequest request) {
-        articleService.updateArticleCommentCount(comment, IPUtil.getIp(request));
+        // 访问量控制
+        String ip = IPUtil.getIp(request);
+        Long id = comment.getArticleId();
+
+        Object flag = redisService.get("article_comment_id_" + id + "_ip_" + ip);
+        if (flag == null) {
+            articleService.updateArticleVisitCount(id, ip);
+            redisService.set("article_comment_id_" + id + "_ip_" + ip, id, 3 * 60);// 3分钟之内同一个ip只能算评论一次
+        } else {
+            return getPathRoot() + "/warn";
+        }
+
+        articleService.updateArticleCommentCount(comment, ip);
         return "redirect:/article/" + comment.getArticleId();
     }
 

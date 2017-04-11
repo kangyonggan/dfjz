@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -104,5 +105,16 @@ public class IndexController extends BaseController {
         return getPathIndex();
     }
 
+    /**
+     * 手动刷新所有任务
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "refresh", method = RequestMethod.GET)
+    @ResponseBody
+    public String runTask(HttpServletRequest request) {
+        return "ok";
+    }
 
 }
