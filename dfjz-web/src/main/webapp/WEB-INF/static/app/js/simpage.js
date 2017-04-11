@@ -115,6 +115,7 @@
                 stopLoading(true);
                 // 内容替换
                 $contentArea.empty().html(result);
+                scroll(0,0)
             });
         }
 
