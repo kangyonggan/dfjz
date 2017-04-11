@@ -22,10 +22,10 @@ public class CategoryArticleCountTask {
     private CategoryService categoryService;
 
     /**
-     * 每10分钟执行一次
+     * 每30分钟执行一次
      * cron表达式：* * * * * *（秒 分 时 日 月 星期）
      */
-    @Scheduled(cron = "0 0/10 * * * *")
+    @Scheduled(cron = "0 0/30 * * * *")
     public void execute() {
         log.info("定时任务统计栏目的文章数开始...");
         categoryService.updateCategoriesArticleCount();

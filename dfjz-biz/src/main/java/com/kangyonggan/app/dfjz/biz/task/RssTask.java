@@ -18,10 +18,10 @@ public class RssTask {
     private ArticleService articleService;
 
     /**
-     * 每20分钟执行一次
+     * 每40分钟执行一次
      * cron表达式：* * * * * *（秒 分 时 日 月 星期）
      */
-    @Scheduled(cron = "0 0/20 * * * *")
+    @Scheduled(cron = "0 0/40 * * * *")
     public void execute() {
         log.info("定时任务自动生成RSS开始...");
         articleService.genBlogRss();
