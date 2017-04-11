@@ -83,6 +83,8 @@
     </div>
 </div>
 
+<div class="clear-float"></div>
+
 <#if article.isComment==1>
 <div class="detail-comment">
     <form action="#article/comment" method="post">
