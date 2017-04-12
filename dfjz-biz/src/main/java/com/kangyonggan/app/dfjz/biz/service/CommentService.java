@@ -33,4 +33,11 @@ public interface CommentService {
      */
     List<CommentCountDto> findArticlesCommentCount();
 
+    /**
+     * 更新评论者ip信息
+     *
+     * @param id
+     * @param ip
+     */
+    void updateCommitCity(Long id, String ip);
 }

@@ -4,7 +4,6 @@ import com.github.pagehelper.PageHelper;
 import com.kangyonggan.app.dfjz.biz.service.ArticleService;
 import com.kangyonggan.app.dfjz.biz.service.CategoryService;
 import com.kangyonggan.app.dfjz.biz.service.CommentService;
-import com.kangyonggan.app.dfjz.biz.service.VisitService;
 import com.kangyonggan.app.dfjz.biz.util.PropertiesUtil;
 import com.kangyonggan.app.dfjz.common.DateUtil;
 import com.kangyonggan.app.dfjz.common.IPUtil;
@@ -29,12 +28,6 @@ import tk.mybatis.mapper.entity.Example;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -50,9 +43,6 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
 
     @Autowired
     private ArticleMapper articleMapper;
-
-    @Autowired
-    private VisitService visitService;
 
     @Autowired
     private CommentService commentService;
@@ -168,28 +158,19 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
 
     @Override
     @LogTime
-    public void updateArticleVisitCount(Long articleId, String ip) {
-        visitService.saveVisit(articleId, ip);
-
+    public void updateArticleVisitCount(Long articleId) {
         articleMapper.updateArticleVisitCount(articleId);
     }
 
     @Override
     @LogTime
-    public void updateArticleCommentCount(Comment comment, String ip) {
-        Map<String, String> resultMap = IPUtil.getIpInfo(ip);
-
-        String city = resultMap.get("city");
-        if (StringUtils.isEmpty(city)) {
-            city = "未知地";
-        }
-        city += "网友";
-
+    public Long updateArticleCommentCount(Comment comment, String ip) {
         comment.setIp(ip);
-        comment.setCity(city);
         commentService.saveComment(comment);
 
         articleMapper.updateArticleCommentCount(comment.getArticleId());
+
+        return comment.getId();
     }
 
     @Override

@@ -112,7 +112,11 @@
                     </div>
                     <div class="content">${comment.content}</div>
                     <div class="tool">
-                        <a href="javascript:">${comment.city}</a>
+                        <#if comment.city==''>
+                            <a href="javascript:">正在调查所在地</a>
+                        <#else>
+                            <a href="javascript:">${comment.city}</a>
+                        </#if>
                     </div>
                 </div>
             </div>

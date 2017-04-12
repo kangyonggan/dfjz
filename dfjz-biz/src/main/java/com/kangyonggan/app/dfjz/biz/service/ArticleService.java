@@ -107,17 +107,17 @@ public interface ArticleService {
      * 更新浏览量
      *
      * @param articleId
-     * @param ip
      */
-    void updateArticleVisitCount(Long articleId, String ip);
+    void updateArticleVisitCount(Long articleId);
 
     /**
      * 更新评论数
      *
      * @param comment
      * @param ip
+     * @return
      */
-    void updateArticleCommentCount(Comment comment, String ip);
+    Long updateArticleCommentCount(Comment comment, String ip);
 
     /**
      * 生成博客的rss
