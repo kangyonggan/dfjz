@@ -1,9 +1,12 @@
 <#assign ctx="${(rca.contextPath)!''}">
 
-<table>
+<h2>
+    <a href="#article/${article.id}" class="visit-title">${article.title}</a>
+</h2>
+
+<table class="block">
     <thead>
     <tr>
-        <th>被访问的文章</th>
         <th>访问者IP</th>
         <th>国家</th>
         <th>地区</th>
@@ -17,7 +20,6 @@
     <tbody>
     <#list page.list as visit>
     <tr>
-        <td><a href="#article/${visit.articleId}" target="_blank">${visit.articleTitle}</a></td>
         <td>${visit.ip}</td>
         <td>${visit.country!''}</td>
         <td>${visit.area!''}</td>
@@ -29,7 +31,6 @@
     </#list>
     </tbody>
 </table>
-
 <div class="clear-float"></div>
 
-<@c.pagination url="#article/${id}/visits"/>
+<@c.pagination url="#article/${article.id}/visits"/>

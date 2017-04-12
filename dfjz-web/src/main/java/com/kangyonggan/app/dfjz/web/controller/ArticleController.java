@@ -145,11 +145,12 @@ public class ArticleController extends BaseController {
     public String visits(@PathVariable("id") Long id,
                          @RequestParam(value = "p", required = false, defaultValue = "1") int pageNum,
                          Model model) {
+        Article article = articleService.findArticleById(id);
         List<Visit> visits = visitService.findVisitsByArticleId(id, pageNum);
         PageInfo<Visit> page = new PageInfo(visits);
 
         model.addAttribute("page", page);
-        model.addAttribute("id", id);
+        model.addAttribute("article", article);
         return getPathRoot() + "/visits";
     }
 }

@@ -32,7 +32,7 @@ public class StatController extends BaseController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public String index(@RequestParam(value = "p", required = false, defaultValue = "1") int pageNum, Model model) {
-        List<Visit> visits = visitService.findVisitsByArticleId(0L, pageNum);
+        List<Visit> visits = visitService.findVisitsByPage(pageNum);
         PageInfo<Visit> page = new PageInfo(visits);
 
         model.addAttribute("page", page);

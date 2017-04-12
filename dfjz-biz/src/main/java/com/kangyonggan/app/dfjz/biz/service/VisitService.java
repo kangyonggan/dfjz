@@ -25,6 +25,14 @@ public interface VisitService {
     List<VisitCountDto> findArticlesVisitCount();
 
     /**
+     * 分页查询访客
+     *
+     * @param pageNum
+     * @return
+     */
+    List<Visit> findVisitsByPage(int pageNum);
+
+    /**
      * 查询文章的访客
      *
      * @param articleId

@@ -11,12 +11,11 @@ import java.util.List;
 public interface VisitMapper extends MyMapper<Visit> {
 
     /**
-     * 查找访问者
+     * 查找所有访问者，带出文章标题
      *
-     * @param articleId
      * @return
      */
-    List<Visit> findVisitsByArticleId(@Param("articleId") Long articleId);
+    List<Visit> findVisits();
 
     /**
      * 查询文章访问量
