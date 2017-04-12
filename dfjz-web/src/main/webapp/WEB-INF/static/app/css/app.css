@@ -617,8 +617,12 @@ table a {
     height: 150px;
 }
 
-.detail-comment > form > input[type="submit"].submit {
-    height: 35px!important;
+.detail-comment > form > button {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 20px;
+    height: 35px;
     border: 1px solid #666;
     background: #f5f5f5;
 }
@@ -879,6 +883,10 @@ table a {
     }
 
     .detail-comment > form > input {
+        width: 600px;
+    }
+
+    .detail-comment > form > button {
         width: 600px;
     }
 
