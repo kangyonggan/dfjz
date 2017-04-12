@@ -3,6 +3,7 @@ package com.kangyonggan.app.dfjz.biz.service.impl;
 import com.kangyonggan.app.dfjz.biz.service.ArticleService;
 import com.kangyonggan.app.dfjz.biz.service.CommentService;
 import com.kangyonggan.app.dfjz.biz.service.MailService;
+import com.kangyonggan.app.dfjz.biz.service.SmsService;
 import com.kangyonggan.app.dfjz.biz.util.PropertiesUtil;
 import com.kangyonggan.app.dfjz.common.IPUtil;
 import com.kangyonggan.app.dfjz.mapper.CommentMapper;
@@ -35,6 +36,9 @@ public class CommentServiceImpl extends BaseService<Comment> implements CommentS
     @Autowired
     private ArticleService articleService;
 
+    @Autowired
+    private SmsService smsService;
+
     @Override
     @LogTime
     public List<Comment> findCommentsByArticleId(Long articleId) {
@@ -58,7 +62,6 @@ public class CommentServiceImpl extends BaseService<Comment> implements CommentS
     }
 
     @Override
-    @LogTime
     public void updateCommitCity(Long id, String ip) {
         Map<String, String> resultMap = IPUtil.getIpInfo(ip);
 
@@ -77,8 +80,11 @@ public class CommentServiceImpl extends BaseService<Comment> implements CommentS
         comment = super.selectByPrimaryKey(id);
         Article article = articleService.findArticleById(comment.getArticleId());
 
+        smsService.sendSms(PropertiesUtil.getProperties("app.mobile"), city, ip, article.getTitle(), comment.getContent());
+
         mailService.send(PropertiesUtil.getProperties("mail.receiver"),
                 article.getTitle() + " - 评论通知",
                 comment.getContent() + "\r\n\r\n来自: " + comment.getCity() + "(" + ip + ")");
+
     }
 }

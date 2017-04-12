@@ -4,6 +4,7 @@
         <!--app-->
         <property name="dfjz.app.name" description="项目名字" defaultValue="东方娇子"/>
         <property name="dfjz.app.author" description="项目负责人" defaultValue="康永敢"/>
+        <property name="dfjz.app.mobile" description="项目负责人手机号" defaultValue="151xxxx9571"/>
         <property name="dfjz.app.ba.no" description="备案号" defaultValue="皖ICP备16017743号-1"/>
 
         <!-- redis -->
@@ -30,6 +31,15 @@
         <property name="dfjz.mail.receiver" description="错误日志邮件接收人" defaultValue="kangyonggan@gmail.com"/>
         <property name="dfjz.mail.bufferSize" description="错误日志邮件缓冲区大小(单位:k)" defaultValue="50"/>
 
+        <!--sms-->
+        <property name="dfjz.sms.regionId" description="短信服务器地区" defaultValue="cn-hangzhou"/>
+        <property name="dfjz.sms.accessKeyId" description="邮件服务器用户名" defaultValue="xxx"/>
+        <property name="dfjz.sms.secret" description="邮件服务器密码" defaultValue="xxx"/>
+        <property name="dfjz.sms.domain" description="短信服务器域名" defaultValue="sms.aliyuncs.com"/>
+        <property name="dfjz.sms.signName" description="短信签名" defaultValue="东方娇子"/>
+        <property name="dfjz.sms.templateCode" description="模板CODE" defaultValue="xxx"/>
+        <property name="dfjz.sms.debug" description="调试模式" defaultValue="true"/>
+
         <!-- log4j2 -->
         <property name="dfjz.log4j2.home" description="log4j2日志的文件主目录" defaultValue="/Users/kyg/logs/dfjz"/>
 
@@ -44,6 +54,7 @@
         <generate template="applicationContext-datasource.xml" charset="UTF-8"/>
         <generate template="applicationContext-redis.xml" charset="UTF-8"/>
         <generate template="applicationContext-mail.xml" charset="UTF-8"/>
+        <generate template="applicationContext-sms.xml" charset="UTF-8"/>
         <generate template="log4j2.xml"/>
     </script>
 </config>

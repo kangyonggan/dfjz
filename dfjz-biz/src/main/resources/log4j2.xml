@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN" monitorInterval="300">
-    <properties>
-        <property name="LOG_HOME">${dfjz.log4j2.home}</property>
-    </properties>
-
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%logger{36}.%t:%L] - %msg%n"/>
         </Console>
-        <RollingRandomAccessFile name="AllFile" fileName="${D}{LOG_HOME}/all.log"
-                                 filePattern="${D}{LOG_HOME}/all-%d{yyyy-MM-dd}-%i.log">
+        <RollingRandomAccessFile name="AllFile" fileName="${dfjz.log4j2.home}/all.log"
+                                 filePattern="${dfjz.log4j2.home}/all-%d{yyyy-MM-dd}-%i.log">
             <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%logger{36}.%t:%L] - %msg%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy interval="1"/>
@@ -21,8 +17,8 @@
                 <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
             </Filters>
         </RollingRandomAccessFile>
-        <RollingRandomAccessFile name="ErrorFile" fileName="${D}{LOG_HOME}/error.log"
-                                 filePattern="${D}{LOG_HOME}/error-%d{yyyy-MM-dd}-%i.log">
+        <RollingRandomAccessFile name="ErrorFile" fileName="${dfjz.log4j2.home}/error.log"
+                                 filePattern="${dfjz.log4j2.home}/error-%d{yyyy-MM-dd}-%i.log">
             <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%logger{36}.%t:%L] - %msg%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy interval="1"/>
@@ -34,7 +30,7 @@
                 <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
             </Filters>
         </RollingRandomAccessFile>
-        <SMTP name="Mail" subject="服务异常 - 报警通知" to="${dfjz.mail.receiver}" from="${dfjz.app.name}"
+        <SMTP name="Mail" subject="${dfjz.app.name} - 报警通知" to="${dfjz.mail.receiver}" from="${dfjz.mail.username}"
               smtpHost="${dfjz.mail.host}" smtpUsername="${dfjz.mail.username}" smtpPassword="${dfjz.mail.password}" bufferSize="${dfjz.mail.bufferSize}" >
         </SMTP>
         <Async name="AsyncAll">

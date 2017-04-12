@@ -16,5 +16,7 @@
     <import resource="applicationContext-freemarker.xml"/>
     <!--邮件-->
     <import resource="applicationContext-mail.xml"/>
+    <!--短信-->
+    <import resource="applicationContext-sms.xml"/>
 
 </beans>

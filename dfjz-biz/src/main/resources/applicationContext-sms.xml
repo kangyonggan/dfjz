@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+    <bean id="smsService" class="com.kangyonggan.app.dfjz.biz.service.impl.SmsServiceImpl">
+        <constructor-arg index="0">
+            <value>${dfjz.sms.regionId}</value>
+        </constructor-arg>
+        <constructor-arg index="1">
+            <value>${dfjz.sms.accessKeyId}</value>
+        </constructor-arg>
+        <constructor-arg index="2">
+            <value>${dfjz.sms.secret}</value>
+        </constructor-arg>
+        <constructor-arg index="3">
+            <value>${dfjz.sms.domain}</value>
+        </constructor-arg>
+
+        <property name="signName" value="${dfjz.sms.signName}"></property>
+        <property name="templateCode" value="${dfjz.sms.templateCode}"></property>
+        <property name="debug" value="${dfjz.sms.debug}"></property>
+    </bean>
+
+</beans>

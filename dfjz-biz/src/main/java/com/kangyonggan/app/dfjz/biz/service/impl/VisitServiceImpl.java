@@ -26,7 +26,6 @@ public class VisitServiceImpl extends BaseService<Visit> implements VisitService
     private VisitMapper visitMapper;
 
     @Override
-    @LogTime
     public void saveVisit(Long articleId, String ip) {
         Visit visit = new Visit();
 
