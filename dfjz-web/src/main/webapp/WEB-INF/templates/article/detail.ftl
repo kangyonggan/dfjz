@@ -24,7 +24,7 @@
         <div class="detail-hot">
             <h3>作者信息</h3>
 
-            <img src="${ctx}/static/app/images/avatar.png">
+            <img src="${ctx}/static/app/images/avatar.jpg">
 
             <p>二逼青年欢乐多</p>
         </div>
