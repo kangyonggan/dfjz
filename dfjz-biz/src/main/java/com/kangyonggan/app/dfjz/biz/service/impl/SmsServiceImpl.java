@@ -41,12 +41,16 @@ public class SmsServiceImpl implements SmsService {
 
     @Override
     @LogTime
-    public void sendSms(String mobile, String name, String articleid) {
+    public void sendSms(String mobile, String articleid) {
+        if (articleid.length() > 15) {
+            articleid = articleid.substring(0, 15);
+        }
+
         SingleSendSmsRequest request = new SingleSendSmsRequest();
         request.setSignName(signName);
         request.setTemplateCode(templateCode);
         request.setRecNum(mobile);
-        request.setParamString("{\"name\":\"" + name + "\",\"articleid\":\"" + articleid + "\"}");
+        request.setParamString("{\"articleid\":\"" + articleid + "\"}");
 
         // 发送
         try {

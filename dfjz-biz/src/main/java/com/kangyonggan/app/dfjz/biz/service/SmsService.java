@@ -10,9 +10,8 @@ public interface SmsService {
      * 评论后发短信通知
      *
      * @param mobile
-     * @param name
      * @param articleid
      */
-    void sendSms(String mobile, String name, String articleid);
+    void sendSms(String mobile, String articleid);
 
 }
