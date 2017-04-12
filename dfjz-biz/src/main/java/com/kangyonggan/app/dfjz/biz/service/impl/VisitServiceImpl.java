@@ -10,7 +10,6 @@ import com.kangyonggan.app.dfjz.model.dto.VisitCountDto;
 import com.kangyonggan.app.dfjz.model.vo.Visit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 import java.util.Map;
@@ -51,15 +50,15 @@ public class VisitServiceImpl extends BaseService<Visit> implements VisitService
 
     @Override
     @LogTime
-    public List<Visit> findVisitsByPage(int pageNum) {
-        PageHelper.startPage(pageNum, AppConstants.PAGE_SIZE * 4);
-
-        return visitMapper.findVisits();
+    public List<VisitCountDto> findArticlesVisitCount() {
+        return visitMapper.selectArticlesVisitCount();
     }
 
     @Override
     @LogTime
-    public List<VisitCountDto> findArticlesVisitCount() {
-        return visitMapper.selectArticlesVisitCount();
+    public List<Visit> findVisitsByArticleId(Long articleId, int pageNum) {
+        PageHelper.startPage(pageNum, AppConstants.PAGE_SIZE * 4);
+
+        return visitMapper.findVisitsByArticleId(articleId);
     }
 }

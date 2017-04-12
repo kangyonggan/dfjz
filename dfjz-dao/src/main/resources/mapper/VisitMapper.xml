@@ -20,13 +20,16 @@
         <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime"/>
     </resultMap>
 
-    <select id="findVisits" resultMap="BaseResultMap">
+    <select id="findVisitsByArticleId" resultMap="BaseResultMap">
         SELECT
           a.title AS articleTitle, v.*
         FROM
           article a, visit v
         WHERE
           a.id = v.article_id
+          <if test="articleId != 0">
+              AND a.id = #{articleId}
+          </if>
         ORDER BY v.id DESC
     </select>
 

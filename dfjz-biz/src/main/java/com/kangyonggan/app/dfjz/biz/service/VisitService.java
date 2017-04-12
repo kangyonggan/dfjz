@@ -20,16 +20,16 @@ public interface VisitService {
     void saveVisit(Long articleId, String ip);
 
     /**
-     * 分页查找访问量
-     *
-     * @param pageNum
-     * @return
-     */
-    List<Visit> findVisitsByPage(int pageNum);
-
-    /**
      * 查询文章访问量
      */
     List<VisitCountDto> findArticlesVisitCount();
 
+    /**
+     * 查询文章的访客
+     *
+     * @param articleId
+     * @param pageNum
+     * @return
+     */
+    List<Visit> findVisitsByArticleId(Long articleId, int pageNum);
 }

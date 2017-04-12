@@ -5,7 +5,7 @@
     <div class="detail-info">
         <span>发表于 ${article.createdTime?date}</span>
         <span>分类于 <a href="#category/${article.categoryCode}">${article.categoryName}</a></span>
-        <span>访问量 <a href="javascript:">${article.visitCount}</a></span>
+        <span>访问量 <a href="#article/${article.id}/visits"">${article.visitCount}</a></span>
         <span>评论数 <a href="javascript:">${article.commentCount}</a></span>
     </div>
 </div>

@@ -1,5 +1,6 @@
 package com.kangyonggan.app.dfjz.web.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.kangyonggan.app.dfjz.biz.service.ArticleService;
 import com.kangyonggan.app.dfjz.biz.service.CommentService;
 import com.kangyonggan.app.dfjz.biz.service.RedisService;
@@ -9,14 +10,12 @@ import com.kangyonggan.app.dfjz.common.MarkdownUtil;
 import com.kangyonggan.app.dfjz.model.dto.Toc;
 import com.kangyonggan.app.dfjz.model.vo.Article;
 import com.kangyonggan.app.dfjz.model.vo.Comment;
+import com.kangyonggan.app.dfjz.model.vo.Visit;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -132,5 +131,25 @@ public class ArticleController extends BaseController {
             }
         }
         return "redirect:/article/" + comment.getArticleId();
+    }
+
+    /**
+     * 文章的访客
+     *
+     * @param id
+     * @param pageNum
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "{id:[\\d]+}/visits", method = RequestMethod.GET)
+    public String visits(@PathVariable("id") Long id,
+                         @RequestParam(value = "p", required = false, defaultValue = "1") int pageNum,
+                         Model model) {
+        List<Visit> visits = visitService.findVisitsByArticleId(id, pageNum);
+        PageInfo<Visit> page = new PageInfo(visits);
+
+        model.addAttribute("page", page);
+        model.addAttribute("id", id);
+        return getPathRoot() + "/visits";
     }
 }
