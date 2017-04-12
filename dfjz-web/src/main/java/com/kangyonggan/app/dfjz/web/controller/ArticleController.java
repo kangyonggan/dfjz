@@ -42,10 +42,6 @@ public class ArticleController extends BaseController {
     @Autowired
     private VisitService visitService;
 
-    private String lockVisit = "lockVisit";
-
-    private String lockComment = "lockComment";
-
     /**
      * 文章详情
      *
@@ -73,20 +69,18 @@ public class ArticleController extends BaseController {
         // 访问量控制
         String ip = IPUtil.getIp(request);
 
-        synchronized (lockVisit) {
-            Object flag = redisService.get("article_visit_id_" + id + "_ip_" + ip);
-            if (flag == null) {
-                articleService.updateArticleVisitCount(id);
+        Object flag = redisService.get("article_visit_id_" + id + "_ip_" + ip);
+        if (flag == null) {
+            articleService.updateArticleVisitCount(id);
 
-                redisService.set("article_visit_id_" + id + "_ip_" + ip, id, 30 * 60);// 30分钟之内同一个ip只能算访问一次
-                log.info("启动线程异步保存访问者ip信息");
-                new Thread() {
-                    public void run() {
-                        visitService.saveVisit(id, ip);
-                        log.info("保存访问者ip成功");
-                    }
-                }.start();
-            }
+            redisService.set("article_visit_id_" + id + "_ip_" + ip, id, 30 * 60);// 30分钟之内同一个ip只能算访问一次
+            log.info("启动线程异步保存访问者ip信息");
+            new Thread() {
+                public void run() {
+                    visitService.saveVisit(id, ip);
+                    log.info("保存访问者ip成功");
+                }
+            }.start();
         }
 
         model.addAttribute("article", article);
@@ -112,23 +106,20 @@ public class ArticleController extends BaseController {
         // 访问量控制
         String ip = IPUtil.getIp(request);
         Long id = comment.getArticleId();
+        Object flag = redisService.get("article_comment_id_" + id + "_ip_" + ip);
+        if (flag == null) {
+            redisService.set("article_comment_id_" + id + "_ip_" + ip, id, 3 * 60);// 3分钟之内同一个ip只能算评论一次
+            Long commenId = articleService.updateArticleCommentCount(comment, ip);
 
-        synchronized (lockComment) {
-            Object flag = redisService.get("article_comment_id_" + id + "_ip_" + ip);
-            if (flag == null) {
-                redisService.set("article_comment_id_" + id + "_ip_" + ip, id, 3 * 60);// 3分钟之内同一个ip只能算评论一次
-                Long commenId = articleService.updateArticleCommentCount(comment, ip);
-
-                log.info("异步查询ip信息，查回后更新");
-                new Thread() {
-                    public void run() {
-                        commentService.updateCommitCity(commenId, ip);
-                        log.info("更新评论的ip信息成功");
-                    }
-                }.start();
-            } else {
-                return getPathRoot() + "/warn";
-            }
+            log.info("异步查询ip信息，查回后更新");
+            new Thread() {
+                public void run() {
+                    commentService.updateCommitCity(commenId, ip);
+                    log.info("更新评论的ip信息成功");
+                }
+            }.start();
+        } else {
+            return getPathRoot() + "/warn";
         }
         return "redirect:/article/" + comment.getArticleId();
     }
