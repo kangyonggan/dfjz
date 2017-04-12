@@ -1,9 +1,12 @@
 package com.kangyonggan.app.dfjz.biz.service.impl;
 
 import com.kangyonggan.app.dfjz.biz.service.CommentService;
+import com.kangyonggan.app.dfjz.mapper.CommentMapper;
 import com.kangyonggan.app.dfjz.model.annotation.LogTime;
 import com.kangyonggan.app.dfjz.model.constants.AppConstants;
+import com.kangyonggan.app.dfjz.model.dto.CommentCountDto;
 import com.kangyonggan.app.dfjz.model.vo.Comment;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
@@ -15,6 +18,9 @@ import java.util.List;
  */
 @Service
 public class CommentServiceImpl extends BaseService<Comment> implements CommentService {
+
+    @Autowired
+    private CommentMapper commentMapper;
 
     @Override
     @LogTime
@@ -30,5 +36,11 @@ public class CommentServiceImpl extends BaseService<Comment> implements CommentS
     @LogTime
     public void saveComment(Comment comment) {
         super.insertSelective(comment);
+    }
+
+    @Override
+    @LogTime
+    public List<CommentCountDto> findArticlesCommentCount() {
+        return commentMapper.selectArticlesCommentCount();
     }
 }

@@ -1,10 +1,7 @@
 package com.kangyonggan.app.dfjz.web.controller;
 
 import com.kangyonggan.app.dfjz.biz.service.ArticleService;
-import com.kangyonggan.app.dfjz.biz.task.ArticleVisitCountTask;
-import com.kangyonggan.app.dfjz.biz.task.CategoryArticleCountTask;
-import com.kangyonggan.app.dfjz.biz.task.RssTask;
-import com.kangyonggan.app.dfjz.biz.task.SiteMapTask;
+import com.kangyonggan.app.dfjz.biz.task.*;
 import com.kangyonggan.app.dfjz.biz.util.PropertiesUtil;
 import com.kangyonggan.app.dfjz.common.IPUtil;
 import com.kangyonggan.app.dfjz.model.vo.Article;
@@ -12,7 +9,10 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -37,6 +37,9 @@ public class HelpController {
 
     @Autowired
     private ArticleVisitCountTask articleVisitCountTask;
+
+    @Autowired
+    private ArticleCommentCountTask articleCommentCountTask;
 
     @Autowired
     private ArticleService articleService;
@@ -85,6 +88,7 @@ public class HelpController {
             rssTask.execute();
             siteMapTask.execute();
             articleVisitCountTask.execute();
+            articleCommentCountTask.execute();
             log.info("手动刷新所有任务成功");
         } else {
             log.error("{}不在ip白名单中，企图手动刷新所有任务，已报警！", ip);

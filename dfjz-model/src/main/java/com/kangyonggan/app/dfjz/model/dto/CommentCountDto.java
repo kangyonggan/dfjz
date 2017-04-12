@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @since 2017/4/10 0010
  */
 @Data
-public class VisitCountDto implements Serializable {
+public class CommentCountDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -19,8 +19,8 @@ public class VisitCountDto implements Serializable {
     private Long articleId;
 
     /**
-     * 访问量
+     * 评论量
      */
-    private Integer visitCount;
+    private Integer commentCount;
 
 }

@@ -1,6 +1,7 @@
 package com.kangyonggan.app.dfjz.biz.service;
 
 import com.kangyonggan.app.dfjz.model.dto.ArticleCountDto;
+import com.kangyonggan.app.dfjz.model.dto.CommentCountDto;
 import com.kangyonggan.app.dfjz.model.dto.Toc;
 import com.kangyonggan.app.dfjz.model.dto.VisitCountDto;
 import com.kangyonggan.app.dfjz.model.vo.Article;
@@ -148,4 +149,11 @@ public interface ArticleService {
      * @param visitCountDtos
      */
     void updateArticlesVisitCount(List<VisitCountDto> visitCountDtos);
+
+    /**
+     * 更新文章评论量
+     *
+     * @param commentCountDtos
+     */
+    void updateArticlesCommentCount(List<CommentCountDto> commentCountDtos);
 }

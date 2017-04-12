@@ -1,5 +1,6 @@
 package com.kangyonggan.app.dfjz.biz.service;
 
+import com.kangyonggan.app.dfjz.model.dto.CommentCountDto;
 import com.kangyonggan.app.dfjz.model.vo.Comment;
 
 import java.util.List;
@@ -24,5 +25,12 @@ public interface CommentService {
      * @param comment
      */
     void saveComment(Comment comment);
+
+    /**
+     * 查询文章评论量
+     *
+     * @return
+     */
+    List<CommentCountDto> findArticlesCommentCount();
 
 }

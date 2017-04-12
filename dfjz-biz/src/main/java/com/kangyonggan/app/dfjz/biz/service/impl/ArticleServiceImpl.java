@@ -14,6 +14,7 @@ import com.kangyonggan.app.dfjz.mapper.ArticleMapper;
 import com.kangyonggan.app.dfjz.model.annotation.LogTime;
 import com.kangyonggan.app.dfjz.model.constants.AppConstants;
 import com.kangyonggan.app.dfjz.model.dto.ArticleCountDto;
+import com.kangyonggan.app.dfjz.model.dto.CommentCountDto;
 import com.kangyonggan.app.dfjz.model.dto.Toc;
 import com.kangyonggan.app.dfjz.model.dto.VisitCountDto;
 import com.kangyonggan.app.dfjz.model.vo.Article;
@@ -234,6 +235,18 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
             article = new Article();
             article.setId(dto.getArticleId());
             article.setVisitCount(dto.getVisitCount());
+            super.updateByPrimaryKeySelective(article);
+        }
+    }
+
+    @Override
+    @LogTime
+    public void updateArticlesCommentCount(List<CommentCountDto> commentCountDtos) {
+        Article article;
+        for (CommentCountDto dto : commentCountDtos) {
+            article = new Article();
+            article.setId(dto.getArticleId());
+            article.setCommentCount(dto.getCommentCount());
             super.updateByPrimaryKeySelective(article);
         }
     }
