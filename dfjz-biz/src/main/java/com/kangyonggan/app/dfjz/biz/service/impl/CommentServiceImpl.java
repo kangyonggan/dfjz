@@ -80,7 +80,7 @@ public class CommentServiceImpl extends BaseService<Comment> implements CommentS
         comment = super.selectByPrimaryKey(id);
         Article article = articleService.findArticleById(comment.getArticleId());
 
-        smsService.sendSms(PropertiesUtil.getProperties("app.mobile"), city, ip, article.getTitle(), comment.getContent());
+        smsService.sendSms(PropertiesUtil.getProperties("app.mobile"), city, "" + article.getId());
 
         mailService.send(PropertiesUtil.getProperties("mail.receiver"),
                 article.getTitle() + " - 评论通知",
