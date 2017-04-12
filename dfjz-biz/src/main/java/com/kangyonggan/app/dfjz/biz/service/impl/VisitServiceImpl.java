@@ -6,6 +6,7 @@ import com.kangyonggan.app.dfjz.common.IPUtil;
 import com.kangyonggan.app.dfjz.mapper.VisitMapper;
 import com.kangyonggan.app.dfjz.model.annotation.LogTime;
 import com.kangyonggan.app.dfjz.model.constants.AppConstants;
+import com.kangyonggan.app.dfjz.model.dto.VisitCountDto;
 import com.kangyonggan.app.dfjz.model.vo.Visit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,5 +60,11 @@ public class VisitServiceImpl extends BaseService<Visit> implements VisitService
         PageHelper.startPage(pageNum, AppConstants.PAGE_SIZE * 4);
 
         return visitMapper.findVisits();
+    }
+
+    @Override
+    @LogTime
+    public List<VisitCountDto> findArticlesVisitCount() {
+        return visitMapper.selectArticlesVisitCount();
     }
 }

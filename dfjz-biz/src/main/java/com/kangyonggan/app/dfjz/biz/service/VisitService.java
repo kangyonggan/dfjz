@@ -1,5 +1,6 @@
 package com.kangyonggan.app.dfjz.biz.service;
 
+import com.kangyonggan.app.dfjz.model.dto.VisitCountDto;
 import com.kangyonggan.app.dfjz.model.vo.Visit;
 
 import java.util.List;
@@ -25,4 +26,10 @@ public interface VisitService {
      * @return
      */
     List<Visit> findVisitsByPage(int pageNum);
+
+    /**
+     * 查询文章访问量
+     */
+    List<VisitCountDto> findArticlesVisitCount();
+
 }

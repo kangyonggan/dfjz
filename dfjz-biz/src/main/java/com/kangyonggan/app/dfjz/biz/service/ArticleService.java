@@ -2,6 +2,7 @@ package com.kangyonggan.app.dfjz.biz.service;
 
 import com.kangyonggan.app.dfjz.model.dto.ArticleCountDto;
 import com.kangyonggan.app.dfjz.model.dto.Toc;
+import com.kangyonggan.app.dfjz.model.dto.VisitCountDto;
 import com.kangyonggan.app.dfjz.model.vo.Article;
 import com.kangyonggan.app.dfjz.model.vo.Comment;
 
@@ -140,4 +141,11 @@ public interface ArticleService {
      * @param article
      */
     void saveArticle(Article article);
+
+    /**
+     * 更新文章访问量
+     *
+     * @param visitCountDtos
+     */
+    void updateArticlesVisitCount(List<VisitCountDto> visitCountDtos);
 }

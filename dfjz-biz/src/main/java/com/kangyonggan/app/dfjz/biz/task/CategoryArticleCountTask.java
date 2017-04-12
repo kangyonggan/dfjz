@@ -1,14 +1,10 @@
 package com.kangyonggan.app.dfjz.biz.task;
 
-import com.kangyonggan.app.dfjz.biz.service.ArticleService;
 import com.kangyonggan.app.dfjz.biz.service.CategoryService;
-import com.kangyonggan.app.dfjz.model.dto.ArticleCountDto;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * @author kangyonggan

@@ -1,6 +1,7 @@
 package com.kangyonggan.app.dfjz.web.controller;
 
 import com.kangyonggan.app.dfjz.biz.service.ArticleService;
+import com.kangyonggan.app.dfjz.biz.task.ArticleVisitCountTask;
 import com.kangyonggan.app.dfjz.biz.task.CategoryArticleCountTask;
 import com.kangyonggan.app.dfjz.biz.task.RssTask;
 import com.kangyonggan.app.dfjz.biz.task.SiteMapTask;
@@ -33,6 +34,9 @@ public class HelpController {
 
     @Autowired
     private SiteMapTask siteMapTask;
+
+    @Autowired
+    private ArticleVisitCountTask articleVisitCountTask;
 
     @Autowired
     private ArticleService articleService;
@@ -80,6 +84,7 @@ public class HelpController {
             categoryArticleCountTask.execute();
             rssTask.execute();
             siteMapTask.execute();
+            articleVisitCountTask.execute();
             log.info("手动刷新所有任务成功");
         } else {
             log.error("{}不在ip白名单中，企图手动刷新所有任务，已报警！", ip);

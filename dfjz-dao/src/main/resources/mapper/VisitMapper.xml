@@ -29,4 +29,12 @@
           a.id = v.article_id
         ORDER BY v.id DESC
     </select>
+
+    <select id="selectArticlesVisitCount" resultType="com.kangyonggan.app.dfjz.model.dto.VisitCountDto">
+        SELECT
+          article_id AS articleId, COUNT(*) AS visitCount
+        FROM
+          visit
+        GROUP BY article_id
+    </select>
 </mapper>
