@@ -187,7 +187,6 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
     }
 
     @Override
-    @LogTime
     public void genBlogRss() {
         Example example = new Example(Article.class);
         example.createCriteria().andEqualTo("isDeleted", AppConstants.IS_DELETED_NO);
@@ -197,7 +196,6 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
     }
 
     @Override
-    @LogTime
     public void genSiteMap() {
         Example example = new Example(Article.class);
         example.createCriteria().andEqualTo("isDeleted", AppConstants.IS_DELETED_NO);
@@ -259,6 +257,7 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
             rss.append("<pubTime>").append(DateUtil.toXmlDateTime(article.getCreatedTime())).append("</pubTime>");
             rss.append("<tag>").append(article.getCategoryCode()).append("</tag>");
             rss.append("<tag>").append(article.getCategoryName()).append("</tag>");
+            rss.append("<breadCrumb title=\"").append(article.getCategoryName()).append("\" url=\"").append("http://kangyonggan.com#category/").append(article.getCategoryCode()).append("\"/>");
             rss.append("</display>");
             rss.append("</data>");
             rss.append("</url>");
