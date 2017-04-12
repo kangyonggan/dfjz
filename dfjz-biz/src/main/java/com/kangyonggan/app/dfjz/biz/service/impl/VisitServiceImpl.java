@@ -28,30 +28,25 @@ public class VisitServiceImpl extends BaseService<Visit> implements VisitService
     @Override
     @LogTime
     public void saveVisit(Long articleId, String ip) {
-        new Thread() {
-            public void run() {
-                Visit visit = new Visit();
+        Visit visit = new Visit();
 
-                visit.setArticleId(articleId);
-                visit.setIp(ip);
-                Map<String, String> resultMap = IPUtil.getIpInfo(ip);
-                visit.setCode(resultMap.get("code"));
+        visit.setArticleId(articleId);
+        visit.setIp(ip);
+        Map<String, String> resultMap = IPUtil.getIpInfo(ip);
+        visit.setCode(resultMap.get("code"));
 
-                if ("0".equals(resultMap.get("code"))) {
-                    visit.setArea(resultMap.get("area"));
-                    visit.setCity(resultMap.get("city"));
-                    visit.setCountry(resultMap.get("country"));
-                    visit.setIsp(resultMap.get("isp"));
-                    visit.setRegion(resultMap.get("region"));
-                    visit.setMsg("查询成功");
-                } else {
-                    visit.setMsg(resultMap.get("msg"));
-                }
+        if ("0".equals(resultMap.get("code"))) {
+            visit.setArea(resultMap.get("area"));
+            visit.setCity(resultMap.get("city"));
+            visit.setCountry(resultMap.get("country"));
+            visit.setIsp(resultMap.get("isp"));
+            visit.setRegion(resultMap.get("region"));
+            visit.setMsg("查询成功");
+        } else {
+            visit.setMsg(resultMap.get("msg"));
+        }
 
-                visitMapper.insertSelective(visit);
-            }
-        }.start();
-
+        visitMapper.insertSelective(visit);
     }
 
     @Override
