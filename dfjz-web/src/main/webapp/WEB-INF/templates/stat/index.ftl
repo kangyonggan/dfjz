@@ -17,7 +17,7 @@
     <tbody>
     <#list page.list as visit>
     <tr>
-        <td><a href="#article${visit.articleId}" target="_blank">${visit.articleTitle}</a></td>
+        <td><a href="#article/${visit.articleId}" target="_blank">${visit.articleTitle}</a></td>
         <td>${visit.ip}</td>
         <td>${visit.country!''}</td>
         <td>${visit.area!''}</td>
