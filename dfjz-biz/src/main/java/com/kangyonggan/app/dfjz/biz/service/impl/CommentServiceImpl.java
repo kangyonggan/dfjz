@@ -1,11 +1,15 @@
 package com.kangyonggan.app.dfjz.biz.service.impl;
 
+import com.kangyonggan.app.dfjz.biz.service.ArticleService;
 import com.kangyonggan.app.dfjz.biz.service.CommentService;
+import com.kangyonggan.app.dfjz.biz.service.MailService;
+import com.kangyonggan.app.dfjz.biz.util.PropertiesUtil;
 import com.kangyonggan.app.dfjz.common.IPUtil;
 import com.kangyonggan.app.dfjz.mapper.CommentMapper;
 import com.kangyonggan.app.dfjz.model.annotation.LogTime;
 import com.kangyonggan.app.dfjz.model.constants.AppConstants;
 import com.kangyonggan.app.dfjz.model.dto.CommentCountDto;
+import com.kangyonggan.app.dfjz.model.vo.Article;
 import com.kangyonggan.app.dfjz.model.vo.Comment;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +28,12 @@ public class CommentServiceImpl extends BaseService<Comment> implements CommentS
 
     @Autowired
     private CommentMapper commentMapper;
+
+    @Autowired
+    private MailService mailService;
+
+    @Autowired
+    private ArticleService articleService;
 
     @Override
     @LogTime
@@ -63,5 +73,12 @@ public class CommentServiceImpl extends BaseService<Comment> implements CommentS
         comment.setCity(city);
 
         super.updateByPrimaryKeySelective(comment);
+
+        comment = super.selectByPrimaryKey(id);
+        Article article = articleService.findArticleById(comment.getArticleId());
+
+        mailService.send(PropertiesUtil.getProperties("mail.receiver"),
+                article.getTitle() + " - 评论通知",
+                comment.getContent() + "\r\n\r\n来自: " + comment.getCity() + "(" + ip + ")");
     }
 }

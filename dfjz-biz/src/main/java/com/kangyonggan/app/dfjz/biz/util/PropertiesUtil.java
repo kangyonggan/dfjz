@@ -25,7 +25,7 @@ public class PropertiesUtil {
 
     public static void refresh() {
         InputStream in = null;
-        FileInputStream fis = null;
+        InputStreamReader isr = null;
         try {
             props = new Properties();
             in = PropertiesUtil.class.getClassLoader().getResourceAsStream("app.properties");
@@ -35,8 +35,8 @@ public class PropertiesUtil {
             String propertiesPath = props.getProperty("properties.path");
             log.info("本地配置文件路径:{}", propertiesPath);
 
-            fis = new FileInputStream(new File(propertiesPath));
-            props.load(fis);
+            isr = new InputStreamReader(new FileInputStream(propertiesPath), "GBK");
+            props.load(isr);
             log.info("本地配置文件加载完毕");
         } catch (IOException e) {
             log.error("配置文件加载失败", e);
@@ -48,9 +48,9 @@ public class PropertiesUtil {
                     log.error("关闭输入流异常", e);
                 }
             }
-            if (fis != null) {
+            if (isr != null) {
                 try {
-                    fis.close();
+                    isr.close();
                 } catch (Exception e) {
                     log.error("关闭输入流异常", e);
                 }
