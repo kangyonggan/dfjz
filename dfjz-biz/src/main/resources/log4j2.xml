@@ -34,7 +34,7 @@
                 <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
             </Filters>
         </RollingRandomAccessFile>
-        <SMTP name="Mail" subject="${dfjz.app.name} - 报警通知" to="${dfjz.mail.receiver}" from="${dfjz.mail.username}"
+        <SMTP name="Mail" subject="服务异常 - 报警通知" to="${dfjz.mail.receiver}" from="${dfjz.app.name}"
               smtpHost="${dfjz.mail.host}" smtpUsername="${dfjz.mail.username}" smtpPassword="${dfjz.mail.password}" bufferSize="${dfjz.mail.bufferSize}" >
         </SMTP>
         <Async name="AsyncAll">
