@@ -165,6 +165,19 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
     @Override
     @LogTime
     public Long updateArticleCommentCount(Comment comment, String ip) {
+        if (StringUtils.isEmpty(comment.getUsername())) {
+            comment.setUsername("路人甲");
+        }
+
+        if (StringUtils.isEmpty(comment.getEmail())) {
+            comment.setEmail("lurenjia@gmail.com");
+        }
+
+        if (StringUtils.isEmpty(comment.getContent())) {
+            comment.setContent("看完博主的帖子，我的心情竟是久久不能平复，正如老子所云：大音希声，大象希形。我现在终于明白我缺乏的是什么了，正是博主那种对真理的执着追求和博主那种对理想的艰苦实践所产生的厚重感。面对博主的文章，我震惊得几乎不能动弹了，博主那种裂纸欲出的大手笔，竟使我忍不住一次次的翻开楼主的帖子，每看一次，赞赏之情就激长数分，我总在想，是否有神灵活在它灵秀的外表下，以至能使人三月不知肉味，使人有余音穿梁，三日不绝的感受。博主，你写得实在是太好了。");
+        }
+
+
         comment.setIp(ip);
         commentService.saveComment(comment);
 

@@ -669,7 +669,7 @@ table a {
 .detail-comment-list > .detail-comment-item .right .content {
     min-height: 60px;
     margin-top: 25px;
-    text-indent: 40px;
+    margin-left: 110px;
 }
 
 .detail-comment-list > .detail-comment-item .right .tool {
