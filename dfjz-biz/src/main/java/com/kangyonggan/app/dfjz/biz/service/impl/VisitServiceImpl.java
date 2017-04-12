@@ -1,13 +1,17 @@
 package com.kangyonggan.app.dfjz.biz.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.kangyonggan.app.dfjz.biz.service.VisitService;
 import com.kangyonggan.app.dfjz.common.IPUtil;
 import com.kangyonggan.app.dfjz.mapper.VisitMapper;
 import com.kangyonggan.app.dfjz.model.annotation.LogTime;
+import com.kangyonggan.app.dfjz.model.constants.AppConstants;
 import com.kangyonggan.app.dfjz.model.vo.Visit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -47,5 +51,13 @@ public class VisitServiceImpl extends BaseService<Visit> implements VisitService
             }
         }.start();
 
+    }
+
+    @Override
+    @LogTime
+    public List<Visit> findVisitsByPage(int pageNum) {
+        PageHelper.startPage(pageNum, AppConstants.PAGE_SIZE * 4);
+
+        return visitMapper.findVisits();
     }
 }

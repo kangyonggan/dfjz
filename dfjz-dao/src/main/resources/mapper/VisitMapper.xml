@@ -19,4 +19,14 @@
         <result column="created_time" jdbcType="TIMESTAMP" property="createdTime"/>
         <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime"/>
     </resultMap>
+
+    <select id="findVisits" resultMap="BaseResultMap">
+        SELECT
+          a.title AS articleTitle, v.*
+        FROM
+          article a, visit v
+        WHERE
+          a.id = v.article_id
+        ORDER BY v.id DESC
+    </select>
 </mapper>

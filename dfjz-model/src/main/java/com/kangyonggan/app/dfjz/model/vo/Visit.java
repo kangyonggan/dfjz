@@ -79,5 +79,11 @@ public class Visit implements Serializable {
     @Column(name = "updated_time")
     private Date updatedTime;
 
+    /**
+     * 被访问的文章标题
+     */
+    @Transient
+    private String articleTitle;
+
     private static final long serialVersionUID = 1L;
 }
