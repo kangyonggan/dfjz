@@ -95,7 +95,7 @@ public class BookServiceImpl extends BaseService<Book> implements BookService {
             writer.write(rss.toString());
             writer.flush();
         } catch (IOException e) {
-            log.error("书籍抓取时异常", e);
+            log.error("书籍抓取完成后，写入异常", e);
         } finally {
             if (writer != null) {
                 try {
