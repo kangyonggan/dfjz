@@ -5,6 +5,7 @@ import com.kangyonggan.app.dfjz.biz.service.ArticleService;
 import com.kangyonggan.app.dfjz.biz.service.CommentService;
 import com.kangyonggan.app.dfjz.biz.service.RedisService;
 import com.kangyonggan.app.dfjz.biz.service.VisitService;
+import com.kangyonggan.app.dfjz.biz.util.PropertiesUtil;
 import com.kangyonggan.app.dfjz.common.IPUtil;
 import com.kangyonggan.app.dfjz.common.MarkdownUtil;
 import com.kangyonggan.app.dfjz.model.dto.Toc;
@@ -43,6 +44,11 @@ public class ArticleController extends BaseController {
     private VisitService visitService;
 
     /**
+     * redis键的前缀
+     */
+    private String prefix = PropertiesUtil.getProperties("redis.prefix") + ":";
+
+    /**
      * 文章详情
      *
      * @param id
@@ -69,11 +75,11 @@ public class ArticleController extends BaseController {
         // 访问量控制
         String ip = IPUtil.getIp(request);
 
-        Object flag = redisService.get("article_visit_id_" + id + "_ip_" + ip);
+        Object flag = redisService.get(prefix + "article_visit_id_" + id + "_ip_" + ip);
         if (flag == null) {
             articleService.updateArticleVisitCount(id);
 
-            redisService.set("article_visit_id_" + id + "_ip_" + ip, id, 30 * 60);// 30分钟之内同一个ip只能算访问一次
+            redisService.set(prefix  + "article_visit_id_" + id + "_ip_" + ip, id, 30 * 60);// 30分钟之内同一个ip只能算访问一次
             log.info("启动线程异步保存访问者ip信息");
             new Thread() {
                 public void run() {
@@ -106,9 +112,9 @@ public class ArticleController extends BaseController {
         // 访问量控制
         String ip = IPUtil.getIp(request);
         Long id = comment.getArticleId();
-        Object flag = redisService.get("article_comment_id_" + id + "_ip_" + ip);
+        Object flag = redisService.get(prefix + "article_comment_id_" + id + "_ip_" + ip);
         if (flag == null) {
-            redisService.set("article_comment_id_" + id + "_ip_" + ip, id, 3 * 60);// 3分钟之内同一个ip只能算评论一次
+            redisService.set(prefix + "article_comment_id_" + id + "_ip_" + ip, id, 3 * 60);// 3分钟之内同一个ip只能算评论一次
             Long commenId = articleService.updateArticleCommentCount(comment, ip);
 
             log.info("异步查询ip信息，查回后更新");

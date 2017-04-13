@@ -2,6 +2,7 @@ package com.kangyonggan.app.dfjz.web.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.kangyonggan.app.dfjz.biz.service.ArticleService;
+import com.kangyonggan.app.dfjz.biz.util.PropertiesUtil;
 import com.kangyonggan.app.dfjz.model.vo.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,10 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author kangyonggan
@@ -55,6 +57,31 @@ public class IndexController extends BaseController {
     @RequestMapping(value = "about", method = RequestMethod.GET)
     public String about() {
         return getPathRoot() + "/about";
+    }
+
+    /**
+     * 订阅
+     *
+     * @return
+     */
+    @RequestMapping(value = "rss", method = RequestMethod.GET)
+    public String rss(Model model) {
+        Map<String, String> rssMap = new HashMap();
+
+        File rssDir = new File(PropertiesUtil.getProperties("file.root.path") + "upload/rss/");
+        File files[] = rssDir.listFiles();
+
+        for (File file : files) {
+            String filename = file.getName();
+            if ("blog.xml".equals(filename) || "sitemap.xml".equals(filename)) {
+                continue;
+            }
+
+            rssMap.put(filename, filename);
+        }
+
+        model.addAttribute("rssMap", rssMap);
+        return getPathRoot() + "/rss";
     }
 
     /**

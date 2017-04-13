@@ -161,3 +161,41 @@ VALUES
   ('linux', '系统运维', 4),
   ('other', '综合', 5);
 
+-- ----------------------------
+--  Table structure for book
+-- ----------------------------
+DROP TABLE
+IF EXISTS book;
+
+CREATE TABLE book
+(
+  id           BIGINT(20) PRIMARY KEY AUTO_INCREMENT NOT NULL
+  COMMENT '主键, 自增',
+  name         VARCHAR(64)                           NOT NULL
+  COMMENT '书名',
+  author       VARCHAR(32)                           NOT NULL
+  COMMENT '作者',
+  intro        VARCHAR(512)                          NOT NULL
+  COMMENT '简介',
+  picture      VARCHAR(256)                          NOT NULL                    DEFAULT ''
+  COMMENT '首图',
+  url          INTEGER                               NOT NULL
+  COMMENT '地址',
+  is_deleted   TINYINT                               NOT NULL                    DEFAULT 0
+  COMMENT '逻辑删除:{0:未删除, 1:已删除}',
+  created_time TIMESTAMP                             NOT NULL                    DEFAULT CURRENT_TIMESTAMP
+  COMMENT '创建时间',
+  updated_time TIMESTAMP                             NOT NULL                    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  COMMENT '更新时间'
+)
+  COMMENT '书籍表';
+CREATE UNIQUE INDEX id_UNIQUE
+  ON book (id);
+CREATE UNIQUE INDEX url_UNIQUE
+  ON book (url);
+CREATE INDEX author_ix
+  ON book (author);
+
+INSERT INTO book (name, author, intro, picture, url)
+  VALUE ('不死武尊', '妖月夜', '一个落魄的少年偶得吞天神诀，可吞噬一切天地元气为己用，从此逆天破命，一雪前耻，凭借着神奇的生命武魂，他凝聚不死之身，横扫九天十地，雄霸天下！',
+         'http://www.biquge.cn/cover/1/1337/1337s.jpg', '1337');

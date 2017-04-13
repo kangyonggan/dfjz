@@ -293,7 +293,7 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
     private void genRssFile(List<Article> articles) {
         StringBuilder rss = new StringBuilder("<feed xmlns=\"http://www.w3.org/2005/Atom\"><title>");
         rss.append(PropertiesUtil.getProperties("app.name")).append("</title>");
-        rss.append("<link href=\"/upload/rss/blog.xml\" rel=\"self\"/>").append("<link href=\"http://kangyonggan.com/\"/>");
+        rss.append("<link href=\"/upload/rss/blog.xml\" rel=\"self\"/>").append("<link href=\"http://www.kangyonggan.com/\"/>");
         rss.append("<updated>").append(DateUtil.toXmlDateTime(new Date())).append("</updated>");
         rss.append("<id>http://www.kangyonggan.com/</id>");
         rss.append("<author><name>").append(PropertiesUtil.getProperties("app.author")).append("</name></author>");
