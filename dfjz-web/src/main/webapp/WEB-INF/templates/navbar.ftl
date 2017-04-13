@@ -7,8 +7,8 @@
             <li><a href="#index">首页</a></li>
             <li><a href="#category">分类</a></li>
             <li><a href="#archives">归档</a></li>
-            <li><a href="#rss" target="_blank">订阅</a></li>
-            <li><a href="${ctx}/upload/rss/sitemap.xml">网站地图</a></li>
+            <li><a href="#rss">订阅</a></li>
+            <li><a href="${ctx}/upload/rss/sitemap.xml" target="_blank">网站地图</a></li>
             <li><a href="#stat">统计分析</a></li>
             <li><a href="#about">关于</a></li>
         </ul>
@@ -32,8 +32,8 @@
                 <li><a href="#index">首页</a></li>
                 <li><a href="#categories">分类</a></li>
                 <li><a href="#archives">归档</a></li>
-                <li><a href="#rss" target="_blank">订阅</a></li>
-                <li><a href="${ctx}/upload/rss/sitemap.xml">网站地图</a></li>
+                <li><a href="#rss">订阅</a></li>
+                <li><a href="${ctx}/upload/rss/sitemap.xml" target="_blank">网站地图</a></li>
                 <li><a href="#stat">统计分析</a></li>
                 <li><a href="#about">关于</a></li>
             </ul>
