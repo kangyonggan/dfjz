@@ -144,7 +144,7 @@ public class BookServiceImpl extends BaseService<Book> implements BookService {
         rss.append("<category term=\"").append("书籍").append("\" scheme=\"").append(BOOK_BASE_URL + "/book/" + book.getUrl()).append("/\"/>");
         rss.append("</entry>");
 
-        log.error("{}书籍的章节{}抓取完成", book.getName(), chapterUrl);
+        log.info("{}书籍的章节{}抓取完成", book.getName(), chapterUrl);
     }
 
     /**
