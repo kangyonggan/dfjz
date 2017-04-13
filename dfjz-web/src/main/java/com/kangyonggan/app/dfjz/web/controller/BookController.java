@@ -21,12 +21,15 @@ public class BookController extends BaseController {
      *
      * @param id
      * @param pageNum
+     * @param startNum
      * @return
      */
     @RequestMapping(value = "{id:[\\d]+}", method = RequestMethod.GET)
     @ResponseBody
-    public String genRss(@PathVariable("id") Long id, @RequestParam(value = "p", required = false, defaultValue = "1") int pageNum) {
-        bookService.genBookRssByPage(id, pageNum);
+    public String genRss(@PathVariable("id") Long id,
+                         @RequestParam(value = "p", required = false, defaultValue = "1") int pageNum,
+                         @RequestParam(value = "s", required = false, defaultValue = "0") int startNum) {
+        bookService.genBookRssByPage(id, pageNum, startNum);
 
         return "ok";
     }

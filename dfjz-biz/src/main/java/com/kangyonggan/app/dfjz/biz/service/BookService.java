@@ -11,7 +11,8 @@ public interface BookService {
      *
      * @param id
      * @param pageNum
+     * @param startNum
      */
-    void genBookRssByPage(Long id, int pageNum);
+    void genBookRssByPage(Long id, int pageNum, int startNum);
 
 }

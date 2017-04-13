@@ -37,7 +37,7 @@ public class BookServiceImpl extends BaseService<Book> implements BookService {
     private RedisService redisService;
 
     @Override
-    public void genBookRssByPage(Long id, int pageNum) {
+    public void genBookRssByPage(Long id, int pageNum, int startNum) {
         // 判断是否重复执行
         if (isExecuting()) {
             log.warn("书籍执行引擎正在执行中, 不可重复执行!");
@@ -54,7 +54,7 @@ public class BookServiceImpl extends BaseService<Book> implements BookService {
             return;
         }
 
-        // 抓取第pageNum页
+        // 抓取第书籍章节列表
         Document bookDoc = HtmlUtil.parseUrl(BOOK_BASE_URL + "/book/" + book.getUrl());
         if (bookDoc == null) {
             log.info("抓取书籍{}章节列表为空，结束抓取!", book.getName());
@@ -81,7 +81,7 @@ public class BookServiceImpl extends BaseService<Book> implements BookService {
         rss.append("<author><name>").append(book.getAuthor()).append("</name></author>");
 
         // 写入章节信息
-        for (int i = start - 1; i < end; i++) {
+        for (int i = start - 1 + startNum; i < end + startNum; i++) {
             Element chapterElement = chapterElements.get(i);
             processChapter(rss, book, chapterElement);
         }
@@ -94,6 +94,7 @@ public class BookServiceImpl extends BaseService<Book> implements BookService {
             writer = new BufferedWriter(new FileWriter(PropertiesUtil.getProperties("file.root.path") + "upload/rss/" + rssName + ".xml"));
             writer.write(rss.toString());
             writer.flush();
+            log.info("书籍抓取完成");
         } catch (IOException e) {
             log.error("书籍抓取完成后，写入异常", e);
         } finally {
@@ -130,7 +131,6 @@ public class BookServiceImpl extends BaseService<Book> implements BookService {
 
         rss.append("<entry>");
         rss.append("<title>").append(title).append("</title>");
-        rss.append("<link href=\"").append(BOOK_BASE_URL + chapterUrl).append("\"/>");
         rss.append("<link href=\"").append(BOOK_BASE_URL + chapterUrl).append("\"/>");
         rss.append("<id>").append(BOOK_BASE_URL + chapterUrl).append("</id>");
         rss.append("<published>").append(DateUtil.toXmlDateTime(new Date())).append("</published>");
