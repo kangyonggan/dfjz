@@ -81,7 +81,7 @@ public class BookServiceImpl extends BaseService<Book> implements BookService {
         rss.append("<author><name>").append(book.getAuthor()).append("</name></author>");
 
         // 写入章节信息
-        for (int i = start - 1 + startNum; i < end + startNum; i++) {
+        for (int i = start - 1 + startNum; i < end + startNum && i < chapterElements.size(); i++) {
             Element chapterElement = chapterElements.get(i);
             processChapter(rss, book, chapterElement);
         }

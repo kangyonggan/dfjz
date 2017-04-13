@@ -199,3 +199,6 @@ CREATE INDEX author_ix
 INSERT INTO book (name, author, intro, picture, url)
   VALUE ('不死武尊', '妖月夜', '一个落魄的少年偶得吞天神诀，可吞噬一切天地元气为己用，从此逆天破命，一雪前耻，凭借着神奇的生命武魂，他凝聚不死之身，横扫九天十地，雄霸天下！',
          'http://www.biquge.cn/cover/1/1337/1337s.jpg', '1337');
+
+INSERT INTO book (name, author, intro, picture, url)
+  VALUE ('逆天邪神', '火星引力', '掌天毒之珠，承邪神之血，修逆天之力，一代邪神，君临天下！', 'http://www.biquge.cn/cover/2/2722/2722s.jpg', '2722');
