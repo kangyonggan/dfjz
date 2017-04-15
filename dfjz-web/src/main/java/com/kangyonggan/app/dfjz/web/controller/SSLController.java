@@ -13,12 +13,12 @@ public class SSLController {
 
     @RequestMapping("y1WhC3cdHAFNWeNwigLlWxVBVLJdWTW7R4a591IqnEA")
     public String one() {
-        return "y1WhC3cdHAFNWeNwigLlWxVBVLJdWTW7R4a591IqnEA.sFeQZnTv-wjzr0FAwLceuz2VOy-wwIvsczHrRIPwOzU";
+        return "sFeQZnTv-wjzr0FAwLceuz2VOy-wwIvsczHrRIPwOzU";
     }
 
     @RequestMapping("WcH7OZsgtg-chfkEzsEYAA12brKsG5pCv2DShVdqA9I")
     public String two() {
-        return "WcH7OZsgtg-chfkEzsEYAA12brKsG5pCv2DShVdqA9I.sFeQZnTv-wjzr0FAwLceuz2VOy-wwIvsczHrRIPwOzU";
+        return "sFeQZnTv-wjzr0FAwLceuz2VOy-wwIvsczHrRIPwOzU";
     }
 
 }
