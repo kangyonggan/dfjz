@@ -73,15 +73,15 @@
 </#if>
 </div>
 
-<div class="share-btns">
-    <div class="jiathis_style_32x32">
-        <a class="jiathis_button_qzone"></a>
-        <a class="jiathis_button_weixin"></a>
-        <a class="jiathis_button_cqq"></a>
-        <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
-        <a class="jiathis_counter_style"></a>
-    </div>
-</div>
+<#--<div class="share-btns">-->
+    <#--<div class="jiathis_style_32x32">-->
+        <#--<a class="jiathis_button_qzone"></a>-->
+        <#--<a class="jiathis_button_weixin"></a>-->
+        <#--<a class="jiathis_button_cqq"></a>-->
+        <#--<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>-->
+        <#--<a class="jiathis_counter_style"></a>-->
+    <#--</div>-->
+<#--</div>-->
 
 <div class="clear-float"></div>
 
@@ -127,14 +127,14 @@
 
 <script src="${ctx}/static/app/js/detail.js"></script>
 
-<script type="text/javascript">
-    var pic = "http://kangyonggan.com" + $($(".markdown img")[0]).attr("src");
+<#--<script type="text/javascript">-->
+    <#--var pic = "http://kangyonggan.com" + $($(".markdown img")[0]).attr("src");-->
 
-    var jiathis_config = {
-        url: "http://kangyonggan.com#article/${article.id}",
-        summary: "${article.title}",
-        pic: pic,
-        title: "康永敢 ##"
-    }
-</script>
-<script type="text/javascript" src="${ctx}/static/app/js/jia.js" charset="utf-8"></script>
+    <#--var jiathis_config = {-->
+        <#--url: "http://kangyonggan.com#article/${article.id}",-->
+        <#--summary: "${article.title}",-->
+        <#--pic: pic,-->
+        <#--title: "康永敢 ##"-->
+    <#--}-->
+<#--</script>-->
+<#--<script type="text/javascript" src="${ctx}/static/app/js/jia.js" charset="utf-8"></script>-->
