@@ -137,4 +137,4 @@
         title: "康永敢 ##"
     }
 </script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<script type="text/javascript" src="${ctx}/static/app/js/jia.js" charset="utf-8"></script>
