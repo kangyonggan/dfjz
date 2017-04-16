@@ -248,7 +248,7 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
 
         for (Article article : articles) {
             rss.append("<url>");
-            rss.append("<loc>http://www.kangyonggan.com/#article/").append(article.getId()).append("</loc>");
+            rss.append("<loc>httsp://www.kangyonggan.com/#article/").append(article.getId()).append("</loc>");
             rss.append("<lastmod>").append(DateUtil.toXmlDateTime(article.getUpdatedTime())).append("</lastmod>");
 
             rss.append("<data>");
@@ -257,7 +257,7 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
             rss.append("<pubTime>").append(DateUtil.toXmlDateTime(article.getCreatedTime())).append("</pubTime>");
             rss.append("<tag>").append(article.getCategoryCode()).append("</tag>");
             rss.append("<tag>").append(article.getCategoryName()).append("</tag>");
-            rss.append("<breadCrumb title=\"").append(article.getCategoryName()).append("\" url=\"").append("http://www.kangyonggan.com/#category/").append(article.getCategoryCode()).append("\"/>");
+            rss.append("<breadCrumb title=\"").append(article.getCategoryName()).append("\" url=\"").append("https://www.kangyonggan.com/#category/").append(article.getCategoryCode()).append("\"/>");
             rss.append("</display>");
             rss.append("</data>");
             rss.append("</url>");
@@ -293,15 +293,15 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
     private void genRssFile(List<Article> articles) {
         StringBuilder rss = new StringBuilder("<feed xmlns=\"http://www.w3.org/2005/Atom\"><title>");
         rss.append(PropertiesUtil.getProperties("app.name")).append("</title>");
-        rss.append("<link href=\"/upload/rss/blog.xml\" rel=\"self\"/>").append("<link href=\"http://www.kangyonggan.com/\"/>");
+        rss.append("<link href=\"/upload/rss/blog.xml\" rel=\"self\"/>").append("<link href=\"https://www.kangyonggan.com/\"/>");
         rss.append("<updated>").append(DateUtil.toXmlDateTime(new Date())).append("</updated>");
-        rss.append("<id>http://www.kangyonggan.com/</id>");
+        rss.append("<id>https://www.kangyonggan.com/</id>");
         rss.append("<author><name>").append(PropertiesUtil.getProperties("app.author")).append("</name></author>");
 
         for (Article article : articles) {
             rss.append("<entry><title>").append(article.getTitle()).append("</title>");
-            rss.append("<link href=\"http://www.kangyonggan.com/#article/").append(article.getId()).append("\"/>");
-            rss.append("<id>http://www.kangyonggan.com/#article/").append(article.getId()).append("</id>");
+            rss.append("<link href=\"https://www.kangyonggan.com/#article/").append(article.getId()).append("\"/>");
+            rss.append("<id>https://www.kangyonggan.com/#article/").append(article.getId()).append("</id>");
             rss.append("<published>").append(DateUtil.toXmlDateTime(article.getCreatedTime())).append("</published>");
             rss.append("<updated>").append(DateUtil.toXmlDateTime(article.getUpdatedTime())).append("</updated>");
             rss.append("<content type=\"html\"><![CDATA[").append(MarkdownUtil.markdownToHtml(article.getContent())).append("]]></content>");
@@ -314,7 +314,7 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
                 rss.append("<summary type=\"html\"><![CDATA[").append(MarkdownUtil.markdownToHtml(article.getContent())).append("]]></summary>");
             }
 
-            rss.append("<category term=\"").append(article.getCategoryName()).append("\" scheme=\"http://www.kangyonggan.com/#category/").append(article.getCategoryCode()).append("/\"/>");
+            rss.append("<category term=\"").append(article.getCategoryName()).append("\" scheme=\"https://www.kangyonggan.com/#category/").append(article.getCategoryCode()).append("/\"/>");
             rss.append("</entry>");
         }
 
