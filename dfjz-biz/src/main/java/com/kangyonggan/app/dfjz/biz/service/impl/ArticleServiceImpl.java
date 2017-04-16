@@ -248,7 +248,7 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
 
         for (Article article : articles) {
             rss.append("<url>");
-            rss.append("<loc>httsp://www.kangyonggan.com/#article/").append(article.getId()).append("</loc>");
+            rss.append("<loc>https://www.kangyonggan.com/#article/").append(article.getId()).append("</loc>");
             rss.append("<lastmod>").append(DateUtil.toXmlDateTime(article.getUpdatedTime())).append("</lastmod>");
 
             rss.append("<data>");
