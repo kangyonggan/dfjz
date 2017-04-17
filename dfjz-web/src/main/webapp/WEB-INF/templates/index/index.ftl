@@ -29,7 +29,11 @@
         </div>
     </#list>
 
-    <@c.pagination url="#index"/>
+    <#if q!=''>
+        <@c.pagination url="#search"/>
+    <#else>
+        <@c.pagination url="#index"/>
+    </#if>
 </div>
 </#if>
 
