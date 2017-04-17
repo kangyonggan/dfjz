@@ -30,7 +30,7 @@
     </#list>
 
     <#if q!=''>
-        <@c.pagination url="#search"/>
+        <@c.pagination url="#search" param="q=${q}"/>
     <#else>
         <@c.pagination url="#index"/>
     </#if>
