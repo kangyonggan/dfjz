@@ -80,7 +80,7 @@ public class HelpController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "article/upload", method = RequestMethod.POST)
+    @RequestMapping(value = "article/update", method = RequestMethod.POST)
     public String upload(@ModelAttribute("article") @Valid Article article, HttpServletRequest request) {
         String ip = IPUtil.getIp(request);
         log.info("修改文章的ip实际地址为：{}", ip);
