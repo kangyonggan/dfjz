@@ -6,7 +6,6 @@ import com.kangyonggan.app.dfjz.biz.service.CategoryService;
 import com.kangyonggan.app.dfjz.biz.service.CommentService;
 import com.kangyonggan.app.dfjz.biz.util.PropertiesUtil;
 import com.kangyonggan.app.dfjz.common.DateUtil;
-import com.kangyonggan.app.dfjz.common.IPUtil;
 import com.kangyonggan.app.dfjz.common.MarkdownUtil;
 import com.kangyonggan.app.dfjz.common.StringUtil;
 import com.kangyonggan.app.dfjz.mapper.ArticleMapper;
@@ -31,7 +30,6 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author kangyonggan
@@ -241,6 +239,12 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
             article.setCommentCount(dto.getCommentCount());
             super.updateByPrimaryKeySelective(article);
         }
+    }
+
+    @Override
+    @LogTime
+    public void updateArticle(Article article) {
+        super.updateByPrimaryKeySelective(article);
     }
 
     private void genSiteMap(List<Article> articles) {

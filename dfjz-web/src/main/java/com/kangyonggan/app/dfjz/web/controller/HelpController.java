@@ -55,15 +55,48 @@ public class HelpController {
     public String save(@ModelAttribute("article") @Valid Article article, HttpServletRequest request) {
         String ip = IPUtil.getIp(request);
         log.info("发布文章的ip实际地址为：{}", ip);
-        String articlePublishIp = PropertiesUtil.getProperties("article.publish.ip");
+        String articlePublishIp = PropertiesUtil.getProperties("white.ip");
         log.info("发布文章的ip白名单为：{}", articlePublishIp);
 
         if (isContainsIp(ip, articlePublishIp)) {
             articleService.saveArticle(article);
-            refreshTask(request);
+            new Thread(){
+                public void run() {
+                    refreshTask(request);
+                }
+            }.start();
             log.info("文章发布成功");
         } else {
             log.error("{}不在ip白名单中，企图发布文章，已报警！", ip);
+        }
+
+        return "redirect:/#index";
+    }
+
+    /**
+     * 修改文章
+     *
+     * @param article
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "article/upload", method = RequestMethod.POST)
+    public String upload(@ModelAttribute("article") @Valid Article article, HttpServletRequest request) {
+        String ip = IPUtil.getIp(request);
+        log.info("修改文章的ip实际地址为：{}", ip);
+        String articlePublishIp = PropertiesUtil.getProperties("white.ip");
+        log.info("修改文章的ip白名单为：{}", articlePublishIp);
+
+        if (isContainsIp(ip, articlePublishIp)) {
+            articleService.updateArticle(article);
+            new Thread(){
+                public void run() {
+                    refreshTask(request);
+                }
+            }.start();
+            log.info("文章修改成功");
+        } else {
+            log.error("{}不在ip白名单中，企图修改文章，已报警！", ip);
         }
 
         return "redirect:/#index";
@@ -80,7 +113,7 @@ public class HelpController {
     public String refreshTask(HttpServletRequest request) {
         String ip = IPUtil.getIp(request);
         log.info("手动刷新所有任务的ip实际地址为：{}", ip);
-        String taskRefreshIp = PropertiesUtil.getProperties("task.refresh.ip");
+        String taskRefreshIp = PropertiesUtil.getProperties("white.ip");
         log.info("手动刷新所有任务的ip白名单为：{}", taskRefreshIp);
 
         if (isContainsIp(ip, taskRefreshIp)) {

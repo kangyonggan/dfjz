@@ -156,4 +156,11 @@ public interface ArticleService {
      * @param commentCountDtos
      */
     void updateArticlesCommentCount(List<CommentCountDto> commentCountDtos);
+
+    /**
+     * 更新文章
+     *
+     * @param article
+     */
+    void updateArticle(Article article);
 }
