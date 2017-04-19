@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改文章</title>
+    <style>
+        form {
+            margin-top: 100px;
+        }
+
+        form > * {
+            display: block;
+            width: 700px;
+            margin: 0 auto;
+            margin-top: 20px;
+            height: 35px;
+            line-height: 45px;
+            text-indent: 10px;
+        }
+
+        textarea {
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+<form action="https://kangyonggan.com/help/article/update" method="post">
+    <input type="text" name="id" placeholder="文章ID" required/>
+    <input type="text" name="title" placeholder="文章标题" required/>
+    <select name="categoryCode" required>
+        <option value="">请选择栏目</option>
+        <option value="java">Java后台</option>
+        <option value="web">Web前端</option>
+        <option value="db">数据库</option>
+        <option value="code">代码片段</option>
+        <option value="linux">系统运维</option>
+        <option value="other">综合</option>
+    </select>
+    <select name="isComment" required>
+        <option value="1" selected>允许评论</option>
+        <option value="0">不允许评论</option>
+    </select>
+    <textarea name="content" placeholder="文章内容" required></textarea>
+    <input type="submit" value="发表"/>
+</form>
+</body>
+</html>

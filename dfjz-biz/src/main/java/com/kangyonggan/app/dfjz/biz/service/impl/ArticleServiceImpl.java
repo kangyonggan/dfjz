@@ -244,6 +244,8 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
     @Override
     @LogTime
     public void updateArticle(Article article) {
+        Category category = categoryService.findCategoryByCode(article.getCategoryCode());
+        article.setCategoryName(category.getName());
         super.updateByPrimaryKeySelective(article);
     }
 
