@@ -62,10 +62,11 @@
         <li>学校：淮北师范大学</li>
         <li>籍贯：安徽蚌埠</li>
         <li>现住址：上海市嘉定区江桥镇</li>
-        <li>上班地点：上海市南京西路399号明天广场21楼华信证券</li>
+        <li>办公地点：上海市南京西路399号明天广场21楼华信证券</li>
         <li>从事行业：互联网+金融</li>
-        <li>个人邮箱：kangyonggan@gmail.com</li>
+        <li>个人邮箱：java@kangyonggan.com</li>
         <li>微信号：Brave_Kang</li>
+        <li>办公QQ：2825176081</li>
     </ul>
 </div>
 
