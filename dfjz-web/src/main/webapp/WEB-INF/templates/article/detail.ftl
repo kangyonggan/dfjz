@@ -89,7 +89,7 @@
 <div class="detail-comment">
     <form action="#article/comment" method="post">
         <input type="hidden" name="articleId" value="${article.id}"/>
-        <input type="hidden" name="token" value="${token}"/>
+        <input type="hidden" name="formToken" value="${formToken}"/>
         <input type="text" name="username" placeholder="匿名" />
         <input type="email" name="email" placeholder="niming@kangyonggan.com" />
         <textarea name="content" placeholder="看完博主的帖子，我的心情竟是久久不能平复，正如老子所云：大音希声，大象希形。我现在终于明白我缺乏的是什么了，正是博主那种对真理的执着追求和博主那种对理想的艰苦实践所产生的厚重感。面对博主的文章，我震惊得几乎不能动弹了，博主那种裂纸欲出的大手笔，竟使我忍不住一次次的翻开博主的帖子，每看一次，赞赏之情就激长数分，我总在想，是否有神灵活在它灵秀的外表下，以至能使人三月不知肉味，使人有余音穿梁，三日不绝的感受。博主，你写得实在是太好了。" ></textarea>

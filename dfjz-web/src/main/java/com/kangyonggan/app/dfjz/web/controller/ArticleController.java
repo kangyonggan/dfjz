@@ -89,8 +89,8 @@ public class ArticleController extends BaseController {
             }.start();
         }
 
-        String token = System.currentTimeMillis() + "";
-        request.getSession().setAttribute("token", token);
+        String formToken = System.currentTimeMillis() + "";
+        request.getSession().setAttribute("formToken", formToken);
 
         model.addAttribute("article", article);
         model.addAttribute("provArticle", provArticle);
@@ -100,7 +100,7 @@ public class ArticleController extends BaseController {
         model.addAttribute("commentArticles", commentArticles);
         model.addAttribute("visitArticles", visitArticles);
         model.addAttribute("stickArticles", stickArticles);
-        model.addAttribute("token", token);
+        model.addAttribute("formToken", formToken);
         return getPathDetail();
     }
 
@@ -108,23 +108,23 @@ public class ArticleController extends BaseController {
      * 评论
      *
      * @param comment
-     * @param token
+     * @param formToken
      * @param request
      * @return
      */
     @RequestMapping(value = "comment", method = RequestMethod.POST)
-    public String comment(@ModelAttribute("comment") @Valid Comment comment, @RequestParam("token") String token, HttpServletRequest request) {
-        Object sessionTokenObj = request.getSession().getAttribute("token");
+    public String comment(@ModelAttribute("comment") @Valid Comment comment, @RequestParam("formToken") String formToken, HttpServletRequest request) {
+        Object sessionTokenObj = request.getSession().getAttribute("formToken");
 
         if (sessionTokenObj == null) {
             return getPathRoot() + "/warn";
         }
 
         String sessionToken = (String) sessionTokenObj;
-        if (!token.equals(sessionToken)) {
+        if (!formToken.equals(sessionToken)) {
             return getPathRoot() + "/warn";
         }
-        request.getSession().removeAttribute("token");
+        request.getSession().removeAttribute("formToken");
 
         // 访问量控制
         String ip = IPUtil.getIp(request);
