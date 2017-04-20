@@ -113,7 +113,12 @@ public class ArticleController extends BaseController {
      */
     @RequestMapping(value = "comment", method = RequestMethod.POST)
     public String comment(@ModelAttribute("comment") @Valid Comment comment, @RequestParam("articleToken") String articleToken, HttpServletRequest request) {
-        Object sessionTokenObj = request.getSession().getAttribute("articleToken");
+
+        Object sessionTokenObj = "";
+        synchronized (sessionTokenObj) {
+            sessionTokenObj = request.getSession().getAttribute("articleToken");
+            request.getSession().removeAttribute("articleToken");
+        }
 
         if (sessionTokenObj == null) {
             return getPathRoot() + "/warn";
@@ -123,7 +128,6 @@ public class ArticleController extends BaseController {
         if (!articleToken.equals(sessionToken)) {
             return getPathRoot() + "/warn";
         }
-        request.getSession().removeAttribute("articleToken");
 
         // 访问量控制
         String ip = IPUtil.getIp(request);
