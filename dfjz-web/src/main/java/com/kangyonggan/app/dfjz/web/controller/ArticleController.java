@@ -89,8 +89,8 @@ public class ArticleController extends BaseController {
             }.start();
         }
 
-        String formToken = System.currentTimeMillis() + "";
-        request.getSession().setAttribute("formToken", formToken);
+        String articleToken = System.currentTimeMillis() + "";
+        request.getSession().setAttribute("articleToken", articleToken);
 
         model.addAttribute("article", article);
         model.addAttribute("provArticle", provArticle);
@@ -100,7 +100,6 @@ public class ArticleController extends BaseController {
         model.addAttribute("commentArticles", commentArticles);
         model.addAttribute("visitArticles", visitArticles);
         model.addAttribute("stickArticles", stickArticles);
-        model.addAttribute("formToken", formToken);
         return getPathDetail();
     }
 
@@ -108,23 +107,23 @@ public class ArticleController extends BaseController {
      * 评论
      *
      * @param comment
-     * @param formToken
+     * @param articleToken
      * @param request
      * @return
      */
     @RequestMapping(value = "comment", method = RequestMethod.POST)
-    public String comment(@ModelAttribute("comment") @Valid Comment comment, @RequestParam("formToken") String formToken, HttpServletRequest request) {
-        Object sessionTokenObj = request.getSession().getAttribute("formToken");
+    public String comment(@ModelAttribute("comment") @Valid Comment comment, @RequestParam("articleToken") String articleToken, HttpServletRequest request) {
+        Object sessionTokenObj = request.getSession().getAttribute("articleToken");
 
         if (sessionTokenObj == null) {
             return getPathRoot() + "/warn";
         }
 
         String sessionToken = (String) sessionTokenObj;
-        if (!formToken.equals(sessionToken)) {
+        if (!articleToken.equals(sessionToken)) {
             return getPathRoot() + "/warn";
         }
-        request.getSession().removeAttribute("formToken");
+        request.getSession().removeAttribute("articleToken");
 
         // 访问量控制
         String ip = IPUtil.getIp(request);
