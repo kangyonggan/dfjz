@@ -68,7 +68,7 @@ public class IndexController extends BaseController {
     public String rss(Model model) {
         Map<String, String> rssMap = new HashMap();
 
-        File rssDir = new File(PropertiesUtil.getProperties("file.root.path") + "upload/rss/");
+        File rssDir = new File(PropertiesUtil.getProperties("file.root.path") + "rss/");
         File files[] = rssDir.listFiles();
 
         for (File file : files) {
