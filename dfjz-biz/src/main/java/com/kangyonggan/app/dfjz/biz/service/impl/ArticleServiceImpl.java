@@ -271,7 +271,7 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
 
         rss.append("</urlset>");
 
-        File file = new File(PropertiesUtil.getProperties("file.root.path") + "upload/rss/sitemap.xml");
+        File file = new File(PropertiesUtil.getProperties("file.root.path") + "rss/sitemap.xml");
 
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
@@ -283,7 +283,7 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
             writer.write(rss.toString());
             writer.flush();
         } catch (Exception e) {
-            log.error("生成SiteMap异常, 文件路径：" + PropertiesUtil.getProperties("file.root.path") + "upload/rss/sitemap.xml", e);
+            log.error("生成SiteMap异常, 文件路径：" + PropertiesUtil.getProperties("file.root.path") + "rss/sitemap.xml", e);
         } finally {
             if (writer != null) {
                 try {
@@ -299,7 +299,7 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
     private void genRssFile(List<Article> articles) {
         StringBuilder rss = new StringBuilder("<feed xmlns=\"http://www.w3.org/2005/Atom\"><title>");
         rss.append(PropertiesUtil.getProperties("app.name")).append("</title>");
-        rss.append("<link href=\"/upload/rss/blog.xml\" rel=\"self\"/>").append("<link href=\"https://www.kangyonggan.com/\"/>");
+        rss.append("<link href=\"/rss/blog.xml\" rel=\"self\"/>").append("<link href=\"https://www.kangyonggan.com/\"/>");
         rss.append("<updated>").append(DateUtil.toXmlDateTime(new Date())).append("</updated>");
         rss.append("<id>https://www.kangyonggan.com/</id>");
         rss.append("<author><name>").append(PropertiesUtil.getProperties("app.author")).append("</name></author>");
@@ -326,7 +326,7 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
 
         rss.append("</feed>");
 
-        File file = new File(PropertiesUtil.getProperties("file.root.path") + "upload/rss/blog.xml");
+        File file = new File(PropertiesUtil.getProperties("file.root.path") + "rss/blog.xml");
 
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
@@ -338,7 +338,7 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
             writer.write(rss.toString());
             writer.flush();
         } catch (Exception e) {
-            log.error("生成博客rss异常, 文件路径：" + PropertiesUtil.getProperties("file.root.path") + "upload/rss/blog.xml", e);
+            log.error("生成博客rss异常, 文件路径：" + PropertiesUtil.getProperties("file.root.path") + "rss/blog.xml", e);
         } finally {
             if (writer != null) {
                 try {

@@ -75,7 +75,7 @@ public class BookServiceImpl extends BaseService<Book> implements BookService {
         StringBuilder rss = new StringBuilder();
         // 把开头信息写入
         rss.append("<feed xmlns=\"http://www.w3.org/2005/Atom\"><title>").append(rssName).append("</title>");
-        rss.append("<link href=\"/upload/rss/" + rssName + ".xml\" rel=\"self\"/>").append("<link href=\"https://www.kangyonggan.com/\"/>");
+        rss.append("<link href=\"/rss/" + rssName + ".xml\" rel=\"self\"/>").append("<link href=\"https://www.kangyonggan.com/\"/>");
         rss.append("<updated>").append(DateUtil.toXmlDateTime(new Date())).append("</updated>");
         rss.append("<id>https://www.kangyonggan.com/</id>");
         rss.append("<author><name>").append(book.getAuthor()).append("</name></author>");
@@ -91,7 +91,7 @@ public class BookServiceImpl extends BaseService<Book> implements BookService {
 
         BufferedWriter writer = null;
         try {
-            writer = new BufferedWriter(new FileWriter(PropertiesUtil.getProperties("file.root.path") + "upload/rss/" + rssName + ".xml"));
+            writer = new BufferedWriter(new FileWriter(PropertiesUtil.getProperties("file.root.path") + "rss/" + rssName + ".xml"));
             writer.write(rss.toString());
             writer.flush();
             log.info("书籍抓取完成");
