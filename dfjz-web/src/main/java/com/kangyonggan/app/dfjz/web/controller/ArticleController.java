@@ -79,7 +79,7 @@ public class ArticleController extends BaseController {
         if (flag == null) {
             articleService.updateArticleVisitCount(id);
 
-            redisService.set(prefix  + "article_visit_id_" + id + "_ip_" + ip, id, 30 * 60);// 30分钟之内同一个ip只能算访问一次
+            redisService.set(prefix + "article_visit_id_" + id + "_ip_" + ip, id, 30 * 60);// 30分钟之内同一个ip只能算访问一次
             log.info("启动线程异步保存访问者ip信息");
             new Thread() {
                 public void run() {
@@ -89,6 +89,9 @@ public class ArticleController extends BaseController {
             }.start();
         }
 
+        String token = System.currentTimeMillis() + "";
+        request.getSession().setAttribute("token", token);
+
         model.addAttribute("article", article);
         model.addAttribute("provArticle", provArticle);
         model.addAttribute("nextArticle", nextArticle);
@@ -97,6 +100,7 @@ public class ArticleController extends BaseController {
         model.addAttribute("commentArticles", commentArticles);
         model.addAttribute("visitArticles", visitArticles);
         model.addAttribute("stickArticles", stickArticles);
+        model.addAttribute("token", token);
         return getPathDetail();
     }
 
@@ -104,11 +108,24 @@ public class ArticleController extends BaseController {
      * 评论
      *
      * @param comment
+     * @param token
      * @param request
      * @return
      */
     @RequestMapping(value = "comment", method = RequestMethod.POST)
-    public String comment(@ModelAttribute("comment") @Valid Comment comment, HttpServletRequest request) {
+    public String comment(@ModelAttribute("comment") @Valid Comment comment, @RequestParam("token") String token, HttpServletRequest request) {
+        Object sessionTokenObj = request.getSession().getAttribute("token");
+
+        if (sessionTokenObj == null) {
+            return getPathRoot() + "/warn";
+        }
+
+        String sessionToken = (String) sessionTokenObj;
+        if (!token.equals(sessionToken)) {
+            return getPathRoot() + "/warn";
+        }
+        request.getSession().removeAttribute("token");
+
         // 访问量控制
         String ip = IPUtil.getIp(request);
         Long id = comment.getArticleId();
