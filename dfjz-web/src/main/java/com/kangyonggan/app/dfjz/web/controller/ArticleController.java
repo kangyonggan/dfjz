@@ -48,6 +48,9 @@ public class ArticleController extends BaseController {
      */
     private String prefix = PropertiesUtil.getProperties("redis.prefix") + ":";
 
+    private String lockDetail = "lockDetail";
+    private String lockComment = "lockComment";
+
     /**
      * 文章详情
      *
@@ -75,18 +78,20 @@ public class ArticleController extends BaseController {
         // 访问量控制
         String ip = IPUtil.getIp(request);
 
-        Object flag = redisService.get(prefix + "article_visit_id_" + id + "_ip_" + ip);
-        if (flag == null) {
-            articleService.updateArticleVisitCount(id);
+        synchronized (lockDetail) {
+            Object flag = redisService.get(prefix + "article_visit_id_" + id + "_ip_" + ip);
+            if (flag == null) {
+                articleService.updateArticleVisitCount(id);
 
-            redisService.set(prefix + "article_visit_id_" + id + "_ip_" + ip, id, 30 * 60);// 30分钟之内同一个ip只能算访问一次
-            log.info("启动线程异步保存访问者ip信息");
-            new Thread() {
-                public void run() {
-                    visitService.saveVisit(id, ip);
-                    log.info("保存访问者ip成功");
-                }
-            }.start();
+                redisService.set(prefix + "article_visit_id_" + id + "_ip_" + ip, id, 30 * 60);// 30分钟之内同一个ip只能算访问一次
+                log.info("启动线程异步保存访问者ip信息");
+                new Thread() {
+                    public void run() {
+                        visitService.saveVisit(id, ip);
+                        log.info("保存访问者ip成功");
+                    }
+                }.start();
+            }
         }
 
         String articleToken = System.currentTimeMillis() + "";
@@ -114,8 +119,8 @@ public class ArticleController extends BaseController {
     @RequestMapping(value = "comment", method = RequestMethod.POST)
     public String comment(@ModelAttribute("comment") @Valid Comment comment, @RequestParam("articleToken") String articleToken, HttpServletRequest request) {
 
-        Object sessionTokenObj = "";
-        synchronized (sessionTokenObj) {
+        Object sessionTokenObj;
+        synchronized (lockComment) {
             sessionTokenObj = request.getSession().getAttribute("articleToken");
             request.getSession().removeAttribute("articleToken");
         }
