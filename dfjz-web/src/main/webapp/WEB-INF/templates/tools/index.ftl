@@ -21,4 +21,40 @@
             <p>HTML转义字符</p>
         </a>
     </div>
+    <div class="item">
+        <a href="#tools/xml">
+            <img src="${ctx}/static/app/images/tools/xml.png"/>
+            <p>XML格式化</p>
+        </a>
+    </div>
+    <div class="item">
+        <a href="#tools/sql">
+            <img src="${ctx}/static/app/images/tools/sql.png"/>
+            <p>SQL格式化</p>
+        </a>
+    </div>
+    <div class="item">
+        <a href="#tools/json">
+            <img src="${ctx}/static/app/images/tools/json.png"/>
+            <p>JSON格式化</p>
+        </a>
+    </div>
+    <div class="item">
+        <a href="#tools/markdown">
+            <img src="${ctx}/static/app/images/tools/markdown.png"/>
+            <p>Markdown编辑器</p>
+        </a>
+    </div>
+    <div class="item">
+        <a href="#tools/js">
+            <img src="${ctx}/static/app/images/tools/js.png"/>
+            <p>JS代码压缩</p>
+        </a>
+    </div>
+    <div class="item">
+        <a href="#tools/css">
+            <img src="${ctx}/static/app/images/tools/css.png"/>
+            <p>CSS代码压缩</p>
+        </a>
+    </div>
 </div>

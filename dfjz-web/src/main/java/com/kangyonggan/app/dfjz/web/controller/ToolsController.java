@@ -70,4 +70,64 @@ public class ToolsController extends BaseController {
         model.addAttribute("htmls", htmls);
         return getPathRoot() + "/html";
     }
+
+    /**
+     * XML格式化
+     *
+     * @return
+     */
+    @RequestMapping(value = "xml", method = RequestMethod.GET)
+    public String xml() {
+        return getPathRoot() + "/xml";
+    }
+
+    /**
+     * SQL格式化
+     *
+     * @return
+     */
+    @RequestMapping(value = "sql", method = RequestMethod.GET)
+    public String sql() {
+        return getPathRoot() + "/sql";
+    }
+
+    /**
+     * JSON格式化
+     *
+     * @return
+     */
+    @RequestMapping(value = "json", method = RequestMethod.GET)
+    public String json() {
+        return getPathRoot() + "/json";
+    }
+
+    /**
+     * Markdown编辑器
+     *
+     * @return
+     */
+    @RequestMapping(value = "markdown", method = RequestMethod.GET)
+    public String markdown() {
+        return getPathRoot() + "/markdown";
+    }
+
+    /**
+     * JS压缩
+     *
+     * @return
+     */
+    @RequestMapping(value = "js", method = RequestMethod.GET)
+    public String js() {
+        return getPathRoot() + "/js";
+    }
+
+    /**
+     * CSS压缩
+     *
+     * @return
+     */
+    @RequestMapping(value = "css", method = RequestMethod.GET)
+    public String css() {
+        return getPathRoot() + "/css";
+    }
 }
