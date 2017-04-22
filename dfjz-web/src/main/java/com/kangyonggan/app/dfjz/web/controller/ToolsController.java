@@ -44,4 +44,17 @@ public class ToolsController extends BaseController {
         model.addAttribute("asclls", asclls);
         return getPathRoot() + "/ascll";
     }
+
+    /**
+     * HTTP状态码
+     *
+     * @return
+     */
+    @RequestMapping(value = "http", method = RequestMethod.GET)
+    public String http(Model model) {
+        List<Dictionary> https = dictionaryService.findDictionariesByType("HTTP");
+
+        model.addAttribute("https", https);
+        return getPathRoot() + "/http";
+    }
 }

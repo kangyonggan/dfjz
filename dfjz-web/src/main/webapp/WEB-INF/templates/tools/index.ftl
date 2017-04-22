@@ -9,4 +9,10 @@
             <p>ASCLL对照表</p>
         </a>
     </div>
+    <div class="item">
+        <a href="#tools/http">
+            <img src="${ctx}/static/app/images/tools/http.png"/>
+            <p>HTTP状态码详解</p>
+        </a>
+    </div>
 </div>

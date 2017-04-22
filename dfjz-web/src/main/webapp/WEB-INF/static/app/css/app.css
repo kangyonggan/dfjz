@@ -945,18 +945,26 @@ table a {
 }
 
 /*tools*/
+.table tr td {
+    padding: 10px 15px;
+    letter-spacing: 1px;
+    line-height: 1.5;
+}
+
+.table th {
+    height: 40px;
+}
+
+.table tr:hover{
+    background: #e4e4e4;
+}
+
 .ascll-table {
     color: #333;
     float: left;
     margin-bottom: 50px;
 }
 
-.ascll-table th {
-    height: 40px;
-}
 .ascll-table td:nth-child(odd),.ascll-table th:nth-child(odd) {
     background: #f4f4f4;
-}
-.ascll-table tr:hover{
-    background: #e4e4e4;
 }

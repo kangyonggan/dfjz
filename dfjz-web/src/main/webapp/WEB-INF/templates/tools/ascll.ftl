@@ -3,7 +3,7 @@
 <h2 class="visit-title">ASCLL码对照表</h2>
 
 <#list 0..3 as i>
-<table class="ascll-table">
+<table class="table ascll-table">
     <thead>
     <tr>
         <th>ASCLL值</th>
