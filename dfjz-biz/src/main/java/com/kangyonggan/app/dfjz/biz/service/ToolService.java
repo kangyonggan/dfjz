@@ -14,4 +14,12 @@ public interface ToolService {
      */
     String formatXml(String data);
 
+    /**
+     * 格式化SQL
+     *
+     * @param data
+     * @param dialect
+     * @return
+     */
+    String formatSql(String data, String dialect);
 }

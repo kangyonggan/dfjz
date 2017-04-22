@@ -1,5 +1,6 @@
 package com.kangyonggan.app.dfjz.web.controller;
 
+import com.alibaba.druid.sql.SQLUtils;
 import com.kangyonggan.app.dfjz.biz.service.DictionaryService;
 import com.kangyonggan.app.dfjz.biz.service.ToolService;
 import com.kangyonggan.app.dfjz.model.vo.Dictionary;
@@ -108,6 +109,22 @@ public class ToolsController extends BaseController {
      */
     @RequestMapping(value = "sql", method = RequestMethod.GET)
     public String sql() {
+        return getPathRoot() + "/sql";
+    }
+
+    /**
+     * SQL格式化
+     *
+     * @param data
+     * @param dialect
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "sql", method = RequestMethod.POST)
+    public String sql(@RequestParam("data") String data,
+                      @RequestParam(value = "dialect", required = false, defaultValue = "MySQL") String dialect,
+                      Model model) {
+        model.addAttribute("result", toolService.formatSql(data, dialect));
         return getPathRoot() + "/sql";
     }
 
