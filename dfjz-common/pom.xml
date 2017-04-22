@@ -73,5 +73,9 @@
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
     </dependencies>
 </project>

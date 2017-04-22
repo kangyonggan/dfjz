@@ -1,18 +1,16 @@
 package com.kangyonggan.app.dfjz.web.controller;
 
-import com.alibaba.druid.sql.SQLUtils;
 import com.kangyonggan.app.dfjz.biz.service.DictionaryService;
 import com.kangyonggan.app.dfjz.biz.service.ToolService;
+import com.kangyonggan.app.dfjz.common.GsonUtil;
 import com.kangyonggan.app.dfjz.model.vo.Dictionary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -135,6 +133,19 @@ public class ToolsController extends BaseController {
      */
     @RequestMapping(value = "json", method = RequestMethod.GET)
     public String json() {
+        return getPathRoot() + "/json";
+    }
+
+    /**
+     * JSON格式化
+     *
+     * @param data
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "json", method = RequestMethod.POST)
+    public String json(@RequestParam("data") String data, Model model) {
+        model.addAttribute("result", GsonUtil.format(data));
         return getPathRoot() + "/json";
     }
 

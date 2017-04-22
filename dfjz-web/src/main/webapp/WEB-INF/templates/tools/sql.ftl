@@ -6,7 +6,7 @@
 
 <div>
     <h4>待格式化的SQL：</h4>
-    <form action="#tools/sql" method="post" id="xml-fromat-form">
+    <form action="#tools/sql" method="post" id="sql-fromat-form">
         <textarea class="textarea mb-10" name="data" placeholder="请输入需要格式化的sql" required>${data}</textarea>
         <select name="dialect" class="select">
             <option value="MySQL" <#if dialect=='MySQL'>selected</#if>>MySQL</option>
@@ -24,7 +24,7 @@
 </div>
 
 <script>
-    $("#xml-fromat-form").submit(function () {
+    $("#sql-fromat-form").submit(function () {
         $btn = $(this).find("button");
         $btn.text($btn.attr("data-loading-text")).attr("disabled", "disabled");
     });
