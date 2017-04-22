@@ -3,6 +3,7 @@ package com.kangyonggan.app.dfjz.web.controller;
 import com.kangyonggan.app.dfjz.biz.service.DictionaryService;
 import com.kangyonggan.app.dfjz.biz.service.ToolService;
 import com.kangyonggan.app.dfjz.common.GsonUtil;
+import com.kangyonggan.app.dfjz.common.MarkdownUtil;
 import com.kangyonggan.app.dfjz.model.vo.Dictionary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -156,6 +157,19 @@ public class ToolsController extends BaseController {
      */
     @RequestMapping(value = "markdown", method = RequestMethod.GET)
     public String markdown() {
+        return getPathRoot() + "/markdown";
+    }
+
+    /**
+     * Markdown编辑器
+     *
+     * @param data
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "markdown", method = RequestMethod.POST)
+    public String markdown(@RequestParam("data") String data, Model model) {
+        model.addAttribute("result", MarkdownUtil.markdownToHtml(data));
         return getPathRoot() + "/markdown";
     }
 
