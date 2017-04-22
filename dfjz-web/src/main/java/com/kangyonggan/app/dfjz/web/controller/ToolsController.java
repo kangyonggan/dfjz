@@ -57,4 +57,17 @@ public class ToolsController extends BaseController {
         model.addAttribute("https", https);
         return getPathRoot() + "/http";
     }
+
+    /**
+     * HTML转义字符
+     *
+     * @return
+     */
+    @RequestMapping(value = "html", method = RequestMethod.GET)
+    public String html(Model model) {
+        List<Dictionary> htmls = dictionaryService.findDictionariesByType("HTML");
+
+        model.addAttribute("htmls", htmls);
+        return getPathRoot() + "/html";
+    }
 }

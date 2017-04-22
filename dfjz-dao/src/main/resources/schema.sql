@@ -149,8 +149,8 @@ CREATE TABLE dictionary
   COMMENT '更新时间'
 )
   COMMENT '字典表';
-CREATE UNIQUE INDEX uid_type_pcode_code
-  ON dictionary (type, pcode, code);
+CREATE INDEX id_type
+  ON dictionary (type);
 CREATE INDEX id_created_time
   ON dictionary (created_time);
 
