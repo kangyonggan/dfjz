@@ -87,6 +87,7 @@
         <httpclient.version>4.5.3</httpclient.version>
         <aliyun.core>2.4.2</aliyun.core>
         <aliyun.sms>3.0.0-rc1</aliyun.sms>
+        <dom4j.version>1.6.1</dom4j.version>
     </properties>
 
     <build>
@@ -436,9 +437,9 @@
                 <version>${aliyun.sms}</version>
             </dependency>
             <dependency>
-                <groupId>com.kangyonggan.app</groupId>
-                <artifactId>json</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <groupId>dom4j</groupId>
+                <artifactId>dom4j</artifactId>
+                <version>${dom4j.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

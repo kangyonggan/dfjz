@@ -1,12 +1,15 @@
 package com.kangyonggan.app.dfjz.web.controller;
 
 import com.kangyonggan.app.dfjz.biz.service.DictionaryService;
+import com.kangyonggan.app.dfjz.biz.service.ToolService;
 import com.kangyonggan.app.dfjz.model.vo.Dictionary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +24,9 @@ public class ToolsController extends BaseController {
 
     @Autowired
     private DictionaryService dictionaryService;
+
+    @Autowired
+    private ToolService toolService;
 
     /**
      * 工具列表
@@ -74,10 +80,24 @@ public class ToolsController extends BaseController {
     /**
      * XML格式化
      *
+     * @param model
      * @return
      */
     @RequestMapping(value = "xml", method = RequestMethod.GET)
-    public String xml() {
+    public String xml(Model model) {
+        return getPathRoot() + "/xml";
+    }
+
+    /**
+     * XML格式化
+     *
+     * @param data
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "xml", method = RequestMethod.POST)
+    public String xml(@RequestParam("data") String data, Model model) {
+        model.addAttribute("result", toolService.formatXml(data));
         return getPathRoot() + "/xml";
     }
 
