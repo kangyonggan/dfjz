@@ -4,13 +4,7 @@
     <div>
         <a href="#index" class="logo">东方娇子</a>
         <ul class="hidden-sm">
-            <li><a href="#index">首页</a></li>
-            <li><a href="#category">分类</a></li>
-            <li><a href="#archives">归档</a></li>
-            <li><a href="#rss">订阅</a></li>
-            <li><a href="${ctx}/rss/sitemap.xml" target="_blank">网站地图</a></li>
-            <li><a href="#stat">统计分析</a></li>
-            <li><a href="#about">关于</a></li>
+        <#include "categories.ftl">
         </ul>
 
         <form action="#search" method="get" class="hidden-sm" novalidate>
@@ -29,13 +23,7 @@
             </form>
 
             <ul>
-                <li><a href="#index">首页</a></li>
-                <li><a href="#categories">分类</a></li>
-                <li><a href="#archives">归档</a></li>
-                <li><a href="#rss">订阅</a></li>
-                <li><a href="${ctx}/rss/sitemap.xml" target="_blank">网站地图</a></li>
-                <li><a href="#stat">统计分析</a></li>
-                <li><a href="#about">关于</a></li>
+            <#include "categories.ftl">
             </ul>
         </div>
     </div>

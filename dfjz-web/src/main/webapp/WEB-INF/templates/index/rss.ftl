@@ -1,7 +1,5 @@
 <#assign ctx="${(rca.contextPath)!''}">
 
-<#assign ctx="${(rca.contextPath)!''}">
-
 <h2 class="visit-title">全部RSS资源</h2>
 
 <ol>

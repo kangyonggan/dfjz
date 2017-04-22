@@ -122,6 +122,39 @@ CREATE INDEX id_created_time
   ON comment (created_time);
 
 -- ----------------------------
+--  Table structure for dictionary
+-- ----------------------------
+DROP TABLE
+IF EXISTS dictionary;
+
+CREATE TABLE dictionary
+(
+  id           BIGINT(20) PRIMARY KEY AUTO_INCREMENT NOT NULL
+  COMMENT '主键, 自增',
+  type         VARCHAR(16)                           NOT NULL
+  COMMENT '类型',
+  code         VARCHAR(16)                           NOT NULL
+  COMMENT '代码',
+  name         VARCHAR(32)                           NOT NULL
+  COMMENT '名称',
+  sort         INTEGER(11)                           NOT NULL
+  COMMENT '排序',
+  pcode        VARCHAR(16)                           NOT NULL                    DEFAULT ''
+  COMMENT '父代码',
+  is_deleted   TINYINT                               NOT NULL                    DEFAULT 0
+  COMMENT '逻辑删除:{0:未删除, 1:已删除}',
+  created_time TIMESTAMP                             NOT NULL                    DEFAULT CURRENT_TIMESTAMP
+  COMMENT '创建时间',
+  updated_time TIMESTAMP                             NOT NULL                    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  COMMENT '更新时间'
+)
+  COMMENT '字典表';
+CREATE UNIQUE INDEX uid_type_pcode_code
+  ON dictionary (type, pcode, code);
+CREATE INDEX id_created_time
+  ON dictionary (created_time);
+
+-- ----------------------------
 --  Table structure for category
 -- ----------------------------
 DROP TABLE
@@ -202,3 +235,135 @@ INSERT INTO book (name, author, intro, picture, url)
 
 INSERT INTO book (name, author, intro, picture, url)
   VALUE ('逆天邪神', '火星引力', '掌天毒之珠，承邪神之血，修逆天之力，一代邪神，君临天下！', 'http://www.biquge.cn/cover/2/2722/2722s.jpg', '2722');
+
+INSERT INTO dictionary
+(type, code, name, sort)
+VALUES
+  ('ASCLL', '0', 'NUT', 0),
+  ('ASCLL', '1', 'SOH', 1),
+  ('ASCLL', '2', 'STX', 2),
+  ('ASCLL', '3', 'ETX', 3),
+  ('ASCLL', '4', 'EOT', 4),
+  ('ASCLL', '5', 'ENQ', 5),
+  ('ASCLL', '6', 'ACK', 6),
+  ('ASCLL', '7', 'BEL', 7),
+  ('ASCLL', '8', 'BS', 8),
+  ('ASCLL', '9', 'HT', 9),
+  ('ASCLL', '10', 'LF', 10),
+  ('ASCLL', '11', 'VT', 11),
+  ('ASCLL', '12', 'FF', 12),
+  ('ASCLL', '13', 'CR', 13),
+  ('ASCLL', '14', 'SO', 14),
+  ('ASCLL', '15', 'SI', 15),
+  ('ASCLL', '16', 'DLE', 16),
+  ('ASCLL', '17', 'DCI', 17),
+  ('ASCLL', '18', 'DC2', 18),
+  ('ASCLL', '19', 'DC3', 19),
+  ('ASCLL', '20', 'DC4', 20),
+  ('ASCLL', '21', 'NAK', 21),
+  ('ASCLL', '22', 'SYN', 22),
+  ('ASCLL', '23', 'TB', 23),
+  ('ASCLL', '24', 'CAN', 24),
+  ('ASCLL', '25', 'EM', 25),
+  ('ASCLL', '26', 'SUB', 26),
+  ('ASCLL', '27', 'ESC', 27),
+  ('ASCLL', '28', 'FS', 28),
+  ('ASCLL', '29', 'GS', 29),
+  ('ASCLL', '30', 'RS', 30),
+  ('ASCLL', '31', 'US', 31),
+  ('ASCLL', '32', '(space)', 32),
+  ('ASCLL', '33', '!', 33),
+  ('ASCLL', '34', '"', 34),
+  ('ASCLL', '35', '#', 35),
+  ('ASCLL', '36', '$', 36),
+  ('ASCLL', '37', '%', 37),
+  ('ASCLL', '38', '&', 38),
+  ('ASCLL', '39', ',', 39),
+  ('ASCLL', '40', '(', 40),
+  ('ASCLL', '41', ')', 41),
+  ('ASCLL', '42', '*', 42),
+  ('ASCLL', '43', '+', 43),
+  ('ASCLL', '44', ',', 44),
+  ('ASCLL', '45', '-', 45),
+  ('ASCLL', '46', '.', 46),
+  ('ASCLL', '47', '/', 47),
+  ('ASCLL', '48', '0', 48),
+  ('ASCLL', '49', '1', 49),
+  ('ASCLL', '50', '2', 50),
+  ('ASCLL', '51', '3', 51),
+  ('ASCLL', '52', '4', 52),
+  ('ASCLL', '53', '5', 53),
+  ('ASCLL', '54', '6', 54),
+  ('ASCLL', '55', '7', 55),
+  ('ASCLL', '56', '8', 56),
+  ('ASCLL', '57', '9', 57),
+  ('ASCLL', '58', ':', 58),
+  ('ASCLL', '59', ';', 59),
+  ('ASCLL', '60', '<', 60),
+  ('ASCLL', '61', '=', 61),
+  ('ASCLL', '62', '>', 62),
+  ('ASCLL', '63', '?', 63),
+  ('ASCLL', '64', '@', 64),
+  ('ASCLL', '65', 'A', 65),
+  ('ASCLL', '66', 'B', 66),
+  ('ASCLL', '67', 'C', 67),
+  ('ASCLL', '68', 'D', 68),
+  ('ASCLL', '69', 'E', 69),
+  ('ASCLL', '70', 'F', 70),
+  ('ASCLL', '71', 'G', 71),
+  ('ASCLL', '72', 'H', 72),
+  ('ASCLL', '73', 'I', 73),
+  ('ASCLL', '74', 'J', 74),
+  ('ASCLL', '75', 'K', 75),
+  ('ASCLL', '76', 'L', 76),
+  ('ASCLL', '77', 'M', 77),
+  ('ASCLL', '78', 'N', 78),
+  ('ASCLL', '79', 'O', 79),
+  ('ASCLL', '80', 'P', 80),
+  ('ASCLL', '81', 'Q', 81),
+  ('ASCLL', '82', 'R', 82),
+  ('ASCLL', '83', 'S', 83),
+  ('ASCLL', '84', 'T', 84),
+  ('ASCLL', '85', 'U', 85),
+  ('ASCLL', '86', 'V', 86),
+  ('ASCLL', '87', 'W', 87),
+  ('ASCLL', '88', 'X', 88),
+  ('ASCLL', '89', 'Y', 89),
+  ('ASCLL', '90', 'Z', 90),
+  ('ASCLL', '91', '[', 91),
+  ('ASCLL', '92', '/', 92),
+  ('ASCLL', '93', ']', 93),
+  ('ASCLL', '94', '^', 94),
+  ('ASCLL', '95', '_', 95),
+  ('ASCLL', '96', '、', 96),
+  ('ASCLL', '97', 'a', 97),
+  ('ASCLL', '98', 'b', 98),
+  ('ASCLL', '99', 'c', 99),
+  ('ASCLL', '100', 'd', 100),
+  ('ASCLL', '101', 'e', 101),
+  ('ASCLL', '102', 'f', 102),
+  ('ASCLL', '103', 'g', 103),
+  ('ASCLL', '104', 'h', 104),
+  ('ASCLL', '105', 'i', 105),
+  ('ASCLL', '106', 'j', 106),
+  ('ASCLL', '107', 'k', 107),
+  ('ASCLL', '108', 'l', 108),
+  ('ASCLL', '109', 'm', 109),
+  ('ASCLL', '110', 'n', 110),
+  ('ASCLL', '111', 'o', 111),
+  ('ASCLL', '112', 'p', 112),
+  ('ASCLL', '113', 'q', 113),
+  ('ASCLL', '114', 'r', 114),
+  ('ASCLL', '115', 's', 115),
+  ('ASCLL', '116', 't', 116),
+  ('ASCLL', '117', 'u', 117),
+  ('ASCLL', '118', 'v', 118),
+  ('ASCLL', '119', 'w', 119),
+  ('ASCLL', '120', 'x', 120),
+  ('ASCLL', '121', 'y', 121),
+  ('ASCLL', '122', 'z', 122),
+  ('ASCLL', '123', '{', 123),
+  ('ASCLL', '124', '|', 124),
+  ('ASCLL', '125', '}', 125),
+  ('ASCLL', '126', '`', 126),
+  ('ASCLL', '127', 'DEL', 127);

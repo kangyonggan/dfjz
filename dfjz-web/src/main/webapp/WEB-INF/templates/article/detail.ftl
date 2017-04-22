@@ -3,10 +3,10 @@
 <div class="detail-header">
     <h1>${article.title}</h1>
     <div class="detail-info">
-        <span>发表于 ${article.createdTime?date}</span>
-        <span>分类于 <a href="#category/${article.categoryCode}">${article.categoryName}</a></span>
-        <span>访问量 <a href="#article/${article.id}/visits"">${article.visitCount}</a></span>
-        <span>评论数 <a href="javascript:">${article.commentCount}</a></span>
+        <span><img class="list-icon" src="${ctx}/static/app/images/calendar.png"/>发表于 ${article.createdTime?date}</span>
+        <span><img class="list-icon" src="${ctx}/static/app/images/folder.png"/>分类于 <a href="#category/${article.categoryCode}">${article.categoryName}</a></span>
+        <span><img class="list-icon" src="${ctx}/static/app/images/visit.png"/>访问量 <a href="#article/${article.id}/visits"">${article.visitCount}</a></span>
+        <span><img class="list-icon" src="${ctx}/static/app/images/comment.png"/>评论数 <a href="javascript:">${article.commentCount}</a></span>
     </div>
 </div>
 

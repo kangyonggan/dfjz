@@ -95,6 +95,14 @@ body {
     background: #e1e1e1;
 }
 
+.nav-icon {
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin-top: 3px;
+    margin-right: 5px;
+}
+
 #header > div > form > input {
     border-radius: 20px;
     border: 1px solid #333;
@@ -127,6 +135,13 @@ body {
 
 .line-border-radius {
     border-radius: 30%;
+}
+
+.list-icon {
+    width: 17px;
+    height: 17px;
+    margin-top: 1px;
+    margin-right: 5px;
 }
 
 .menu-list {
@@ -299,7 +314,7 @@ table {
     border-collapse: collapse;
 }
 
-table tr td,th {
+table tr td, th {
     border: 1px solid #555;
     padding: 6px 10px;
 }
@@ -530,6 +545,7 @@ table a {
 .clear-float {
     clear: both;
 }
+
 .detail-pay {
     margin-top: 50px;
     text-align: center;
@@ -694,6 +710,7 @@ table a {
     line-height: 1.5;
     color: #555;
 }
+
 .categories p {
     text-align: center;
     font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -701,11 +718,13 @@ table a {
     line-height: 2;
     color: #555;
 }
+
 .categories ul {
     padding-left: 0;
     list-style: none;
     margin-top: 30px;
 }
+
 .categories ul li a {
     color: #555;
     text-decoration: none;
@@ -787,6 +806,7 @@ table a {
     font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
     color: #555;
 }
+
 .list-line .title small {
     color: #bbb;
     margin-left: 5px;
@@ -800,6 +820,7 @@ table a {
     line-height: 1.5;
     color: #555;
 }
+
 .about h2 {
     font-size: 22px;
     font-weight: 300;
@@ -807,6 +828,7 @@ table a {
     color: #555;
     margin-top: 50px;
 }
+
 .about ul li {
     height: 30px;
 }
@@ -816,6 +838,7 @@ table a {
     clear: both;
     margin-top: 80px;
 }
+
 .share-btns div {
     display: block;
     width: 300px;
@@ -831,6 +854,26 @@ table a {
 
 .visit-title:hover {
     text-decoration: underline;
+}
+
+/*tools*/
+.tools-list > .item a {
+    display: inline-block;
+    padding: 20px 40px;
+    width: 160px;
+    height: 190px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    color: #333;
+    text-decoration: none;
+    float: left;
+    margin: 26px;
+}
+.tools-list > .item a img {
+    display: inline-block;
+    width: 140px;
+    height: 140px;
 }
 
 /*small screen*/
@@ -853,6 +896,9 @@ table a {
 
     .hidden-sm {
         display: none;
+    }
+    .ascll-table {
+        width: 50%;
     }
 }
 
@@ -893,4 +939,24 @@ table a {
     .detail-comment > form > textarea {
         width: 600px;
     }
+    .ascll-table {
+        width: 25%;
+    }
+}
+
+/*tools*/
+.ascll-table {
+    color: #333;
+    float: left;
+    margin-bottom: 50px;
+}
+
+.ascll-table th {
+    height: 40px;
+}
+.ascll-table td:nth-child(odd),.ascll-table th:nth-child(odd) {
+    background: #f4f4f4;
+}
+.ascll-table tr:hover{
+    background: #e4e4e4;
 }
