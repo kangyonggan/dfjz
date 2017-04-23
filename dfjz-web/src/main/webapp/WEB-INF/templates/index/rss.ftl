@@ -4,7 +4,7 @@
 
 <div class="tools-list">
     <div class="item">
-        <a href="${ctx}/rss/blog.xmll" target="_blank">
+        <a href="${ctx}/rss/blog.xml" target="_blank">
             <img src="${ctx}/static/app/images/article.png"/>
             <p>全部文章</p>
         </a>
