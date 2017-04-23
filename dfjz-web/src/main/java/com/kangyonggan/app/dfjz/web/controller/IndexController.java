@@ -2,6 +2,7 @@ package com.kangyonggan.app.dfjz.web.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.kangyonggan.app.dfjz.biz.service.ArticleService;
+import com.kangyonggan.app.dfjz.biz.service.DictionaryService;
 import com.kangyonggan.app.dfjz.biz.util.PropertiesUtil;
 import com.kangyonggan.app.dfjz.model.vo.Article;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class IndexController extends BaseController {
 
     @Autowired
     private ArticleService articleService;
+
+    @Autowired
+    private DictionaryService dictionaryService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String layout() {
@@ -77,7 +81,7 @@ public class IndexController extends BaseController {
                 continue;
             }
 
-            rssMap.put(filename, filename);
+            rssMap.put(filename.substring(0, filename.lastIndexOf(".")), filename);
         }
 
         model.addAttribute("rssMap", rssMap);
@@ -118,6 +122,17 @@ public class IndexController extends BaseController {
 
         model.addAttribute("page", page);
         return getPathIndex();
+    }
+
+    /**
+     * 导航
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "nav", method = RequestMethod.GET)
+    public String nav(Model model) {
+        model.addAttribute("navs", dictionaryService.findDictionariesByType("NAV"));
+        return getPathRoot() + "/nav";
     }
 
 }

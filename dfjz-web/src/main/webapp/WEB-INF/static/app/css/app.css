@@ -870,6 +870,7 @@ table a {
     float: left;
     margin: 26px;
 }
+
 .tools-list > .item a img {
     display: inline-block;
     width: 140px;
@@ -897,6 +898,7 @@ table a {
     .hidden-sm {
         display: none;
     }
+
     .ascll-table {
         width: 50%;
     }
@@ -939,6 +941,7 @@ table a {
     .detail-comment > form > textarea {
         width: 600px;
     }
+
     .ascll-table {
         width: 25%;
     }
@@ -955,7 +958,7 @@ table a {
     height: 40px;
 }
 
-.table tr:hover{
+.table tr:hover {
     background: #e4e4e4;
 }
 
@@ -965,7 +968,7 @@ table a {
     margin-bottom: 50px;
 }
 
-.ascll-table td:nth-child(odd),.ascll-table th:nth-child(odd) {
+.ascll-table td:nth-child(odd), .ascll-table th:nth-child(odd) {
     background: #f4f4f4;
 }
 
@@ -1014,7 +1017,7 @@ table a {
 .result {
     font-size: inherit;
     color: #333;
-    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
     line-height: 1.42857143;
     background: #f5f5f5;
     padding: 10px;
@@ -1029,4 +1032,13 @@ table a {
 
 .mb-10 {
     margin-bottom: 10px;
+}
+
+.book-pic {
+    width: 120px !important;
+    height: 150px !important;
+}
+
+.book-name {
+    margin-top: 0px !important;
 }

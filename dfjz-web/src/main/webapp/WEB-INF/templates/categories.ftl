@@ -31,9 +31,9 @@
     </a>
 </li>
 <li>
-    <a href="#stat">
-        <img src="${ctx}/static/app/images/stat.png" class="nav-icon"/>
-        统计分析
+    <a href="#nav">
+        <img src="${ctx}/static/app/images/nav.png" class="nav-icon"/>
+        导航
     </a>
 </li>
 <li>
