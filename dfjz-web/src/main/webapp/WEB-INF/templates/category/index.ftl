@@ -13,5 +13,5 @@
 </div>
 
 <script>
-    window.document.title = "全部分类 | 东方娇子";
+    window.document.title = "分类 | 东方娇子";
 </script>
