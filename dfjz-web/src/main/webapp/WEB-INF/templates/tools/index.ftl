@@ -4,6 +4,12 @@
 
 <div class="tools-list">
     <div class="item">
+        <a href="#tools/qr">
+            <img src="${ctx}/static/app/images/tools/qr.png"/>
+            <p>生成二维码</p>
+        </a>
+    </div>
+    <div class="item">
         <a href="#tools/ascll">
             <img src="${ctx}/static/app/images/tools/table.png"/>
             <p>ASCLL对照表</p>

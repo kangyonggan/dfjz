@@ -877,6 +877,13 @@ table a {
     height: 140px;
 }
 
+
+@media (max-width: 800px) {
+    .tools-form .input {
+        width: 90%;
+    }
+}
+
 /*small screen*/
 @media (max-width: 1250px) {
     #header {
@@ -1041,4 +1048,14 @@ table a {
 
 .book-name {
     margin-top: 0px !important;
+}
+
+.tools-form .input {
+    border: 1px solid #333;
+    text-indent: 10px;
+    outline: none;
+    padding: 3px 0;
+    min-width: 50%;
+    height: 28px;
+    font-size: 13px;
 }

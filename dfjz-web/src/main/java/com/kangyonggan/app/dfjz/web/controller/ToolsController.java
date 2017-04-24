@@ -2,10 +2,14 @@ package com.kangyonggan.app.dfjz.web.controller;
 
 import com.kangyonggan.app.dfjz.biz.service.DictionaryService;
 import com.kangyonggan.app.dfjz.biz.service.ToolService;
+import com.kangyonggan.app.dfjz.biz.util.PropertiesUtil;
 import com.kangyonggan.app.dfjz.common.CompressorUtil;
 import com.kangyonggan.app.dfjz.common.GsonUtil;
 import com.kangyonggan.app.dfjz.common.MarkdownUtil;
+import com.kangyonggan.app.dfjz.common.QrCodeUtil;
 import com.kangyonggan.app.dfjz.model.vo.Dictionary;
+import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +27,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("tools")
+@Log4j2
 public class ToolsController extends BaseController {
 
     @Autowired
@@ -28,6 +35,8 @@ public class ToolsController extends BaseController {
 
     @Autowired
     private ToolService toolService;
+
+    private SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 
     /**
      * 工具列表
@@ -218,5 +227,45 @@ public class ToolsController extends BaseController {
     public String css(@RequestParam("data") String data, Model model) {
         model.addAttribute("result", CompressorUtil.compressCSS(data));
         return getPathRoot() + "/css";
+    }
+
+    /**
+     * 二维码
+     *
+     * @return
+     */
+    @RequestMapping(value = "qr", method = RequestMethod.GET)
+    public String qr() {
+        return getPathRoot() + "/qr";
+    }
+
+    /**
+     * 二维码
+     *
+     * @param data
+     * @param width
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "qr", method = RequestMethod.POST)
+    public String qr(@RequestParam("data") String data, @RequestParam(value = "width", required = false, defaultValue = "200") int width,
+                     Model model) throws Exception {
+        if (StringUtils.isEmpty(data)) {
+            return getPathRoot() + "/qr";
+        }
+
+        String qrName = "QR" + format.format(new Date()) + ".png";
+        String name = PropertiesUtil.getProperties("file.root.path") + "upload/" + qrName;
+        log.info("生成二维码的名称:" + qrName);
+        try {
+            QrCodeUtil.genQrCode(name, data, width);
+            log.info("二维码生成成功");
+        } catch (Exception e) {
+            log.error("生成二维码失败", e);
+            throw e;
+        }
+        model.addAttribute("result", qrName);
+        return getPathRoot() + "/qr";
     }
 }
