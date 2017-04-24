@@ -60,5 +60,5 @@
 </div>
 
 <script>
-    window.document.title = $(".visit-title").text() + " | 东方娇子";
+    window.document.title = "工具 | 东方娇子";
 </script>
