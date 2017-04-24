@@ -4,14 +4,14 @@ $(function () {
     $(window).scroll(function () {
         if ($(window).scrollTop() >= 100) { //向下滚动像素大于这个值时，即出现浮窗~
             $('.scroll-bar').fadeIn(1000);
-            $("#header").css("height", "60px");
+            $("#header").css({"height":"60px", "border-bottom":"1px solid #ddd"});
             $("#header > div > a.logo").css("margin-top", "10px");
             $("#header > div > ul").css("margin-top", "18px");
             $("#header > div > form > input").css("margin-top", "17px");
             $("#header > div > a.menu-button").css("margin-top", "10px");
         } else {
             $('.scroll-bar').fadeOut(1000);
-            $("#header").css("height", "90px");
+            $("#header").css({"height":"90px", "border-bottom":"0px solid #ddd"});
             $("#header > div > a.logo").css("margin-top", "25px");
             $("#header > div > ul").css("margin-top", "30px");
             $("#header > div > form > input").css("margin-top", "28px");
