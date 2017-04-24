@@ -2,6 +2,7 @@ package com.kangyonggan.app.dfjz.web.controller;
 
 import com.kangyonggan.app.dfjz.biz.service.DictionaryService;
 import com.kangyonggan.app.dfjz.biz.service.ToolService;
+import com.kangyonggan.app.dfjz.common.CompressorUtil;
 import com.kangyonggan.app.dfjz.common.GsonUtil;
 import com.kangyonggan.app.dfjz.common.MarkdownUtil;
 import com.kangyonggan.app.dfjz.model.vo.Dictionary;
@@ -184,12 +185,38 @@ public class ToolsController extends BaseController {
     }
 
     /**
+     * JS压缩
+     *
+     * @param data
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "js", method = RequestMethod.POST)
+    public String js(@RequestParam("data") String data, Model model) {
+        model.addAttribute("resultMap", CompressorUtil.compressJS(data));
+        return getPathRoot() + "/js";
+    }
+
+    /**
      * CSS压缩
      *
      * @return
      */
     @RequestMapping(value = "css", method = RequestMethod.GET)
     public String css() {
+        return getPathRoot() + "/css";
+    }
+
+    /**
+     * CSS压缩
+     *
+     * @param data
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "css", method = RequestMethod.POST)
+    public String css(@RequestParam("data") String data, Model model) {
+        model.addAttribute("result", CompressorUtil.compressCSS(data));
         return getPathRoot() + "/css";
     }
 }
