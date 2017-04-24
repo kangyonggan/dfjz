@@ -243,13 +243,13 @@ public class ToolsController extends BaseController {
      * 二维码
      *
      * @param data
-     * @param width
+     * @param size
      * @param model
      * @return
      * @throws Exception
      */
     @RequestMapping(value = "qr", method = RequestMethod.POST)
-    public String qr(@RequestParam("data") String data, @RequestParam(value = "width", required = false, defaultValue = "200") int width,
+    public String qr(@RequestParam("data") String data, @RequestParam(value = "size", required = false, defaultValue = "200") int size,
                      Model model) throws Exception {
         if (StringUtils.isEmpty(data)) {
             return getPathRoot() + "/qr";
@@ -259,7 +259,7 @@ public class ToolsController extends BaseController {
         String name = PropertiesUtil.getProperties("file.root.path") + "upload/" + qrName;
         log.info("生成二维码的名称:" + qrName);
         try {
-            QrCodeUtil.genQrCode(name, data, width);
+            QrCodeUtil.genQrCode(name, data, size);
             log.info("二维码生成成功");
         } catch (Exception e) {
             log.error("生成二维码失败", e);
