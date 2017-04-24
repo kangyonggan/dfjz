@@ -8,6 +8,8 @@
     <meta name="description" content="代码片段,学习笔记,技术分享,解决方案,架构设计"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 
+    <title>未命名 | 东方娇子</title>
+
     <link rel="shortcut icon" href="${ctx}/static/app/images/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="${ctx}/static/app/css/app.css"/>

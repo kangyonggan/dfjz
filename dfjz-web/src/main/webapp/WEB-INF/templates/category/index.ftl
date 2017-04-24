@@ -12,3 +12,6 @@
     </ul>
 </div>
 
+<script>
+    window.document.title = "全部分类 | 东方娇子";
+</script>

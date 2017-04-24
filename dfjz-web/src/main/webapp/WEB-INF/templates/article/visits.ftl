@@ -34,3 +34,7 @@
 <div class="clear-float"></div>
 
 <@c.pagination url="#article/${article.id}/visits"/>
+
+<script>
+    window.document.title = "所有访问 | ${article.title}| 东方娇子";
+</script>

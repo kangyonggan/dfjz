@@ -39,3 +39,7 @@
 
 <script>var q = '${q!''}';</script>
 <script src="${ctx}/static/app/js/index.js"></script>
+
+<script>
+    window.document.title = "首页 | 东方娇子";
+</script>

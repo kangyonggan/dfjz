@@ -70,3 +70,6 @@
     </ul>
 </div>
 
+<script>
+    window.document.title = "关于 | 东方娇子";
+</script>

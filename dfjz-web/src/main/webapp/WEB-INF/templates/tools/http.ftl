@@ -19,3 +19,7 @@
     </#list>
     </tbody>
 </table>
+
+<script>
+    window.document.title = $(".visit-title").text() + " | 东方娇子";
+</script>

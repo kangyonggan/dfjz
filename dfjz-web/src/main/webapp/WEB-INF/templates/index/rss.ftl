@@ -32,3 +32,7 @@
     </div>
 </#list>
 </div>
+
+<script>
+    window.document.title = "订阅 | 东方娇子";
+</script>

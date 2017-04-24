@@ -13,3 +13,8 @@
     </#list>
 </div>
 
+<script>
+    window.document.title = "常用导航 | 东方娇子";
+</script>
+
+

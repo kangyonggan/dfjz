@@ -23,3 +23,7 @@
         $btn.text($btn.attr("data-loading-text")).attr("disabled", "disabled");
     });
 </script>
+
+<script>
+    window.document.title = $(".visit-title").text() + " | 东方娇子";
+</script>

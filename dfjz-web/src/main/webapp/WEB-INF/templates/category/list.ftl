@@ -14,3 +14,7 @@
 <div class="clear-float"></div>
 
 <@c.pagination url="#category/${category.code}"/>
+
+<script>
+    window.document.title = "${category.name} | 东方娇子";
+</script>

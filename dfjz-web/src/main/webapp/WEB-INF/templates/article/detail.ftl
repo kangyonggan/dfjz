@@ -127,6 +127,9 @@
 </#if>
 
 <script src="${ctx}/static/app/js/detail.js"></script>
+<script>
+    window.document.title = "${article.title} | 东方娇子";
+</script>
 
 <#--<script type="text/javascript">-->
     <#--var pic = "http://kangyonggan.com" + $($(".markdown img")[0]).attr("src");-->

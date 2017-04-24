@@ -33,3 +33,7 @@
 <div class="clear-float"></div>
 
 <@c.pagination url="#stat"/>
+
+<script>
+    window.document.title = "访问统计 | 东方娇子";
+</script>

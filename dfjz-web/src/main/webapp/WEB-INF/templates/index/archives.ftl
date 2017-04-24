@@ -13,3 +13,7 @@
 <div class="clear-float"></div>
 
 <@c.pagination url="#archives"/>
+
+<script>
+    window.document.title = "归档 | 东方娇子";
+</script>

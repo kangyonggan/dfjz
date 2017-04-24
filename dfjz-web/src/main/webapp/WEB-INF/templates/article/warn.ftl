@@ -5,3 +5,7 @@
 <div class="align-center">
     <a href="javascript:window.location.reload();" class="color-grey">返回文章</a>
 </div>
+
+<script>
+    window.document.title = "非法请求 | 东方娇子";
+</script>
