@@ -268,4 +268,14 @@ public class ToolsController extends BaseController {
         model.addAttribute("result", qrName);
         return getPathRoot() + "/qr";
     }
+
+    /**
+     * 加密解密
+     *
+     * @return
+     */
+    @RequestMapping(value = "encry", method = RequestMethod.GET)
+    public String encry() {
+        return getPathRoot() + "/encry";
+    }
 }

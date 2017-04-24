@@ -63,6 +63,12 @@
             <p>CSS代码压缩</p>
         </a>
     </div>
+    <div class="item">
+        <a href="#tools/encry">
+            <img src="${ctx}/static/app/images/tools/encry.png"/>
+            <p>加密解密</p>
+        </a>
+    </div>
 </div>
 
 <script>
