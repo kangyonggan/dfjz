@@ -34,10 +34,10 @@
         <SMTP name="Mail" subject="${dfjz.app.name} - 报警通知" to="${dfjz.mail.receiver}" from="${dfjz.mail.username}"
               smtpHost="${dfjz.mail.host}" smtpUsername="${dfjz.mail.username}" smtpPassword="${dfjz.mail.password}" bufferSize="${dfjz.mail.bufferSize}" >
         </SMTP>
-        <Async name="AsyncAll">
+        <Async name="AsyncAll" includeLocation="true">
             <AppenderRef ref="AllFile"/>
         </Async>
-        <Async name="AsyncError">
+        <Async name="AsyncError" includeLocation="true">
             <AppenderRef ref="ErrorFile"/>
             <AppenderRef ref="Mail" />
         </Async>
