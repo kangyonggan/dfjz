@@ -95,6 +95,7 @@ public class ArticleController extends BaseController {
         }
 
         String articleToken = System.currentTimeMillis() + "";
+        log.info("访问文章{}, token={}", id, articleToken);
         request.getSession().setAttribute("articleToken", articleToken);
 
         model.addAttribute("article", article);
@@ -118,6 +119,7 @@ public class ArticleController extends BaseController {
      */
     @RequestMapping(value = "comment", method = RequestMethod.POST)
     public String comment(@ModelAttribute("comment") @Valid Comment comment, @RequestParam("articleToken") String articleToken, HttpServletRequest request) {
+        log.info("评论文章{}, token={}, 评论内容:{}", comment.getArticleId(), articleToken, comment);
 
         Object sessionTokenObj;
         synchronized (lockComment) {
