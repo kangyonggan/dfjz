@@ -1,5 +1,7 @@
+<#assign title="所有访问"/>
 <#assign ctx="${(rca.contextPath)!''}">
 
+<@override name="content">
 <h2>
     <a href="#article/${article.id}" class="visit-title">${article.title}</a>
 </h2>
@@ -34,7 +36,6 @@
 <div class="clear-float"></div>
 
 <@c.pagination url="#article/${article.id}/visits"/>
+</@override>
 
-<script>
-    window.document.title = "所有访问 | ${article.title}| 东方娇子";
-</script>
+<@extends name="../content-layout.ftl"/>

@@ -1,6 +1,10 @@
+<#assign title="全部工具"/>
+<#assign ctx="${(rca.contextPath)!''}">
 <#assign ctx="${(rca.contextPath)!''}">
 
-<h2 class="visit-title">全部工具</h2>
+<@override name="content">
+
+<h2 class="visit-title">${title}</h2>
 
 <div class="tools-list">
     <div class="item">
@@ -74,3 +78,7 @@
 <script>
     window.document.title = "工具 | 东方娇子";
 </script>
+
+</@override>
+
+<@extends name="../content-layout.ftl"/>

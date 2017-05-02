@@ -1,4 +1,7 @@
+<#assign title="分类"/>
 <#assign ctx="${(rca.contextPath)!''}">
+
+<@override name="content">
 
 <div class="categories">
     <h1>全部分类</h1>
@@ -12,6 +15,6 @@
     </ul>
 </div>
 
-<script>
-    window.document.title = "分类 | 东方娇子";
-</script>
+</@override>
+
+<@extends name="../content-layout.ftl"/>

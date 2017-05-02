@@ -2,7 +2,6 @@ package com.kangyonggan.app.dfjz.biz.service.impl;
 
 import com.kangyonggan.app.dfjz.biz.service.MailService;
 import com.kangyonggan.app.dfjz.biz.util.PropertiesUtil;
-import com.kangyonggan.app.dfjz.model.annotation.LogTime;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -23,7 +22,6 @@ public class MailServiceImpl implements MailService {
     private JavaMailSender javaMailSender;
 
     @Override
-    @LogTime
     public void send(String to, String title, String text) {
         send(to, title, text, false);
     }

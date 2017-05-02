@@ -1,6 +1,9 @@
+<#assign title="首页"/>
+<#assign ctx="${(rca.contextPath)!''}">
 <#assign ctx="${(rca.contextPath)!''}">
 <#assign q = RequestParameters.q!'' />
 
+<@override name="content">
 <#if !page?? || !page.list?? || page.list?size lte 0>
 <div class="article-list-empty">
     没有符合条件的文章
@@ -36,10 +39,9 @@
     </#if>
 </div>
 </#if>
+</@override>
 
 <script>var q = '${q!''}';</script>
 <script src="${ctx}/static/app/js/index.js"></script>
 
-<script>
-    window.document.title = "首页 | 东方娇子";
-</script>
+<@extends name="../content-layout.ftl"/>

@@ -1,6 +1,9 @@
+<#assign title="ASCLL码对照表"/>
 <#assign ctx="${(rca.contextPath)!''}">
 
-<h2 class="visit-title">ASCLL码对照表</h2>
+<@override name="content">
+
+<h2 class="visit-title">${title}</h2>
 
 <#list 0..3 as i>
 <table class="table ascll-table">
@@ -21,7 +24,6 @@
     </tbody>
 </table>
 </#list>
+</@override>
 
-<script>
-    window.document.title = $(".visit-title").text() + " | 东方娇子";
-</script>
+<@extends name="../content-layout.ftl"/>

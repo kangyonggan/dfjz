@@ -1,7 +1,10 @@
+<#assign title="Markdown编辑器"/>
 <#assign ctx="${(rca.contextPath)!''}">
 <#assign data = RequestParameters.data!'' />
 
-<h2 class="visit-title">Markdown编辑器</h2>
+<@override name="content">
+
+<h2 class="visit-title">${title}</h2>
 
 <div>
     <h4>把markdown转成html：</h4>
@@ -35,3 +38,7 @@
 <script>
     window.document.title = $(".visit-title").text() + " | 东方娇子";
 </script>
+
+</@override>
+
+<@extends name="../content-layout.ftl"/>

@@ -1,5 +1,7 @@
+<#assign title="${article.title}"/>
 <#assign ctx="${(rca.contextPath)!''}">
 
+<@override name="content">
 <div class="detail-header">
     <h1>${article.title}</h1>
     <div class="detail-info">
@@ -125,11 +127,9 @@
     </div>
     </#if>
 </#if>
+</@override>
 
 <script src="${ctx}/static/app/js/detail.js"></script>
-<script>
-    window.document.title = "${article.title} | 东方娇子";
-</script>
 
 <#--<script type="text/javascript">-->
     <#--var pic = "http://kangyonggan.com" + $($(".markdown img")[0]).attr("src");-->
@@ -142,3 +142,5 @@
     <#--}-->
 <#--</script>-->
 <#--<script type="text/javascript" src="${ctx}/static/app/js/jia.js" charset="utf-8"></script>-->
+
+<@extends name="../content-layout.ftl"/>

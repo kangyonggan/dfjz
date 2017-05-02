@@ -1,4 +1,9 @@
+<#assign title="HTML转义字符"/>
 <#assign ctx="${(rca.contextPath)!''}">
+
+<@override name="content">
+
+<h2 class="visit-title">${title}</h2>
 
 <h2 class="visit-title">HTML转义字符</h2>
 
@@ -27,3 +32,7 @@
 <script>
     window.document.title = $(".visit-title").text() + " | 东方娇子";
 </script>
+
+</@override>
+
+<@extends name="../content-layout.ftl"/>

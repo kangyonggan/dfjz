@@ -1,5 +1,3 @@
-<#assign ctx="${(rca.contextPath)!''}">
-
 <li>
     <a href="#index">
         <img src="${ctx}/static/app/images/home.png" class="nav-icon"/>

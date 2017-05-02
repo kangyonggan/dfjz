@@ -1,5 +1,7 @@
+<#assign title="关于"/>
 <#assign ctx="${(rca.contextPath)!''}">
 
+<@override name="content">
 <div class="about">
     <h1>关于本站</h1>
 
@@ -69,7 +71,6 @@
         <li>办公QQ：2825176081</li>
     </ul>
 </div>
+</@override>
 
-<script>
-    window.document.title = "关于 | 东方娇子";
-</script>
+<@extends name="../content-layout.ftl"/>

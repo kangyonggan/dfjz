@@ -1,8 +1,11 @@
+<#assign title="生成二维码"/>
 <#assign ctx="${(rca.contextPath)!''}">
 <#assign data = RequestParameters.data!'' />
 <#assign size = RequestParameters.size!'200' />
 
-<h2 class="visit-title">生成二维码</h2>
+<@override name="content">
+
+<h2 class="visit-title">${title}</h2>
 
 <div>
     <h4>输入URL或其他文本：</h4>
@@ -38,3 +41,7 @@
 <script>
     window.document.title = $(".visit-title").text() + " | 东方娇子";
 </script>
+
+</@override>
+
+<@extends name="../content-layout.ftl"/>

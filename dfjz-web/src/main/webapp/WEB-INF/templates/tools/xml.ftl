@@ -1,7 +1,10 @@
+<#assign title="XML格式化"/>
 <#assign ctx="${(rca.contextPath)!''}">
 <#assign data = RequestParameters.data!'' />
 
-<h2 class="visit-title">XML格式化</h2>
+<@override name="content">
+
+<h2 class="visit-title">${title}</h2>
 
 <div>
     <h4>待格式化的XML：</h4>
@@ -27,3 +30,7 @@
 <script>
     window.document.title = $(".visit-title").text() + " | 东方娇子";
 </script>
+
+</@override>
+
+<@extends name="../content-layout.ftl"/>

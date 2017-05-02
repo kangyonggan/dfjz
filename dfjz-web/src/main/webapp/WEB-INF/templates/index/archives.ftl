@@ -1,5 +1,7 @@
+<#assign title="归档"/>
 <#assign ctx="${(rca.contextPath)!''}">
 
+<@override name="content">
 <div class="list-line">
     <div class="total">好! 目前共计 ${page.total} 篇日志。 继续努力。</div>
     <div class="tag">2017</div>
@@ -14,6 +16,6 @@
 
 <@c.pagination url="#archives"/>
 
-<script>
-    window.document.title = "归档 | 东方娇子";
-</script>
+</@override>
+
+<@extends name="../content-layout.ftl"/>

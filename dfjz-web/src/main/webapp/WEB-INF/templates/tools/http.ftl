@@ -1,6 +1,9 @@
+<#assign title="HTTP状态码"/>
 <#assign ctx="${(rca.contextPath)!''}">
 
-<h2 class="visit-title">HTTP状态码</h2>
+<@override name="content">
+
+<h2 class="visit-title">${title}</h2>
 
 <table class="table">
     <thead>
@@ -23,3 +26,7 @@
 <script>
     window.document.title = $(".visit-title").text() + " | 东方娇子";
 </script>
+
+</@override>
+
+<@extends name="../content-layout.ftl"/>

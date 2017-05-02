@@ -1,5 +1,7 @@
+<#assign title="${category.name}"/>
 <#assign ctx="${(rca.contextPath)!''}">
 
+<@override name="content">
 <div class="list-line">
     <div class="title">
     ${category.name}(${category.articleCount})<small>分类</small>
@@ -14,7 +16,6 @@
 <div class="clear-float"></div>
 
 <@c.pagination url="#category/${category.code}"/>
+</@override>
 
-<script>
-    window.document.title = "${category.name} | 东方娇子";
-</script>
+<@extends name="../content-layout.ftl"/>

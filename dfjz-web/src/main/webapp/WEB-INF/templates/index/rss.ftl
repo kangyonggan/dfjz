@@ -1,4 +1,7 @@
+<#assign title="订阅"/>
 <#assign ctx="${(rca.contextPath)!''}">
+
+<@override name="content">
 
 <h2 class="visit-title">全部RSS资源</h2>
 
@@ -33,6 +36,7 @@
 </#list>
 </div>
 
-<script>
-    window.document.title = "订阅 | 东方娇子";
-</script>
+</@override>
+
+<@extends name="../content-layout.ftl"/>
+

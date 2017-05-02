@@ -164,11 +164,11 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
     @LogTime
     public Long updateArticleCommentCount(Comment comment, String ip) {
         if (StringUtils.isEmpty(comment.getUsername())) {
-            comment.setUsername("路人甲");
+            comment.setUsername("匿名");
         }
 
         if (StringUtils.isEmpty(comment.getEmail())) {
-            comment.setEmail("lurenjia@gmail.com");
+            comment.setEmail("niming@kangyonggan.com");
         }
 
         if (StringUtils.isEmpty(comment.getContent())) {

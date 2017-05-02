@@ -1,5 +1,7 @@
+<#assign title="访问统计"/>
 <#assign ctx="${(rca.contextPath)!''}">
 
+<@override name="content">
 <table>
     <thead>
     <tr>
@@ -34,6 +36,6 @@
 
 <@c.pagination url="#stat"/>
 
-<script>
-    window.document.title = "访问统计 | 东方娇子";
-</script>
+</@override>
+
+<@extends name="../content-layout.ftl"/>

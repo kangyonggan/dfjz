@@ -1,4 +1,7 @@
+<#assign title="导航"/>
 <#assign ctx="${(rca.contextPath)!''}">
+
+<@override name="content">
 
 <h2 class="visit-title">常用导航</h2>
 
@@ -13,8 +16,9 @@
     </#list>
 </div>
 
-<script>
-    window.document.title = "导航 | 东方娇子";
-</script>
+</@override>
+
+<@extends name="../content-layout.ftl"/>
+
 
 

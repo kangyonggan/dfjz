@@ -1,5 +1,10 @@
+<#assign title="JS压缩"/>
 <#assign ctx="${(rca.contextPath)!''}">
 <#assign data = RequestParameters.data!'' />
+
+<@override name="content">
+
+<h2 class="visit-title">${title}</h2>
 
 <h2 class="visit-title">JS压缩</h2>
 
@@ -44,3 +49,7 @@
 <script>
     window.document.title = $(".visit-title").text() + " | 东方娇子";
 </script>
+
+</@override>
+
+<@extends name="../content-layout.ftl"/>
