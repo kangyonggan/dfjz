@@ -61,6 +61,11 @@ public class ArticleController extends BaseController {
      */
     @RequestMapping(value = "{id:[\\d]+}", method = RequestMethod.GET)
     public String detail(@PathVariable("id") Long id, HttpServletRequest request, Model model) {
+        getDetail(id, request, model);
+        return getPathDetail();
+    }
+
+    private void getDetail(@PathVariable("id") final Long id, HttpServletRequest request, Model model) {
         Article article = articleService.findArticleById(id);
         Toc toc = articleService.extraArticleToc(article.getContent());
 
@@ -106,7 +111,6 @@ public class ArticleController extends BaseController {
         model.addAttribute("commentArticles", commentArticles);
         model.addAttribute("visitArticles", visitArticles);
         model.addAttribute("stickArticles", stickArticles);
-        return getPathDetail();
     }
 
     /**
@@ -115,10 +119,11 @@ public class ArticleController extends BaseController {
      * @param comment
      * @param articleToken
      * @param request
+     * @param model
      * @return
      */
     @RequestMapping(value = "comment", method = RequestMethod.POST)
-    public String comment(@ModelAttribute("comment") @Valid Comment comment, @RequestParam("articleToken") String articleToken, HttpServletRequest request) {
+    public String comment(@ModelAttribute("comment") @Valid Comment comment, @RequestParam("articleToken") String articleToken, HttpServletRequest request, Model model) {
         log.info("评论文章{}, token={}, 评论内容:{}", comment.getArticleId(), articleToken, comment);
 
         Object sessionTokenObj;
@@ -154,7 +159,9 @@ public class ArticleController extends BaseController {
         } else {
             return getPathRoot() + "/warn";
         }
-        return "redirect:/article/" + comment.getArticleId();
+
+        getDetail(id, request, model);
+        return getPathDetail();
     }
 
     /**
