@@ -68,9 +68,9 @@
         </a>
     </div>
     <div class="item">
-        <a href="#tools/encry">
-            <img src="${ctx}/static/app/images/tools/encry.png"/>
-            <p>加密解密</p>
+        <a href="#tools/idcard">
+            <img src="${ctx}/static/app/images/tools/idcard.png"/>
+            <p>身份证查询</p>
         </a>
     </div>
 </div>

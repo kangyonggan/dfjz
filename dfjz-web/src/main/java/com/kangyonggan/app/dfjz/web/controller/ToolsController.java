@@ -3,10 +3,7 @@ package com.kangyonggan.app.dfjz.web.controller;
 import com.kangyonggan.app.dfjz.biz.service.DictionaryService;
 import com.kangyonggan.app.dfjz.biz.service.ToolService;
 import com.kangyonggan.app.dfjz.biz.util.PropertiesUtil;
-import com.kangyonggan.app.dfjz.common.CompressorUtil;
-import com.kangyonggan.app.dfjz.common.GsonUtil;
-import com.kangyonggan.app.dfjz.common.MarkdownUtil;
-import com.kangyonggan.app.dfjz.common.QrCodeUtil;
+import com.kangyonggan.app.dfjz.common.*;
 import com.kangyonggan.app.dfjz.model.vo.Dictionary;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
@@ -270,12 +267,40 @@ public class ToolsController extends BaseController {
     }
 
     /**
-     * 加密解密
+     * 身份证查询
      *
      * @return
      */
-    @RequestMapping(value = "encry", method = RequestMethod.GET)
-    public String encry() {
-        return getPathRoot() + "/encry";
+    @RequestMapping(value = "idcard", method = RequestMethod.GET)
+    public String idcard() {
+        return getPathRoot() + "/idcard";
+    }
+
+    /**
+     * 身份证查询
+     *
+     * @param data
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "idcard", method = RequestMethod.POST)
+    public String idcard(@RequestParam("data") String data, Model model) {
+        boolean isIdCard = IDCardUtil.isIdCard(data);
+        if (isIdCard) {
+            model.addAttribute("province", IDCardUtil.getProvinceFromIdCard(data));
+            model.addAttribute("age", IDCardUtil.getAgeFromIdCard(data));
+            model.addAttribute("year", IDCardUtil.getYearFromIdCard(data));
+            model.addAttribute("month", IDCardUtil.getMonthFromIdCard(data));
+            model.addAttribute("day", IDCardUtil.getDayFromIdCard(data));
+            model.addAttribute("sex", IDCardUtil.getSexFromIdCard(data));
+            if (data.length() == 15) {
+                model.addAttribute("to18", IDCardUtil.convert15To18(data));
+            } else {
+                model.addAttribute("to15", IDCardUtil.convert18To15(data));
+            }
+        }
+
+        model.addAttribute("isIdCard", isIdCard);
+        return getPathRoot() + "/idcard";
     }
 }

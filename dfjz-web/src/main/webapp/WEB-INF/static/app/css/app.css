@@ -1006,6 +1006,13 @@ table a {
     border-radius: 4px;
 }
 
+.input {
+    min-width: 220px;
+    height: 30px;
+    padding: 0 3px;
+    display: block;
+}
+
 .btn {
     display: inline-block;
     padding: 6px 12px;
