@@ -1,5 +1,7 @@
 package com.kangyonggan.app.dfjz.common;
 
+import lombok.extern.log4j.Log4j2;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -12,6 +14,7 @@ import java.util.Map;
  * @author kangyonggan
  * @since 6/23/17
  */
+@Log4j2
 public class IDCardUtil {
 
     /**
@@ -191,21 +194,25 @@ public class IDCardUtil {
      */
     public static boolean isIdCard15(String idCard) {
         if (idCard == null || idCard.length() != CHINA_ID_MIN_LENGTH) {
+            log.info("身份证{}长度不对", idCard);
             return false;
         }
 
         if (!isNumber(idCard)) {
+            log.info("身份证{}不是纯数字", idCard);
             return false;
         }
 
         String proCode = idCard.substring(0, 2);
         if (cityCodes.get(proCode) == null) {
+            log.info("身份证{}身份码错误", idCard);
             return false;
         }
 
         try {
             new SimpleDateFormat("yyyyMMdd").parse("19" + idCard.substring(6, 12));
         } catch (ParseException e) {
+            log.info("身份证" + idCard + "年月日不对", e);
             return false;
         }
 
@@ -248,27 +255,32 @@ public class IDCardUtil {
      */
     public static boolean isIdCard18(String idCard) {
         if (idCard == null || idCard.length() != CHINA_ID_MAX_LENGTH) {
+            log.info("身份证{}长度不对", idCard);
             return false;
         }
 
         if (!isNumberWithX(idCard)) {
+            log.info("身份证{}不是纯数字或X", idCard);
             return false;
         }
 
         String proCode = idCard.substring(0, 2);
         if (cityCodes.get(proCode) == null) {
+            log.info("身份证{}省份码不对", idCard);
             return false;
         }
 
         try {
             new SimpleDateFormat("yyyyMMdd").parse(idCard.substring(6, 14));
         } catch (ParseException e) {
+            log.info("身份证" + idCard + "年月日不对", e);
             return false;
         }
 
         int iSum = getPowerSum(idCard);
         String checkCode = getCheckCode18(iSum);
         if (!checkCode.equals(idCard.substring(17, 18))) {
+            log.info("身份证{}最后一位校验码不对，应该是{}", idCard, checkCode);
             return false;
         }
 
