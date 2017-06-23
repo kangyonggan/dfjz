@@ -5,8 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 身份证工具类
@@ -55,27 +54,7 @@ public class IDCardUtil {
             "1", "0", "X", "9", "8", "7", "6", "5", "4", "3", "2"
     };
 
-    /**
-     * 校验身份证信息
-     *
-     * @param idNo
-     * @return
-     */
-    private static Map<String, String> valid(String idNo) {
-        return null;
-    }
-
     private static Map<String, String> cityCodes = new HashMap();
-
-    /**
-     * 台湾身份首字母对应数字
-     */
-    private static Map<String, Integer> twFirstCode = new HashMap();
-
-    /**
-     * 香港身份首字母对应数字
-     */
-    private static Map<String, Integer> hkFirstCode = new HashMap();
 
     static {
         cityCodes.put("11", "北京");
@@ -113,42 +92,6 @@ public class IDCardUtil {
         cityCodes.put("81", "香港");
         cityCodes.put("82", "澳门");
         cityCodes.put("91", "国外");
-        twFirstCode.put("A", 10);
-        twFirstCode.put("B", 11);
-        twFirstCode.put("C", 12);
-        twFirstCode.put("D", 13);
-        twFirstCode.put("E", 14);
-        twFirstCode.put("F", 15);
-        twFirstCode.put("G", 16);
-        twFirstCode.put("H", 17);
-        twFirstCode.put("J", 18);
-        twFirstCode.put("K", 19);
-        twFirstCode.put("L", 20);
-        twFirstCode.put("M", 21);
-        twFirstCode.put("N", 22);
-        twFirstCode.put("P", 23);
-        twFirstCode.put("Q", 24);
-        twFirstCode.put("R", 25);
-        twFirstCode.put("S", 26);
-        twFirstCode.put("T", 27);
-        twFirstCode.put("U", 28);
-        twFirstCode.put("V", 29);
-        twFirstCode.put("X", 30);
-        twFirstCode.put("Y", 31);
-        twFirstCode.put("W", 32);
-        twFirstCode.put("Z", 33);
-        twFirstCode.put("I", 34);
-        twFirstCode.put("O", 35);
-        hkFirstCode.put("A", 1);
-        hkFirstCode.put("B", 2);
-        hkFirstCode.put("C", 3);
-        hkFirstCode.put("R", 18);
-        hkFirstCode.put("U", 21);
-        hkFirstCode.put("Z", 26);
-        hkFirstCode.put("X", 24);
-        hkFirstCode.put("W", 23);
-        hkFirstCode.put("O", 15);
-        hkFirstCode.put("N", 14);
     }
 
     /**
@@ -390,4 +333,56 @@ public class IDCardUtil {
     public static int getSexFromIdCard(String idCard) {
         return ((18 == idCard.length() ? idCard.charAt(17) : idCard.charAt(14)) + 1) % 2;
     }
+
+    public static Map<String, String> getCityCodes() {
+        return cityCodes;
+    }
+
+    /**
+     * 生成身份证
+     *
+     * @param prov
+     * @param sex
+     * @param len
+     * @param size
+     * @return
+     */
+    public static List<String> genIdCard(String prov, int sex, int len, int size) {
+        List<String> list = new ArrayList();
+        for (int i = 0; i < size; i++) {
+            list.add(genIdCard(prov, sex, len));
+        }
+        return list;
+    }
+
+    /**
+     * 生成身份证
+     *
+     * @param prov
+     * @param sex
+     * @param len
+     * @return
+     */
+    private static String genIdCard(String prov, int sex, int len) {
+        if (cityCodes.get(prov) == null) {
+            log.info("省份码{}不对，无法生成身份证", prov);
+            return null;
+        }
+
+        if (sex != -1 && (sex < 0 || sex > 1)) {
+            log.info("性别{}不对，无法生成身份证", sex);
+            return null;
+        }
+
+        if (len != -1 && (len != CHINA_ID_MAX_LENGTH || len != CHINA_ID_MIN_LENGTH)) {
+            log.info("长度{}不对，无法生成身份证", sex);
+            return null;
+        }
+
+        Random random = new Random();
+        int index = random.nextInt(cityCodes.size());
+
+        return null;
+    }
+
 }

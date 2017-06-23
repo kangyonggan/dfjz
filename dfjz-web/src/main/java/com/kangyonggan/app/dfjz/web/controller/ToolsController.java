@@ -303,4 +303,50 @@ public class ToolsController extends BaseController {
         model.addAttribute("isIdCard", isIdCard);
         return getPathRoot() + "/idcard";
     }
+
+    /**
+     * 生成身份证
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "gencard", method = RequestMethod.GET)
+    public String gencard(Model model) {
+        model.addAttribute("cityCodes", IDCardUtil.getCityCodes());
+        return getPathRoot() + "/gencard";
+    }
+
+    /**
+     * 身份生成证
+     *
+     * @param prov
+     * @param sex
+     * @param len
+     * @param size
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "gencard", method = RequestMethod.POST)
+    public String gencard(@RequestParam("prov") String prov,
+                          @RequestParam("sex") int sex,
+                          @RequestParam("len") int len,
+                          @RequestParam("size") int size,
+                          Model model) {
+        model.addAttribute("cityCodes", IDCardUtil.getCityCodes());
+
+        String result = "";
+        if (len < 0 || len > 100) {
+            result = "生成数量控制在1~100之间（包括）";
+        } else {
+            List<String> list = IDCardUtil.genIdCard(prov, sex, len, size);
+
+            for (String str : list) {
+                result += str + "\n\n";
+            }
+
+        }
+
+        model.addAttribute("result", "正在开发中，敬请期待");
+        return getPathRoot() + "/gencard";
+    }
 }

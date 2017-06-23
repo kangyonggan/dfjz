@@ -1013,6 +1013,11 @@ table a {
     display: block;
 }
 
+.label {
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
 .btn {
     display: inline-block;
     padding: 6px 12px;

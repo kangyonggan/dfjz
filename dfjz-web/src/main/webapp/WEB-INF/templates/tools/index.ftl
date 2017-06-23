@@ -73,6 +73,12 @@
             <p>身份证查询</p>
         </a>
     </div>
+    <div class="item">
+        <a href="#tools/gencard">
+            <img src="${ctx}/static/app/images/tools/gencard.png"/>
+            <p>生成身份证</p>
+        </a>
+    </div>
 </div>
 
 <script>
