@@ -9,7 +9,7 @@
 <div>
     <h4>待查询的身份证：</h4>
     <form action="#tools/idcard" method="post" id="xml-fromat-form">
-        <input class="input" name="data" placeholder="请输入需要格式化的xml" value="${data}" required />
+        <input class="input" name="data" placeholder="请输入待查询的身份证" value="${data}" required />
         <button class="btn btn-success mt-10" data-loading-text="正在查询...">查询</button>
     </form>
 </div>
