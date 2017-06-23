@@ -194,7 +194,7 @@ public class IDCardUtil {
      */
     public static boolean isIdCard15(String idCard) {
         if (idCard == null || idCard.length() != CHINA_ID_MIN_LENGTH) {
-            log.info("身份证{}长度不对", idCard);
+            log.info("身份证{}长度不对， 不是15位身份证", idCard);
             return false;
         }
 
@@ -255,7 +255,7 @@ public class IDCardUtil {
      */
     public static boolean isIdCard18(String idCard) {
         if (idCard == null || idCard.length() != CHINA_ID_MAX_LENGTH) {
-            log.info("身份证{}长度不对", idCard);
+            log.info("身份证{}长度不对， 不是18位身份证", idCard);
             return false;
         }
 
