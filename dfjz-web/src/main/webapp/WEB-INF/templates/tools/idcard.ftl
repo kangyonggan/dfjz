@@ -1,6 +1,6 @@
 <#assign title="身份证查询"/>
 <#assign ctx="${(rca.contextPath)!''}">
-<#assign data = RequestParameters.data!'340321199112273095' />
+<#assign data = RequestParameters.data!'' />
 
 <@override name="content">
 
