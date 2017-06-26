@@ -331,7 +331,7 @@ public class IDCardUtil {
      * @return 性别{0:男, 1:女}
      */
     public static int getSexFromIdCard(String idCard) {
-        return ((18 == idCard.length() ? idCard.charAt(16) : idCard.charAt(13)) + 1) % 2;
+        return ((18 == idCard.length() ? idCard.charAt(16) : idCard.charAt(14)) + 1) % 2;
     }
 
     public static Map<String, String> getCityCodes() {
