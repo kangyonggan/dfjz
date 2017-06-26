@@ -20,9 +20,9 @@
         <pre class="result"><code>您输入的身份证号码无效</code></pre>
     <#else>
         <pre class="result"><code><table>
-                    <thead><tr><th>省份</th><th>性别</th><th>生日</th><th>年龄</th><th><#if data?length==15>转成18位<#else>转成15位</#if></th></tr></thead>
+                    <thead><tr><th>省份</th><th>性别</th><th>生日</th><th>年龄</th><th>地区</th><th><#if data?length==15>转成18位<#else>转成15位</#if></th></tr></thead>
                     <tbody>
-                    <tr><td>${province}</td><td>${(sex==0)?string('男', '女')}</td><td>${year}年${month}月${day}日</td><td>${age}周岁</td><td><#if data?length==15>${to18}<#else>${to15}</#if></td></tr>
+                    <tr><td>${province}</td><td>${(sex==0)?string('男', '女')}</td><td>${year}年${month}月${day}日</td><td>${age}周岁</td><td>${area}</td><td><#if data?length==15>${to18}<#else>${to15}</#if></td></tr>
                     </tbody>
                 </table></code></pre>
     </#if>

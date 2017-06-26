@@ -1,6 +1,7 @@
 package com.kangyonggan.app.dfjz.common;
 
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.StringUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -281,7 +282,10 @@ public class IDCardUtil {
      * @return 年龄(周岁)
      */
     public static int getAgeFromIdCard(String idCard) {
-        return LocalDate.now().getYear() - Integer.parseInt(getYearFromIdCard(idCard));
+        int nowMonths = LocalDate.now().getYear() * 12 + LocalDate.now().getMonthValue();
+        int birMonths = Integer.parseInt(getYearFromIdCard(idCard)) * 12 + Integer.parseInt(getMonthFromIdCard(idCard));
+
+        return (nowMonths - birMonths) / 12;
     }
 
     /**
@@ -334,6 +338,16 @@ public class IDCardUtil {
         return ((18 == idCard.length() ? idCard.charAt(16) : idCard.charAt(14)) + 1) % 2;
     }
 
+    /**
+     * 根据身份号获取地区
+     *
+     * @param idCard 身份证号
+     * @return
+     */
+    public static String getAreaFromIdCard(String idCard) {
+        return IDCardConstants.getArea(idCard.substring(0, 6));
+    }
+
     public static Map<String, String> getCityCodes() {
         return cityCodes;
     }
@@ -342,15 +356,17 @@ public class IDCardUtil {
      * 生成身份证
      *
      * @param prov
+     * @param startAge
+     * @param endAge
      * @param sex
      * @param len
      * @param size
      * @return
      */
-    public static List<String> genIdCard(String prov, int sex, int len, int size) {
+    public static List<String> genIdCard(String prov, int startAge, int endAge, String sex, int len, int size) {
         List<String> list = new ArrayList();
         for (int i = 0; i < size; i++) {
-            list.add(genIdCard(prov, sex, len));
+            list.add(genIdCard(prov, startAge, endAge, sex, len));
         }
         return list;
     }
@@ -359,30 +375,118 @@ public class IDCardUtil {
      * 生成身份证
      *
      * @param prov
+     * @param startAge
+     * @param endAge
      * @param sex
      * @param len
      * @return
      */
-    private static String genIdCard(String prov, int sex, int len) {
-        if (cityCodes.get(prov) == null) {
-            log.info("省份码{}不对，无法生成身份证", prov);
-            return null;
+    private static String genIdCard(String prov, int startAge, int endAge, String sex, int len) {
+        StringBuilder sb = new StringBuilder();
+
+        // 根据省份码，随机获取一个6位地区码
+        sb.append(IDCardConstants.getRandomAreaCode(prov));
+        // 获取年
+        int year = genRandomAge(startAge, endAge);
+        sb.append(year);
+        // 获取月
+        String month = genRandomMonth();
+        sb.append(month);
+        // 获取日
+        sb.append(genRandomDay(year, month));
+        // 两位随机数
+        sb.append(genRandomNum()).append(genRandomNum());
+        // 性别
+        sb.append(genSexNum(sex));
+        // 计算检验码
+        int iSum = getPowerSum(sb.toString());
+        String checkCode = getCheckCode18(iSum);
+        sb.append(checkCode);
+
+        String idcard = sb.toString();
+        if (len == 15) {
+            idcard = convert18To15(idcard);
+        } else if (len == -1) {
+            Random random = new Random();
+            if (random.nextInt(100) % 2 == 0) {
+                idcard = convert18To15(idcard);
+            }
+        }
+        return idcard;
+    }
+
+    private static int genRandomAge(int startAge, int endAge) {
+        if (endAge < startAge) {
+            int temp = startAge;
+            startAge = endAge;
+            endAge = temp;
         }
 
-        if (sex != -1 && (sex < 0 || sex > 1)) {
-            log.info("性别{}不对，无法生成身份证", sex);
-            return null;
-        }
+        int nowYear = LocalDate.now().getYear();
+        int startYear = nowYear - endAge;
+        int endYear = nowYear - startAge;
 
-        if (len != -1 && (len != CHINA_ID_MAX_LENGTH || len != CHINA_ID_MIN_LENGTH)) {
-            log.info("长度{}不对，无法生成身份证", sex);
-            return null;
+        if (startYear == endYear) {
+            return startYear;
+        } else {
+            Random random = new Random();
+            int rand = random.nextInt(endYear - startYear);
+            return startYear + rand;
+        }
+    }
+
+    private static String genRandomMonth() {
+        Random random = new Random();
+        int rand = random.nextInt(12) % 12 + 1;
+
+        return rand < 10 ? "0" + rand : String.valueOf(rand);
+    }
+
+    private static String genRandomDay(int year, String month) {
+        int allDays = 31;
+        if ("2".equals(month)) {
+            if (isLeapYaer(year)) {
+                allDays = 29;
+            } else {
+                allDays = 28;
+            }
+        } else if ("4,6,9,11".indexOf(month) > -1) {
+            allDays = 30;
         }
 
         Random random = new Random();
-        int index = random.nextInt(cityCodes.size());
-
-        return null;
+        int day = random.nextInt(allDays) % allDays + 1;
+        return day < 10 ? "0" + day : String.valueOf(day);
     }
 
+    private static boolean isLeapYaer(int year) {
+        if (year % 400 == 0) {
+            return true;
+        } else if (year % 100 == 0) {
+            return false;
+        } else if (year % 4 == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    private static String genRandomNum() {
+        Random random = new Random();
+        return String.valueOf(random.nextInt(10));
+    }
+
+    private static String genSexNum(String sex) {
+        Random random = new Random();
+
+        int boys[] = {1, 3, 5, 7, 9};
+        int girls[] = {0, 2, 4, 6, 8};
+
+        if (StringUtils.isEmpty(sex)) {
+            return genRandomNum();
+        } else if (sex.equals("0")) {
+            return String.valueOf(boys[random.nextInt(5)]);
+        } else {
+            return String.valueOf(girls[random.nextInt(5)]);
+        }
+    }
 }

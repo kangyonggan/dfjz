@@ -1,8 +1,10 @@
 <#assign title="生成身份证"/>
 <#assign ctx="${(rca.contextPath)!''}">
 <#assign prov = RequestParameters.prov!'' />
+<#assign startAge = RequestParameters.startAge!'1' />
+<#assign endAge = RequestParameters.endAge!'100' />
 <#assign sex = RequestParameters.sex!'' />
-<#assign len = RequestParameters.len!'' />
+<#assign len = RequestParameters.len!'18' />
 <#assign size = RequestParameters.size!'10' />
 
 <@override name="content">
@@ -19,6 +21,10 @@
                 <option value="${key}" <#if key==prov>selected</#if>>${cityCodes["${key}"]}</option>
             </#list>
         </select>
+
+        <div class="label">年龄段(周岁)</div>
+        <input type="number" class="small-input" name="startAge" value="${startAge}"/> -
+        <input type="number" class="small-input" name="endAge" value="${endAge}"/>
 
         <div class="label">性别</div>
         <select name="sex" class="select input">

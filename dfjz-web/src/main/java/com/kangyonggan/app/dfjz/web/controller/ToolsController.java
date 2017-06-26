@@ -293,6 +293,7 @@ public class ToolsController extends BaseController {
             model.addAttribute("month", IDCardUtil.getMonthFromIdCard(data));
             model.addAttribute("day", IDCardUtil.getDayFromIdCard(data));
             model.addAttribute("sex", IDCardUtil.getSexFromIdCard(data));
+            model.addAttribute("area", IDCardUtil.getAreaFromIdCard(data));
             if (data.length() == 15) {
                 model.addAttribute("to18", IDCardUtil.convert15To18(data));
             } else {
@@ -320,6 +321,8 @@ public class ToolsController extends BaseController {
      * 身份生成证
      *
      * @param prov
+     * @param startAge
+     * @param endAge
      * @param sex
      * @param len
      * @param size
@@ -328,25 +331,26 @@ public class ToolsController extends BaseController {
      */
     @RequestMapping(value = "gencard", method = RequestMethod.POST)
     public String gencard(@RequestParam("prov") String prov,
-                          @RequestParam("sex") int sex,
+                          @RequestParam("startAge") int startAge,
+                          @RequestParam("endAge") int endAge,
+                          @RequestParam("sex") String sex,
                           @RequestParam("len") int len,
                           @RequestParam("size") int size,
                           Model model) {
         model.addAttribute("cityCodes", IDCardUtil.getCityCodes());
 
         String result = "";
-        if (len < 0 || len > 100) {
+        if (size < 0 || size > 100) {
             result = "生成数量控制在1~100之间（包括）";
         } else {
-            List<String> list = IDCardUtil.genIdCard(prov, sex, len, size);
+            List<String> list = IDCardUtil.genIdCard(prov, startAge, endAge, sex, len, size);
 
             for (String str : list) {
                 result += str + "\n\n";
             }
-
         }
 
-        model.addAttribute("result", "正在开发中，敬请期待");
+        model.addAttribute("result", result);
         return getPathRoot() + "/gencard";
     }
 }

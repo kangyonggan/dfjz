@@ -1013,6 +1013,13 @@ table a {
     display: block;
 }
 
+.small-input {
+    width: 90px;
+    height: 30px;
+    padding: 0 3px;
+    display: inline-block;
+}
+
 .label {
     margin-top: 20px;
     margin-bottom: 5px;
