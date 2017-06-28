@@ -353,4 +353,30 @@ public class ToolsController extends BaseController {
         model.addAttribute("result", result);
         return getPathRoot() + "/gencard";
     }
+
+    /**
+     * 编码转换
+     *
+     * @return
+     */
+    @RequestMapping(value = "charset", method = RequestMethod.GET)
+    public String charset() {
+        return getPathRoot() + "/charset";
+    }
+
+    /**
+     * 编码转换
+     *
+     * @param data
+     * @param charset
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "charset", method = RequestMethod.POST)
+    public String charset(@RequestParam("data") String data,
+                          @RequestParam("charset") String charset,
+                          Model model) {
+        model.addAttribute("result", CharsetUtil.convert(data, charset));
+        return getPathRoot() + "/charset";
+    }
 }

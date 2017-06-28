@@ -79,6 +79,12 @@
             <p>生成身份证</p>
         </a>
     </div>
+    <div class="item">
+        <a href="#tools/charset">
+            <img src="${ctx}/static/app/images/tools/charset.png"/>
+            <p>编码转换</p>
+        </a>
+    </div>
 </div>
 
 <script>
