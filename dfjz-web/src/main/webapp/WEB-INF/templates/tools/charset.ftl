@@ -14,9 +14,13 @@
         <div class="mt-10"></div>
         <select name="charset" class="select">
             <option value="1" <#if charset=='1'>selected</#if>>UTF-8 转 GBK</option>
-            <option value="2" <#if charset=='2'>selected</#if>>GBK 转 UTF-8</option>
-            <option value="3" <#if charset=='3'>selected</#if>>字符串 转 unicode</option>
-            <option value="4" <#if charset=='4'>selected</#if>>unicode 转 字符串</option>
+            <option value="1" <#if charset=='2'>selected</#if>>UTF-8 转 IOS-8859-1</option>
+            <option value="2" <#if charset=='3'>selected</#if>>GBK 转 UTF-8</option>
+            <option value="2" <#if charset=='4'>selected</#if>>GBK 转 IOS-8859-1</option>
+            <option value="2" <#if charset=='5'>selected</#if>>IOS-8859-1 转 UTF-8</option>
+            <option value="2" <#if charset=='6'>selected</#if>>IOS-8859-1 转 GBK</option>
+            <option value="3" <#if charset=='7'>selected</#if>>字符串 转 unicode</option>
+            <option value="4" <#if charset=='8'>selected</#if>>unicode 转 字符串</option>
         </select>
         <div class="mt-10"></div>
         <button class="btn btn-success mt-10" data-loading-text="正在转码...">转码</button>

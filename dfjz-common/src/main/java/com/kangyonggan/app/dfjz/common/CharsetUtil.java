@@ -6,16 +6,33 @@ package com.kangyonggan.app.dfjz.common;
  */
 public class CharsetUtil {
 
+    private static final String UTF8 = "UTF-8";
+    private static final String GBK = "GBK";
+    private static final String IOS88591 = "IOS-8859-1";
+
     public static final String UTF8_TO_GBK = "1";
-    public static final String GBK_TO_UTF8 = "2";
-    public static final String STRING_TO_UNICODE = "3";
-    public static final String UNICODE_TO_STRING = "4";
+    public static final String UTF8_TO_ISO88591 = "2";
+    public static final String GBK_TO_UTF8 = "3";
+    public static final String GBK_TO_ISO88591 = "4";
+    public static final String ISO88591_TO_UTF8 = "5";
+    public static final String ISO88591_TO_GBK = "6";
+
+    public static final String STRING_TO_UNICODE = "7";
+    public static final String UNICODE_TO_STRING = "8";
 
     public static String convert(String data, String operation) {
         if (UTF8_TO_GBK.equals(operation)) {
-            return uf8ToGbk(data);
+            return convertCharset(data, UTF8, GBK);
+        } else if (UTF8_TO_ISO88591.equals(operation)) {
+            return convertCharset(data, UTF8, IOS88591);
         } else if (GBK_TO_UTF8.equals(operation)) {
-            return gbkToUtf8(data);
+            return convertCharset(data, GBK, UTF8);
+        } else if (GBK_TO_ISO88591.equals(operation)) {
+            return convertCharset(data, GBK, IOS88591);
+        } else if (ISO88591_TO_UTF8.equals(operation)) {
+            return convertCharset(data, IOS88591, UTF8);
+        } else if (ISO88591_TO_GBK.equals(operation)) {
+            return convertCharset(data, IOS88591, GBK);
         } else if (STRING_TO_UNICODE.equals(operation)) {
             return stringToUnicode(data);
         } else if (UNICODE_TO_STRING.equals(operation)) {
@@ -24,17 +41,9 @@ public class CharsetUtil {
         return data;
     }
 
-    public static String uf8ToGbk(String data) {
-        return convertCharset(data, "UTF-8", "GBK");
-    }
-
-    public static String gbkToUtf8(String data) {
-        return convertCharset(data, "GBK", "UTF-8");
-    }
-
-    public static String convertCharset(String data, String oldCharset, String newOldCharset) {
+    public static String convertCharset(String data, String oldCharset, String newCharset) {
         try {
-            return new String(data.getBytes(oldCharset), newOldCharset);
+            return new String(data.getBytes(oldCharset), newCharset);
         } catch (Exception e) {
             return data;
         }
