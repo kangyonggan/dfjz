@@ -25,16 +25,16 @@ public class CharsetUtil {
     }
 
     public static String uf8ToGbk(String data) {
-        try {
-            return new String(data.getBytes("UTF-8"), "GBK");
-        } catch (Exception e) {
-            return data;
-        }
+        return convertCharset(data, "UTF-8", "GBK");
     }
 
     public static String gbkToUtf8(String data) {
+        return convertCharset(data, "GBK", "UTF-8");
+    }
+
+    public static String convertCharset(String data, String oldCharset, String newOldCharset) {
         try {
-            return new String(data.getBytes("GBK"), "UTF-8");
+            return new String(data.getBytes(oldCharset), newOldCharset);
         } catch (Exception e) {
             return data;
         }
