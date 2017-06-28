@@ -58,8 +58,12 @@ public class CharsetUtil {
         }
 
         StringBuffer sb = new StringBuffer();
-        for (int i = 1; i < hex.length; i++) {
-            sb.append((char) Integer.parseInt(hex[i], 16));
+        try {
+            for (int i = 1; i < hex.length; i++) {
+                sb.append((char) Integer.parseInt(hex[i], 16));
+            }
+        } catch (Exception e) {
+            return data;
         }
 
         return sb.toString();
