@@ -8,7 +8,7 @@ public class CharsetUtil {
 
     private static final String UTF8 = "UTF-8";
     private static final String GBK = "GBK";
-    private static final String IOS88591 = "IOS-8859-1";
+    private static final String ISO88591 = "ISO-8859-1";
 
     public static final String UTF8_TO_GBK = "1";
     public static final String UTF8_TO_ISO88591 = "2";
@@ -24,15 +24,15 @@ public class CharsetUtil {
         if (UTF8_TO_GBK.equals(operation)) {
             return convertCharset(data, UTF8, GBK);
         } else if (UTF8_TO_ISO88591.equals(operation)) {
-            return convertCharset(data, UTF8, IOS88591);
+            return convertCharset(data, UTF8, ISO88591);
         } else if (GBK_TO_UTF8.equals(operation)) {
             return convertCharset(data, GBK, UTF8);
         } else if (GBK_TO_ISO88591.equals(operation)) {
-            return convertCharset(data, GBK, IOS88591);
+            return convertCharset(data, GBK, ISO88591);
         } else if (ISO88591_TO_UTF8.equals(operation)) {
-            return convertCharset(data, IOS88591, UTF8);
+            return convertCharset(data, ISO88591, UTF8);
         } else if (ISO88591_TO_GBK.equals(operation)) {
-            return convertCharset(data, IOS88591, GBK);
+            return convertCharset(data, ISO88591, GBK);
         } else if (STRING_TO_UNICODE.equals(operation)) {
             return stringToUnicode(data);
         } else if (UNICODE_TO_STRING.equals(operation)) {
