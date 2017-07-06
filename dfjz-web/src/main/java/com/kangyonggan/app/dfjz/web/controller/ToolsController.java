@@ -292,10 +292,14 @@ public class ToolsController extends BaseController {
                       @RequestParam(value = "file", required = false) MultipartFile file) throws Exception {
 
         String result = "未知异常，请刷新后重试！";
-        if (StringUtils.isEmpty(data)) {
-            result = QrCodeUtil.decode(file.getInputStream());
-        } else {
-            result = QrCodeUtil.decode(data);
+        try {
+            if (StringUtils.isEmpty(data)) {
+                result = QrCodeUtil.decode(file.getInputStream());
+            } else {
+                result = QrCodeUtil.decode(data);
+            }
+        } catch (Exception e) {
+            result = "无法解析：" + e.getMessage();
         }
 
         log.info("qr解码结果：{}", result);
