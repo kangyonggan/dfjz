@@ -9,7 +9,6 @@ import com.kangyonggan.app.dfjz.model.dto.CommonResponse;
 import com.kangyonggan.app.dfjz.model.dto.IdCardResponse;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -144,7 +143,7 @@ public class ServiceController {
      * @param data 待压缩的js
      * @return
      */
-    @RequestMapping(value = "markdown", method = RequestMethod.POST)
+    @RequestMapping(value = "js", method = RequestMethod.POST)
     @LogTime
     public CommonResponse js(@RequestParam("data") String data) {
         CommonResponse response = new CommonResponse();
@@ -226,7 +225,7 @@ public class ServiceController {
      * @param data 二维码地址
      * @return
      */
-    @RequestMapping(value = "qr", method = RequestMethod.POST)
+    @RequestMapping(value = "qrurl", method = RequestMethod.POST)
     @LogTime
     public CommonResponse qr(@RequestParam("data") String data) {
         CommonResponse response = new CommonResponse();
@@ -251,7 +250,7 @@ public class ServiceController {
      * @param data 二维码图片
      * @return
      */
-    @RequestMapping(value = "qr", method = RequestMethod.POST)
+    @RequestMapping(value = "qrfile", method = RequestMethod.POST)
     @LogTime
     public CommonResponse qr(@RequestParam(value = "data") MultipartFile data) {
         CommonResponse response = new CommonResponse();

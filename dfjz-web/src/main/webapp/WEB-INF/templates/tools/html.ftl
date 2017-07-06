@@ -5,8 +5,6 @@
 
 <h2 class="visit-title">${title}</h2>
 
-<h2 class="visit-title">HTML转义字符</h2>
-
 <#list 0..3 as i>
 <table class="table ascll-table">
     <thead>
