@@ -10,7 +10,7 @@
 <div>
     <form action="${ctx}/tools/qr2" method="post" id="qr2-fromat-form" class="tools-form" enctype="multipart/form-data">
         <input type="radio" name="type" value="0" <#if type=="0">checked</#if>/> 图片URL:
-        <input class="input" id="data" name="data" placeholder="https://kangyonggan.com/upload/qr2.ng" value="${data}"/><br/>
+        <input class="input" id="data" name="data" placeholder="https://kangyonggan.com/upload/qr2.png" value="${data}"/><br/>
 
         <div class="mt-10"></div>
         <input type="radio" id="type-1" name="type" value="1" <#if type=="1">checked</#if>/> 上传图片:
