@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -264,6 +266,40 @@ public class ToolsController extends BaseController {
         }
         model.addAttribute("result", qrName);
         return getPathRoot() + "/qr";
+    }
+
+    /**
+     * 二维码解析
+     *
+     * @return
+     */
+    @RequestMapping(value = "qr2", method = RequestMethod.GET)
+    public String qr2() {
+        return getPathRoot() + "/qr2";
+    }
+
+    /**
+     * 二维码解析
+     *
+     * @param data
+     * @param file
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "qr2", method = RequestMethod.POST)
+    @ResponseBody
+    public String qr2(@RequestParam(value = "data", required = false, defaultValue = "") String data,
+                      @RequestParam(value = "file", required = false) MultipartFile file) throws Exception {
+
+        String result = "未知异常，请刷新后重试！";
+        if (StringUtils.isEmpty(data)) {
+            result = QrCodeUtil.decode(file.getInputStream());
+        } else {
+            result = QrCodeUtil.decode(data);
+        }
+
+        log.info("qr解码结果：{}", result);
+        return result;
     }
 
     /**

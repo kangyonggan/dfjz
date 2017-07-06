@@ -14,6 +14,12 @@
         </a>
     </div>
     <div class="item">
+        <a href="#tools/qr2">
+            <img src="${ctx}/static/app/images/tools/qr2.png"/>
+            <p>解析二维码</p>
+        </a>
+    </div>
+    <div class="item">
         <a href="#tools/ascll">
             <img src="${ctx}/static/app/images/tools/table.png"/>
             <p>ASCLL对照表</p>
