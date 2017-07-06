@@ -235,3 +235,6 @@ INSERT INTO book (name, author, intro, picture, url)
 
 INSERT INTO book (name, author, intro, picture, url)
   VALUE ('逆天邪神', '火星引力', '掌天毒之珠，承邪神之血，修逆天之力，一代邪神，君临天下！', 'http://www.biquge.cn/cover/2/2722/2722s.jpg', '2722');
+
+INSERT INTO book (name, author, intro, picture, url)
+  VALUE ('绝世战魂', '极品妖孽', '家族少主，天生废魂，在机缘巧合之下，觉醒了太古神秘的战神之魂，从此之后，一路逆袭，邂逅仙姿美女，碾压九界天才，无所不战，无所不胜！', 'http://www.biquge.cn/cover/18/18612/18612s.jpg', '18612');
