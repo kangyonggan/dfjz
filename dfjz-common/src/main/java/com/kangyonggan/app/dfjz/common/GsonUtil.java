@@ -18,21 +18,18 @@ public class GsonUtil {
      *
      * @param data
      * @return
+     * @throws Exception
      */
-    public static String format(String data) {
-        try {
-            Gson gson = new Gson();
-            StringWriter stringWriter = new StringWriter();
-            JsonWriter writer = gson.newJsonWriter(stringWriter);
-            writer.setIndent("\t");
+    public static String format(String data) throws Exception {
+        Gson gson = new Gson();
+        StringWriter stringWriter = new StringWriter();
+        JsonWriter writer = gson.newJsonWriter(stringWriter);
+        writer.setIndent("\t");
 
-            JsonElement jsonElement = new JsonParser().parse(data);
-            gson.toJson(jsonElement, writer);
+        JsonElement jsonElement = new JsonParser().parse(data);
+        gson.toJson(jsonElement, writer);
 
-            return stringWriter.toString();
-        } catch (Exception e) {
-            return e.getMessage();
-        }
+        return stringWriter.toString();
     }
 
 }

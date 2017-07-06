@@ -15,11 +15,7 @@ public class MarkdownUtil {
      * @return
      */
     public static String markdownToHtml(String markdown) {
-        try {
-            return new PegDownProcessor(Integer.MAX_VALUE).markdownToHtml(markdown);
-        } catch (Exception e) {
-            return e.getMessage();
-        }
+        return new PegDownProcessor(Integer.MAX_VALUE).markdownToHtml(markdown);
     }
 
 }

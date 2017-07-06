@@ -6,6 +6,7 @@ import com.kangyonggan.app.dfjz.biz.util.PropertiesUtil;
 import com.kangyonggan.app.dfjz.common.*;
 import com.kangyonggan.app.dfjz.model.vo.Dictionary;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author kangyonggan
@@ -106,7 +108,14 @@ public class ToolsController extends BaseController {
      */
     @RequestMapping(value = "xml", method = RequestMethod.POST)
     public String xml(@RequestParam("data") String data, Model model) {
-        model.addAttribute("result", toolService.formatXml(data));
+        String result;
+        try {
+            result = toolService.formatXml(data);
+        } catch (Exception e) {
+            result = e.getMessage();
+        }
+
+        model.addAttribute("result", result);
         return getPathRoot() + "/xml";
     }
 
@@ -132,7 +141,13 @@ public class ToolsController extends BaseController {
     public String sql(@RequestParam("data") String data,
                       @RequestParam(value = "dialect", required = false, defaultValue = "MySQL") String dialect,
                       Model model) {
-        model.addAttribute("result", toolService.formatSql(data, dialect));
+        String result;
+        try {
+            result = toolService.formatSql(data, dialect);
+        } catch (Exception e) {
+            result = e.getMessage();
+        }
+        model.addAttribute("result", result);
         return getPathRoot() + "/sql";
     }
 
@@ -155,7 +170,15 @@ public class ToolsController extends BaseController {
      */
     @RequestMapping(value = "json", method = RequestMethod.POST)
     public String json(@RequestParam("data") String data, Model model) {
-        model.addAttribute("result", GsonUtil.format(data));
+        String result;
+
+        try {
+            result = GsonUtil.format(data);
+        } catch (Exception e) {
+            result = e.getMessage();
+        }
+
+        model.addAttribute("result", result);
         return getPathRoot() + "/json";
     }
 
@@ -178,7 +201,14 @@ public class ToolsController extends BaseController {
      */
     @RequestMapping(value = "markdown", method = RequestMethod.POST)
     public String markdown(@RequestParam("data") String data, Model model) {
-        model.addAttribute("result", MarkdownUtil.markdownToHtml(data));
+        String result;
+        try {
+            result = MarkdownUtil.markdownToHtml(data);
+        } catch (Exception e) {
+            result = e.getMessage();
+        }
+
+        model.addAttribute("result", result);
         return getPathRoot() + "/markdown";
     }
 
@@ -201,7 +231,13 @@ public class ToolsController extends BaseController {
      */
     @RequestMapping(value = "js", method = RequestMethod.POST)
     public String js(@RequestParam("data") String data, Model model) {
-        model.addAttribute("resultMap", CompressorUtil.compressJS(data));
+        Map<String, String> resultMap = new HashedMap();
+        try {
+            resultMap = CompressorUtil.compressJS(data);
+        } catch (Exception e) {
+            resultMap.put("errorMsg", e.getMessage());
+        }
+        model.addAttribute("resultMap", resultMap);
         return getPathRoot() + "/js";
     }
 
@@ -224,7 +260,13 @@ public class ToolsController extends BaseController {
      */
     @RequestMapping(value = "css", method = RequestMethod.POST)
     public String css(@RequestParam("data") String data, Model model) {
-        model.addAttribute("result", CompressorUtil.compressCSS(data));
+        String result;
+        try {
+            result = CompressorUtil.compressCSS(data);
+        } catch (Exception e) {
+            result = e.getMessage();
+        }
+        model.addAttribute("result", result);
         return getPathRoot() + "/css";
     }
 
@@ -291,7 +333,7 @@ public class ToolsController extends BaseController {
     public String qr2(@RequestParam(value = "data", required = false, defaultValue = "") String data,
                       @RequestParam(value = "file", required = false) MultipartFile file) throws Exception {
 
-        String result = "未知异常，请刷新后重试！";
+        String result;
         try {
             if (StringUtils.isEmpty(data)) {
                 result = QrCodeUtil.decode(file.getInputStream());
@@ -325,8 +367,8 @@ public class ToolsController extends BaseController {
      */
     @RequestMapping(value = "idcard", method = RequestMethod.POST)
     public String idcard(@RequestParam("data") String data, Model model) {
-        boolean isIdCard = IDCardUtil.isIdCard(data);
-        if (isIdCard) {
+        String res[] = IDCardUtil.isIdCard(data);
+        if (res[0].equals("0")) {
             model.addAttribute("province", IDCardUtil.getProvinceFromIdCard(data));
             model.addAttribute("age", IDCardUtil.getAgeFromIdCard(data));
             model.addAttribute("year", IDCardUtil.getYearFromIdCard(data));
@@ -341,7 +383,7 @@ public class ToolsController extends BaseController {
             }
         }
 
-        model.addAttribute("isIdCard", isIdCard);
+        model.addAttribute("isIdCard", res[0].equals("0"));
         return getPathRoot() + "/idcard";
     }
 

@@ -126,8 +126,27 @@ public class IDCardUtil {
      * @param idCard
      * @return
      */
-    public static boolean isIdCard(String idCard) {
-        return isIdCard15(idCard) || isIdCard18(idCard);
+    public static String[] isIdCard(String idCard) {
+        String res[] = new String[2];
+
+        String res1[] = isIdCard15(idCard);
+        String res2[] = isIdCard18(idCard);
+
+        if ("0".equals(res1[0]) && "0".equals(res2[0])) {
+            res[0] = "0";
+            res[1] = res2[1];
+        } else if (StringUtils.isEmpty(idCard)) {
+            res[0] = "-1";
+            res[1] = "身份证号码不能为空";
+        } else if (idCard.length() == CHINA_ID_MIN_LENGTH) {
+            res[0] = "-1";
+            res[1] = res1[1];
+        } else {
+            res[0] = "-1";
+            res[1] = res1[2];
+        }
+
+        return res;
     }
 
     /**
@@ -136,31 +155,38 @@ public class IDCardUtil {
      * @param idCard
      * @return
      */
-    public static boolean isIdCard15(String idCard) {
+    public static String[] isIdCard15(String idCard) {
+        String res[] = new String[2];
         if (idCard == null || idCard.length() != CHINA_ID_MIN_LENGTH) {
-            log.info("身份证{}长度不对， 不是15位身份证", idCard);
-            return false;
+            res[0] = "-1";
+            res[1] = "身份证长度不对， 不是15位身份证";
+            return res;
         }
 
         if (!isNumber(idCard)) {
-            log.info("身份证{}不是纯数字", idCard);
-            return false;
+            res[0] = "-1";
+            res[1] = "身份证不是纯数字";
+            return res;
         }
 
         String proCode = idCard.substring(0, 2);
         if (cityCodes.get(proCode) == null) {
-            log.info("身份证{}身份码错误", idCard);
-            return false;
+            res[0] = "-1";
+            res[1] = "身份证省份错误";
+            return res;
         }
 
         try {
             new SimpleDateFormat("yyyyMMdd").parse("19" + idCard.substring(6, 12));
         } catch (ParseException e) {
-            log.info("身份证" + idCard + "年月日不对", e);
-            return false;
+            res[0] = "-1";
+            res[1] = "身份证年月日不对";
+            return res;
         }
 
-        return true;
+        res[0] = "0";
+        res[1] = "是合法身份证";
+        return res;
     }
 
     /**
@@ -197,38 +223,52 @@ public class IDCardUtil {
      * @param idCard
      * @return
      */
-    public static boolean isIdCard18(String idCard) {
+    public static String[] isIdCard18(String idCard) {
+        String res[] = new String[2];
+
         if (idCard == null || idCard.length() != CHINA_ID_MAX_LENGTH) {
-            log.info("身份证{}长度不对， 不是18位身份证", idCard);
-            return false;
+            res[0] = "-1";
+            res[1] = "身份证长度不对， 不是18位身份证";
+
+            return res;
         }
 
         if (!isNumberWithX(idCard)) {
-            log.info("身份证{}不是纯数字或X", idCard);
-            return false;
+            res[0] = "-1";
+            res[1] = "身份证不是纯数字或X";
+
+            return res;
         }
 
         String proCode = idCard.substring(0, 2);
         if (cityCodes.get(proCode) == null) {
-            log.info("身份证{}省份码不对", idCard);
-            return false;
+            res[0] = "-1";
+            res[1] = "身份证省份码不对";
+
+            return res;
         }
 
         try {
             new SimpleDateFormat("yyyyMMdd").parse(idCard.substring(6, 14));
         } catch (ParseException e) {
-            log.info("身份证" + idCard + "年月日不对", e);
-            return false;
+            res[0] = "-1";
+            res[1] = "身份证年月日不对";
+
+            return res;
         }
 
         int iSum = getPowerSum(idCard);
         String checkCode = getCheckCode18(iSum);
         if (!checkCode.equals(idCard.substring(17, 18))) {
-            log.info("身份证{}最后一位校验码不对，应该是{}", idCard, checkCode);
-            return false;
+            res[0] = "-1";
+            res[1] = String.format("身份证最后一位校验码不对，应该是%s", checkCode);
+
+            return res;
         }
 
-        return true;
+        res[0] = "0";
+        res[1] = "是合法身份证";
+        return res;
     }
 
     /**

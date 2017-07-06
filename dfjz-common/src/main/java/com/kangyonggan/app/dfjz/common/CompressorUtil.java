@@ -25,8 +25,9 @@ public class CompressorUtil {
      *
      * @param data
      * @return
+     * @throws Exception
      */
-    public static String compressCSS(String data) {
+    public static String compressCSS(String data) throws Exception {
         if (StringUtils.isEmpty(data)) {
             return "";
         }
@@ -39,7 +40,7 @@ public class CompressorUtil {
 
             return writer.toString();
         } catch (Exception e) {
-            return e.getMessage();
+            throw e;
         }
     }
 
@@ -48,8 +49,9 @@ public class CompressorUtil {
      *
      * @param data
      * @return
+     * @throws Exception
      */
-    public static Map<String, String> compressJS(String data) {
+    public static Map<String, String> compressJS(String data) throws Exception {
         Map<String, String> resultMap = new HashMap();
 
         if (StringUtils.isEmpty(data)) {
@@ -68,7 +70,7 @@ public class CompressorUtil {
             resultMap.put("warningMsg", errorReporter.getWarningMsg());
             resultMap.put("errorMsg", errorReporter.getErrorMsg());
         } catch (Exception e) {
-            resultMap.put("errorMsg", e.getMessage());
+            throw e;
         }
 
         return resultMap;

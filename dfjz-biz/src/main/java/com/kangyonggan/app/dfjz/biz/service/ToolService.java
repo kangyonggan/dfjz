@@ -11,8 +11,9 @@ public interface ToolService {
      *
      * @param data
      * @return
+     * @throws Exception
      */
-    String formatXml(String data);
+    String formatXml(String data) throws Exception;
 
     /**
      * 格式化SQL
@@ -20,6 +21,7 @@ public interface ToolService {
      * @param data
      * @param dialect
      * @return
+     * @throws Exception
      */
-    String formatSql(String data, String dialect);
+    String formatSql(String data, String dialect) throws Exception;
 }
