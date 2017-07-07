@@ -132,9 +132,9 @@ public class IDCardUtil {
         String res1[] = isIdCard15(idCard);
         String res2[] = isIdCard18(idCard);
 
-        if ("0".equals(res1[0]) && "0".equals(res2[0])) {
+        if ("0".equals(res1[0]) || "0".equals(res2[0])) {
             res[0] = "0";
-            res[1] = res2[1];
+            res[1] = "合法身份证";
         } else if (StringUtils.isEmpty(idCard)) {
             res[0] = "-1";
             res[1] = "身份证号码不能为空";
@@ -143,7 +143,7 @@ public class IDCardUtil {
             res[1] = res1[1];
         } else {
             res[0] = "-1";
-            res[1] = res1[2];
+            res[1] = res2[1];
         }
 
         return res;
@@ -159,7 +159,7 @@ public class IDCardUtil {
         String res[] = new String[2];
         if (idCard == null || idCard.length() != CHINA_ID_MIN_LENGTH) {
             res[0] = "-1";
-            res[1] = "身份证长度不对， 不是15位身份证";
+            res[1] = "身份证长度不对";
             return res;
         }
 
@@ -228,7 +228,7 @@ public class IDCardUtil {
 
         if (idCard == null || idCard.length() != CHINA_ID_MAX_LENGTH) {
             res[0] = "-1";
-            res[1] = "身份证长度不对， 不是18位身份证";
+            res[1] = "身份证长度不对";
 
             return res;
         }

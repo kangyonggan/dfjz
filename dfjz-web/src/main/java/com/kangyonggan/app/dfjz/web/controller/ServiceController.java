@@ -3,7 +3,6 @@ package com.kangyonggan.app.dfjz.web.controller;
 import com.kangyonggan.app.dfjz.biz.service.ToolService;
 import com.kangyonggan.app.dfjz.biz.util.PropertiesUtil;
 import com.kangyonggan.app.dfjz.common.*;
-import com.kangyonggan.app.dfjz.model.annotation.LogTime;
 import com.kangyonggan.app.dfjz.model.constants.Resp;
 import com.kangyonggan.app.dfjz.model.dto.CommonResponse;
 import com.kangyonggan.app.dfjz.model.dto.IdCardResponse;
@@ -39,7 +38,6 @@ public class ServiceController {
      * @return
      */
     @RequestMapping(value = "xml", method = RequestMethod.POST)
-    @LogTime
     public CommonResponse xml(@RequestParam("data") String data) {
         CommonResponse response = new CommonResponse();
 
@@ -66,7 +64,6 @@ public class ServiceController {
      * @return
      */
     @RequestMapping(value = "sql", method = RequestMethod.POST)
-    @LogTime
     public CommonResponse sql(@RequestParam("data") String data, @RequestParam(value = "dialect", required = false, defaultValue = "MySQL") String dialect) {
         CommonResponse response = new CommonResponse();
 
@@ -92,7 +89,6 @@ public class ServiceController {
      * @return
      */
     @RequestMapping(value = "json", method = RequestMethod.POST)
-    @LogTime
     public CommonResponse json(@RequestParam("data") String data) {
         CommonResponse response = new CommonResponse();
 
@@ -118,7 +114,6 @@ public class ServiceController {
      * @return
      */
     @RequestMapping(value = "markdown", method = RequestMethod.POST)
-    @LogTime
     public CommonResponse markdown(@RequestParam("data") String data) {
         CommonResponse response = new CommonResponse();
 
@@ -144,7 +139,6 @@ public class ServiceController {
      * @return
      */
     @RequestMapping(value = "js", method = RequestMethod.POST)
-    @LogTime
     public CommonResponse js(@RequestParam("data") String data) {
         CommonResponse response = new CommonResponse();
 
@@ -170,7 +164,6 @@ public class ServiceController {
      * @return
      */
     @RequestMapping(value = "css", method = RequestMethod.POST)
-    @LogTime
     public CommonResponse css(@RequestParam("data") String data) {
         CommonResponse response = new CommonResponse();
 
@@ -197,7 +190,6 @@ public class ServiceController {
      * @return
      */
     @RequestMapping(value = "qr", method = RequestMethod.POST)
-    @LogTime
     public CommonResponse qr(@RequestParam("data") String data, @RequestParam(value = "size", required = false, defaultValue = "200") int size) {
         CommonResponse response = new CommonResponse();
 
@@ -226,7 +218,6 @@ public class ServiceController {
      * @return
      */
     @RequestMapping(value = "qrurl", method = RequestMethod.POST)
-    @LogTime
     public CommonResponse qr(@RequestParam("data") String data) {
         CommonResponse response = new CommonResponse();
 
@@ -251,7 +242,6 @@ public class ServiceController {
      * @return
      */
     @RequestMapping(value = "qrfile", method = RequestMethod.POST)
-    @LogTime
     public CommonResponse qr(@RequestParam(value = "data") MultipartFile data) {
         CommonResponse response = new CommonResponse();
 
@@ -276,7 +266,6 @@ public class ServiceController {
      * @return
      */
     @RequestMapping(value = "idcard", method = RequestMethod.POST)
-    @LogTime
     public CommonResponse idcard(@RequestParam(value = "data") String data) {
         CommonResponse response = new CommonResponse();
 
@@ -310,7 +299,6 @@ public class ServiceController {
      * @return
      */
     @RequestMapping(value = "gencard", method = RequestMethod.POST)
-    @LogTime
     public IdCardResponse gencard(@RequestParam(value = "prov", required = false, defaultValue = "") String prov,
                                   @RequestParam(value = "startAge", required = false, defaultValue = "1") int startAge,
                                   @RequestParam(value = "endAge", required = false, defaultValue = "100") int endAge,

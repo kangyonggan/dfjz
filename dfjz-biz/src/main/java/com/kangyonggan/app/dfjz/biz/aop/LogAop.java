@@ -35,7 +35,7 @@ public class LogAop {
         slowMethodTime = Long.parseLong(val);
     }
 
-    @Pointcut("execution(* com.kangyonggan.app.dfjz..*.*(..))")
+    @Pointcut("execution(* com.kangyonggan.app.dfjz.biz..*.*(..))")
     public void pointcut() {
     }
 
