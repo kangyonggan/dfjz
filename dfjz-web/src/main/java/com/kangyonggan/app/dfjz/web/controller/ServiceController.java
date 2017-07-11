@@ -242,7 +242,7 @@ public class ServiceController {
      * @return
      */
     @RequestMapping(value = "qrfile", method = RequestMethod.POST)
-    public CommonResponse qr(@RequestParam(value = "data") MultipartFile data) {
+    public CommonResponse qr(@RequestParam("data") MultipartFile data) {
         CommonResponse response = new CommonResponse();
 
         try {
@@ -266,7 +266,7 @@ public class ServiceController {
      * @return
      */
     @RequestMapping(value = "idcard", method = RequestMethod.POST)
-    public CommonResponse idcard(@RequestParam(value = "data") String data) {
+    public CommonResponse idcard(@RequestParam("data") String data) {
         CommonResponse response = new CommonResponse();
 
         try {
@@ -290,12 +290,12 @@ public class ServiceController {
     /**
      * 身份生成证
      *
-     * @param prov 省份编码，比如：340321，默认随机
+     * @param prov     省份编码，比如：340321，默认随机
      * @param startAge 最小年龄，默认1
-     * @param endAge 最大年龄，默认100
-     * @param sex 性别，0:男，1:女，默认0
-     * @param len 身份证长度，15：15位身份证，18：18位身份证，默认随机
-     * @param size 生成数量，默认10个
+     * @param endAge   最大年龄，默认100
+     * @param sex      性别，0:男，1:女，默认0
+     * @param len      身份证长度，15：15位身份证，18：18位身份证，默认随机
+     * @param size     生成数量，默认10个
      * @return
      */
     @RequestMapping(value = "gencard", method = RequestMethod.POST)
@@ -326,6 +326,31 @@ public class ServiceController {
             response.setRespMsg(e.getMessage());
         }
 
+        return response;
+    }
+
+    /**
+     * 获取生辰八字
+     *
+     * @param year  阳历年
+     * @param month 阳历月
+     * @param day   阳历日
+     * @param hour  阳历时
+     * @return 返回生辰八字
+     */
+    @RequestMapping(value = "eightWord", method = RequestMethod.POST)
+    public CommonResponse eightWord(@RequestParam("year") int year, @RequestParam("month") int month, @RequestParam("day") int day, @RequestParam("hour") int hour) {
+        CommonResponse response = new CommonResponse();
+
+        try {
+            response.setResult(DestinyUtil.getEightWord(year, month, day, hour));
+            response.setRespCode(Resp.K0000.getRespCode());
+            response.setRespMsg(Resp.K0000.getRespMsg());
+        } catch (Exception e) {
+            log.warn("获取生辰八字异常", e);
+            response.setRespCode(Resp.K9999.getRespCode());
+            response.setRespMsg(e.getMessage());
+        }
         return response;
     }
 }
