@@ -1,5 +1,7 @@
 package com.kangyonggan.app.dfjz.biz.service;
 
+import java.io.InputStream;
+
 /**
  * @author kangyonggan
  * @since 2017/4/22 0022
@@ -24,4 +26,14 @@ public interface ToolService {
      * @throws Exception
      */
     String formatSql(String data, String dialect) throws Exception;
+
+    /**
+     * properties文件对比
+     *
+     * @param inLeft
+     * @param inRight
+     * @return
+     * @throws Exception
+     */
+    String compareProperties(InputStream inLeft, InputStream inRight) throws Exception;
 }

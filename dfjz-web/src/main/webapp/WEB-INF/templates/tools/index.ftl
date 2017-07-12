@@ -91,6 +91,12 @@
             <p>编码转换</p>
         </a>
     </div>
+    <div class="item">
+        <a href="#tools/compare">
+            <img src="${ctx}/static/app/images/tools/compare.png"/>
+            <p>properties文件对比</p>
+        </a>
+    </div>
 </div>
 
 <script>

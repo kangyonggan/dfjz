@@ -461,4 +461,32 @@ public class ToolsController extends BaseController {
         model.addAttribute("result", CharsetUtil.convert(data, charset));
         return getPathRoot() + "/charset";
     }
+
+    /**
+     * 文件对比
+     *
+     * @return
+     */
+    @RequestMapping(value = "compare", method = RequestMethod.GET)
+    public String compare() {
+        return getPathRoot() + "/compare";
+    }
+
+    /**
+     * 文件对比
+     *
+     * @param fileLeft
+     * @param fileRight
+     * @return
+     */
+    @RequestMapping(value = "compare", method = RequestMethod.POST)
+    @ResponseBody
+    public String compare(@RequestParam("fileLeft") MultipartFile fileLeft,
+                          @RequestParam("fileRight") MultipartFile fileRight) {
+        try {
+            return toolService.compareProperties(fileLeft.getInputStream(), fileRight.getInputStream());
+        } catch (Exception e) {
+            return "不是合法的文件，请文明使用。" + e.getMessage();
+        }
+    }
 }
