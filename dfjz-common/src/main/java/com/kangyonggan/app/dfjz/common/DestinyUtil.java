@@ -260,7 +260,7 @@ public class DestinyUtil {
             }
 
             // 统计弱五行
-            if (getCount(data, wuxing[i]) < 2) {
+            if (getCount(data, wuxing[i]) == 1) {
                 ruo[ruoLen++] = wuxing[i];
             }
 
