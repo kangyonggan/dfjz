@@ -239,6 +239,92 @@ public class DestinyUtil {
     }
 
     /**
+     * 计算五行缺、弱、强和圆满
+     *
+     * @param data
+     * @return
+     */
+    public static String wuxing(String data) {
+        String wuxing[] = {"金", "木", "水", "火", "土"};
+
+        String que[] = new String[4];
+        String ruo[] = new String[4];
+        String qiang[] = new String[2];
+        int queLen = 0;
+        int ruoLen = 0;
+        int qiangLen = 0;
+        for (int i = 0; i < wuxing.length; i++) {
+            // 统计缺五行
+            if (data.indexOf(wuxing[i]) == -1) {
+                que[queLen++] = wuxing[i];
+            }
+
+            // 统计弱五行
+            if (getCount(data, wuxing[i]) < 2) {
+                ruo[ruoLen++] = wuxing[i];
+            }
+
+            // 统计强五行
+            if (getCount(data, wuxing[i]) > 2) {
+                qiang[qiangLen++] = wuxing[i];
+            }
+        }
+
+        StringBuilder result = new StringBuilder();
+        if (queLen == 0) {
+            // 五行圆满
+            result.append("五行圆满\n");
+        } else {
+            // 五行有缺
+            result.append("五行缺：");
+            for (int i = 0; i < queLen; i++) {
+                result.append(que[i]).append(" ");
+            }
+            result.append("\n");
+        }
+
+        if (ruoLen > 0) {
+            result.append("弱五行：");
+            for (int i = 0; i < ruoLen; i++) {
+                result.append(ruo[i]).append(" ");
+            }
+            result.append("\n");
+        }
+
+        if (qiangLen > 0) {
+            result.append("强五行：");
+            for (int i = 0; i < qiangLen; i++) {
+                result.append(qiang[i]).append("\t");
+            }
+            result.append("\n");
+        }
+
+        return result.toString();
+    }
+
+    /**
+     * 计算word在data中的个数
+     *
+     * @param data
+     * @param word
+     * @return
+     */
+    private static int getCount(String data, String word) {
+        int count = 0;
+        for (int i = 0; i < data.length(); i++) {
+            if (word.equals(data.substring(i, i + 1))) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    public static void main(String[] args) throws Exception {
+        System.out.println(wuxing(getWuXing(getEightWord4Lunar(1992, 3, 17, 17))));
+    }
+
+    /**
      * 获取运势
      *
      * @param wuXing

@@ -131,6 +131,7 @@ public class ToolServiceImpl implements ToolService {
         result.append("阳历出生年月：").append(yangli).append("\n");
         result.append("生辰八字：").append(bazi).append("\n");
         result.append("五行：").append(wuxing).append("\n");
+        result.append(DestinyUtil.wuxing(wuxing));
         result.append("生肖：").append(shengxiao).append("\n");
         result.append("运势：").append(yunshi).append("\n");
 
