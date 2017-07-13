@@ -20,12 +20,15 @@
             <pre class="result"><code>您输入的身份证号码无效</code></pre>
         <#else>
             <pre class="result"><code><table>
-                    <thead><tr><th>省份</th><th>性别</th><th>生日</th><th>年龄</th><th>地区</th><th><#if data?length==15>
-                        转成18位<#else>转成15位</#if></th><th>生肖</th><th>出生年份</th></tr></thead>
+                    <thead>
+                        <tr>
+                            <th>省份</th><th>性别</th><th>生日</th><th>年龄</th><th>地区</th><th><#if data?length==15>转成18位<#else>转成15位</#if></th><th>生肖</th><th>出生年份</th><th>运势</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                    <tr><td>${province!'不存在的省'}</td><td>${(sex==0)?string('男', '女')}</td><td>${year}
-                        年${month}月${day}日</td><td>${age}周岁</td><td>${area!'不存在的地区'}</td><td><#if data?length==15>${to18}<#else>${to15}</#if></td><td>${shengXiao}</td><td>${ganZhi}
-                        年</td></tr>
+                    <tr>
+                        <td>${province!'不存在的省'}</td><td>${(sex==0)?string('男', '女')}</td><td>${year}年${month}月${day}日</td><td>${age}周岁</td><td>${area!'不存在的地区'}</td><td><#if data?length==15>${to18}<#else>${to15}</#if></td><td>${shengXiao}</td><td>${ganZhi}年</td><td>${yunshi}</td>
+                    </tr>
                     </tbody>
                 </table></code></pre>
         </#if>

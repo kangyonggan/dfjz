@@ -373,12 +373,16 @@ public class ToolsController extends BaseController {
             model.addAttribute("province", IDCardUtil.getProvinceFromIdCard(data));
             model.addAttribute("age", IDCardUtil.getAgeFromIdCard(data));
             model.addAttribute("year", year);
-            model.addAttribute("month", IDCardUtil.getMonthFromIdCard(data));
-            model.addAttribute("day", IDCardUtil.getDayFromIdCard(data));
+            String month = IDCardUtil.getMonthFromIdCard(data);
+            model.addAttribute("month", month);
+            String day = IDCardUtil.getDayFromIdCard(data);
+            model.addAttribute("day", day);
             model.addAttribute("sex", IDCardUtil.getSexFromIdCard(data));
             model.addAttribute("area", IDCardUtil.getAreaFromIdCard(data));
             model.addAttribute("shengXiao", DestinyUtil.getShengXiao(Integer.parseInt(year)));
             model.addAttribute("ganZhi", DestinyUtil.getYearColumn(Integer.parseInt(year)));
+            model.addAttribute("yunshi", DestinyUtil.getYunShi(DestinyUtil.getDayColumn(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day)), Integer.parseInt(month)));
+
             if (data.length() == 15) {
                 model.addAttribute("to18", IDCardUtil.convert15To18(data));
             } else {

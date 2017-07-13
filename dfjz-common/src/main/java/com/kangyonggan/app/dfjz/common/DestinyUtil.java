@@ -147,7 +147,7 @@ public class DestinyUtil {
      * @param day
      * @return
      */
-    private static String getDayColumn(int year, int month, int day) {
+    public static String getDayColumn(int year, int month, int day) {
         int remainder = ((year - 1) * 5 + (year - 1) / 4 + LocalDate.of(year, month, day).getDayOfYear()) % 60;
         return getTianGan(remainder) + getDiZhi(remainder);
     }
@@ -327,13 +327,11 @@ public class DestinyUtil {
     /**
      * 获取运势
      *
-     * @param wuXing
+     * @param riGan
      * @param month
      * @return
      */
-    public static String getYunShi(String wuXing, int month) {
-        String riGan = wuXing.substring(4, 5);
-
+    public static String getYunShi(String riGan, int month) {
         if ("木".equals(riGan)) {
             if (month >= 1 && month <= 3) {
                 return "必须有火助，有水更好，但忌水太多，也忌土太多。";
