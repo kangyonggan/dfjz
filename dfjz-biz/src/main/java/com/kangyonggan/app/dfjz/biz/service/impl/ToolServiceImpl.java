@@ -114,11 +114,11 @@ public class ToolServiceImpl implements ToolService {
         String yinli;
         String yangli;
         if (lunar.equals("0")) {
-            bazi = DestinyUtil.getEightWord(year, month, day, hour);
+            bazi = DestinyUtil.getEightWord4Lunar(year, month, day, hour);
             yinli = LocalDate.of(year, month, day).format(DateTimeFormatter.BASIC_ISO_DATE);
             yangli = CalendarUtil.lunarToSolar(yinli);
         } else {
-            bazi = DestinyUtil.getEightWord4Lunar(year, month, day, hour);
+            bazi = DestinyUtil.getEightWord(year, month, day, hour);
             yangli = LocalDate.of(year, month, day).format(DateTimeFormatter.BASIC_ISO_DATE);
             yinli = CalendarUtil.solarToLunar(yangli);
         }
