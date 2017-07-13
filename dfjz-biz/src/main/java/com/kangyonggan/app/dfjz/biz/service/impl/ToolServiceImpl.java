@@ -123,8 +123,8 @@ public class ToolServiceImpl implements ToolService {
             yinli = CalendarUtil.solarToLunar(yangli);
         }
         String wuxing = DestinyUtil.getWuXing(bazi);
-        String shengxiao = DestinyUtil.getShengXiao(year);
-        String yunshi = DestinyUtil.getYunShi(wuxing, month);
+        String shengxiao = DestinyUtil.getShengXiao(Integer.parseInt(yangli.substring(0, 4)));
+        String yunshi = DestinyUtil.getYunShi(wuxing, Integer.parseInt(yangli.substring(4, 6)));
 
         StringBuilder result = new StringBuilder();
         result.append("阴历出生年月：").append(yinli).append("\n");
