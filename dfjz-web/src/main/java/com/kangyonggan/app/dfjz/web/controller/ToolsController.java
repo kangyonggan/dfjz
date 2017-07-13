@@ -381,7 +381,8 @@ public class ToolsController extends BaseController {
             model.addAttribute("area", IDCardUtil.getAreaFromIdCard(data));
             model.addAttribute("shengXiao", DestinyUtil.getShengXiao(Integer.parseInt(year)));
             model.addAttribute("ganZhi", DestinyUtil.getYearColumn(Integer.parseInt(year)));
-            model.addAttribute("yunshi", DestinyUtil.getYunShi(DestinyUtil.getDayColumn(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day)), Integer.parseInt(month)));
+            String tianGan = DestinyUtil.getDayColumn(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day)).substring(0, 1);
+            model.addAttribute("yunshi", DestinyUtil.getYunShi(DestinyUtil.getTianGanWuXing(tianGan), Integer.parseInt(month)));
 
             if (data.length() == 15) {
                 model.addAttribute("to18", IDCardUtil.convert15To18(data));

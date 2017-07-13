@@ -202,7 +202,7 @@ public class DestinyUtil {
      * @param tianGan
      * @return
      */
-    private static String getTianGanWuXing(String tianGan) {
+    public static String getTianGanWuXing(String tianGan) {
         if ("甲乙".indexOf(tianGan) > -1) {
             return "木";
         } else if ("丙丁".indexOf(tianGan) > -1) {
