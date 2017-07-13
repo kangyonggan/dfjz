@@ -327,12 +327,12 @@ public class DestinyUtil {
     /**
      * 获取运势
      *
-     * @param riGan
-     * @param month
+     * @param wuXingOfRiGan 日干对应的五行
+     * @param month         月
      * @return
      */
-    public static String getYunShi(String riGan, int month) {
-        if ("木".equals(riGan)) {
+    public static String getYunShi(String wuXingOfRiGan, int month) {
+        if ("木".equals(wuXingOfRiGan)) {
             if (month >= 1 && month <= 3) {
                 return "必须有火助，有水更好，但忌水太多，也忌土太多。";
             } else if (month >= 4 && month <= 6) {
@@ -342,7 +342,7 @@ public class DestinyUtil {
             } else if (month >= 10 && month <= 12) {
                 return "必须有火相助，最好有土、水。";
             }
-        } else if ("火".equals(riGan)) {
+        } else if ("火".equals(wuXingOfRiGan)) {
             if (month >= 1 && month <= 3) {
                 return "此时必为丙火或丁火，大都不错，但忌木多、土多。";
             } else if (month >= 4 && month <= 6) {
@@ -352,7 +352,7 @@ public class DestinyUtil {
             } else if (month >= 10 && month <= 12) {
                 return "必须有木相助，忌有水与金多，喜有土、水、木。";
             }
-        } else if ("土".equals(riGan)) {
+        } else if ("土".equals(wuXingOfRiGan)) {
             if (month >= 1 && month <= 3) {
                 return "喜有火、木，喜有金而少，忌金多、木多。";
             } else if (month >= 4 && month <= 6) {
@@ -362,7 +362,7 @@ public class DestinyUtil {
             } else if (month >= 10 && month <= 12) {
                 return "喜有火，更喜有火又有金，喜有土、木。";
             }
-        } else if ("金".equals(riGan)) {
+        } else if ("金".equals(wuXingOfRiGan)) {
             if (month >= 1 && month <= 3) {
                 return "喜有土、火，最忌没有土、金。";
             } else if (month >= 4 && month <= 6) {
@@ -372,7 +372,7 @@ public class DestinyUtil {
             } else if (month >= 10 && month <= 12) {
                 return "必须有火、土相助，忌无火、土反而有金、水，忌木多而无火。";
             }
-        } else if ("水".equals(riGan)) {
+        } else if ("水".equals(wuXingOfRiGan)) {
             if (month >= 1 && month <= 3) {
                 return "必须有土相助，若有火，金，但忌金多。";
             } else if (month >= 4 && month <= 6) {
