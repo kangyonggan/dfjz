@@ -332,18 +332,25 @@ public class ServiceController {
     /**
      * 获取生辰八字
      *
-     * @param year  阳历年
-     * @param month 阳历月
-     * @param day   阳历日
-     * @param hour  阳历时
+     * @param year    阳历年
+     * @param month   阳历月
+     * @param day     阳历日
+     * @param hour    阳历时
+     * @param isLunar 是否阴历
      * @return 返回生辰八字
      */
     @RequestMapping(value = "eightWord", method = RequestMethod.POST)
-    public CommonResponse eightWord(@RequestParam("year") int year, @RequestParam("month") int month, @RequestParam("day") int day, @RequestParam("hour") int hour) {
+    public CommonResponse eightWord(@RequestParam("year") int year, @RequestParam("month") int month,
+                                    @RequestParam("day") int day, @RequestParam("hour") int hour,
+                                    @RequestParam(value = "isLunar", required = false, defaultValue = "true") boolean isLunar) {
         CommonResponse response = new CommonResponse();
 
         try {
-            response.setResult(DestinyUtil.getEightWord(year, month, day, hour));
+            if (isLunar) {
+                response.setResult(DestinyUtil.getEightWord4Lunar(year, month, day, hour));
+            } else {
+                response.setResult(DestinyUtil.getEightWord(year, month, day, hour));
+            }
             response.setRespCode(Resp.K0000.getRespCode());
             response.setRespMsg(Resp.K0000.getRespMsg());
         } catch (Exception e) {
