@@ -348,7 +348,14 @@ public class CalendarUtil {
         lunarMonth = i;
         lunarDay = offset;
 
-        return "阴历：" + lunarYear + "年" + (leapMonthFlag & (lunarMonth == leapMonth) ? "闰" : "") + lunarMonth + "月" + lunarDay + "日";
+        return to2num(lunarYear) + to2num(lunarMonth) + to2num(lunarDay);
+    }
+
+    private static String to2num(int num) {
+        if (num < 10) {
+            return "0" + num;
+        }
+        return "" + num;
     }
 
     public static void main(String[] args) throws Exception {
