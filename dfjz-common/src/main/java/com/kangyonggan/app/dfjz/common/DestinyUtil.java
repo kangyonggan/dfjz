@@ -22,6 +22,11 @@ public class DestinyUtil {
     private static final String[] DI_ZHI = {"子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"};
 
     /**
+     * 生肖，12个
+     */
+    private static final String[] SHENG_XIAO = {"鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊", "猴", "鸡", "狗", "猪"};
+
+    /**
      * 甲子，60个
      */
     private static final String[] JIA_ZI = {
@@ -79,7 +84,7 @@ public class DestinyUtil {
      * @param year
      * @return
      */
-    private static String getYearColumn(int year) {
+    public static String getYearColumn(int year) {
         return getTianGan(year - 3) + getDiZhi(year - 3);
     }
 
@@ -164,4 +169,137 @@ public class DestinyUtil {
         return TIAN_GAN[(col + row * 5) % 10] + DI_ZHI[row - 1];
     }
 
+    /**
+     * 获取生肖
+     *
+     * @param year
+     * @return
+     */
+    public static String getShengXiao(int year) {
+        return SHENG_XIAO[getDiZhiIndex(year - 3)];
+    }
+
+    /**
+     * 根据八字获取五行
+     *
+     * @param baZi
+     * @return
+     */
+    public static String getWuXing(String baZi) {
+        StringBuilder wuXing = new StringBuilder();
+
+        for (int i = 0; i < 4; i++) {
+            wuXing.append(getTianGanWuXing(baZi.substring(2 * i, 2 * i + 1)));
+            wuXing.append(getDiZhiWuXing(baZi.substring(2 * i + 1, 2 * i + 2)));
+        }
+
+        return wuXing.toString();
+    }
+
+    /**
+     * 获取天干对应的五行
+     *
+     * @param tianGan
+     * @return
+     */
+    private static String getTianGanWuXing(String tianGan) {
+        if ("甲乙".indexOf(tianGan) > -1) {
+            return "木";
+        } else if ("丙丁".indexOf(tianGan) > -1) {
+            return "火";
+        } else if ("戊己".indexOf(tianGan) > -1) {
+            return "土";
+        } else if ("庚辛".indexOf(tianGan) > -1) {
+            return "金";
+        } else if ("壬癸".indexOf(tianGan) > -1) {
+            return "水";
+        }
+        return tianGan;
+    }
+
+    /**
+     * 获取地址对应的五行
+     *
+     * @param diZhi
+     * @return
+     */
+    private static String getDiZhiWuXing(String diZhi) {
+        if ("寅卯".indexOf(diZhi) > -1) {
+            return "木";
+        } else if ("巳午".indexOf(diZhi) > -1) {
+            return "火";
+        } else if ("辰丑戌未".indexOf(diZhi) > -1) {
+            return "土";
+        } else if ("申酉".indexOf(diZhi) > -1) {
+            return "金";
+        } else if ("亥子".indexOf(diZhi) > -1) {
+            return "水";
+        }
+        return diZhi;
+    }
+
+    /**
+     * 获取运势
+     *
+     * @param wuXing
+     * @param month
+     * @return
+     */
+    public static String getYunShi(String wuXing, int month) {
+        String riGan = wuXing.substring(4, 5);
+
+        if ("木".equals(riGan)) {
+            if (month >= 1 && month <= 3) {
+                return "必须有火助，有水更好，但忌水太多，也忌土太多。";
+            } else if (month >= 4 && month <= 6) {
+                return "必须有水相助，忌土太多，也忌木太多。";
+            } else if (month >= 7 && month <= 9) {
+                return "必须有金相助，但忌金太多，须有土、火才好，但忌水多。";
+            } else if (month >= 10 && month <= 12) {
+                return "必须有火相助，最好有土、水。";
+            }
+        } else if ("火".equals(riGan)) {
+            if (month >= 1 && month <= 3) {
+                return "此时必为丙火或丁火，大都不错，但忌木多、土多。";
+            } else if (month >= 4 && month <= 6) {
+                return "必须有水相助，最喜有金。";
+            } else if (month >= 7 && month <= 9) {
+                return "喜有木，忌水、土多。";
+            } else if (month >= 10 && month <= 12) {
+                return "必须有木相助，忌有水与金多，喜有土、水、木。";
+            }
+        } else if ("土".equals(riGan)) {
+            if (month >= 1 && month <= 3) {
+                return "喜有火、木，喜有金而少，忌金多、木多。";
+            } else if (month >= 4 && month <= 6) {
+                return "喜有水、金，忌有木。";
+            } else if (month >= 7 && month <= 9) {
+                return "喜有火，有木，忌金、水多。";
+            } else if (month >= 10 && month <= 12) {
+                return "喜有火，更喜有火又有金，喜有土、木。";
+            }
+        } else if ("金".equals(riGan)) {
+            if (month >= 1 && month <= 3) {
+                return "喜有土、火，最忌没有土、金。";
+            } else if (month >= 4 && month <= 6) {
+                return "必须有水相助，忌木多。";
+            } else if (month >= 7 && month <= 9) {
+                return "喜有木、火，忌土多。";
+            } else if (month >= 10 && month <= 12) {
+                return "必须有火、土相助，忌无火、土反而有金、水，忌木多而无火。";
+            }
+        } else if ("水".equals(riGan)) {
+            if (month >= 1 && month <= 3) {
+                return "必须有土相助，若有火，金，但忌金多。";
+            } else if (month >= 4 && month <= 6) {
+                return "必须有金相助，忌木多。";
+            } else if (month >= 7 && month <= 9) {
+                return "必须有金相助，忌土、金、水多，喜木、火。";
+            } else if (month >= 10 && month <= 12) {
+                return "必须有火相助，喜水多，但忌金多。";
+            }
+        }
+
+        return "";
+    }
 }

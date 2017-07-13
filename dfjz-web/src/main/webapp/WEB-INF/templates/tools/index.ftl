@@ -97,6 +97,12 @@
             <p>properties文件对比</p>
         </a>
     </div>
+    <div class="item">
+        <a href="#tools/bazi">
+            <img src="${ctx}/static/app/images/tools/bazi.png"/>
+            <p>八字、五行</p>
+        </a>
+    </div>
 </div>
 
 <script>

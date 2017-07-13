@@ -36,4 +36,17 @@ public interface ToolService {
      * @throws Exception
      */
     String compareProperties(InputStream inLeft, InputStream inRight) throws Exception;
+
+    /**
+     * 八字、五行
+     *
+     * @param lunar
+     * @param year
+     * @param month
+     * @param day
+     * @param hour
+     * @return
+     * @throws Exception
+     */
+    String getBaZi(String lunar, int year, int month, int day, int hour) throws Exception;
 }

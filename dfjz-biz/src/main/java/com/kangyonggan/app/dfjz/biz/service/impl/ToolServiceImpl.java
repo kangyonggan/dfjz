@@ -2,6 +2,8 @@ package com.kangyonggan.app.dfjz.biz.service.impl;
 
 import com.alibaba.druid.sql.SQLUtils;
 import com.kangyonggan.app.dfjz.biz.service.ToolService;
+import com.kangyonggan.app.dfjz.common.CalendarUtil;
+import com.kangyonggan.app.dfjz.common.DestinyUtil;
 import com.kangyonggan.app.dfjz.common.PropertiesUtil;
 import com.kangyonggan.app.dfjz.common.XmlUtil;
 import com.kangyonggan.app.dfjz.model.annotation.LogTime;
@@ -10,6 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -101,6 +105,35 @@ public class ToolServiceImpl implements ToolService {
         }
 
         // 格式化输出
+        return result.toString();
+    }
+
+    @Override
+    public String getBaZi(String lunar, int year, int month, int day, int hour) throws Exception {
+        String bazi;
+        String yinli;
+        String yangli;
+        if (lunar.equals("0")) {
+            bazi = DestinyUtil.getEightWord(year, month, day, hour);
+            yinli = LocalDate.of(year, month, day).format(DateTimeFormatter.BASIC_ISO_DATE);
+            yangli = CalendarUtil.lunarToSolar(yinli);
+        } else {
+            bazi = DestinyUtil.getEightWord4Lunar(year, month, day, hour);
+            yangli = LocalDate.of(year, month, day).format(DateTimeFormatter.BASIC_ISO_DATE);
+            yinli = CalendarUtil.solarToLunar(yangli);
+        }
+        String wuxing = DestinyUtil.getWuXing(bazi);
+        String shengxiao = DestinyUtil.getShengXiao(year);
+        String yunshi = DestinyUtil.getYunShi(wuxing, month);
+
+        StringBuilder result = new StringBuilder();
+        result.append("阴历出生年月：").append(yinli).append("\n");
+        result.append("阳历出生年月：").append(yangli).append("\n");
+        result.append("生辰八字：").append(bazi).append("\n");
+        result.append("五行：").append(wuxing).append("\n");
+        result.append("生肖：").append(shengxiao).append("\n");
+        result.append("运势：").append(yunshi).append("\n");
+
         return result.toString();
     }
 

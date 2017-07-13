@@ -369,13 +369,16 @@ public class ToolsController extends BaseController {
     public String idcard(@RequestParam("data") String data, Model model) {
         String res[] = IDCardUtil.isIdCard(data);
         if (res[0].equals("0")) {
+            String year = IDCardUtil.getYearFromIdCard(data);
             model.addAttribute("province", IDCardUtil.getProvinceFromIdCard(data));
             model.addAttribute("age", IDCardUtil.getAgeFromIdCard(data));
-            model.addAttribute("year", IDCardUtil.getYearFromIdCard(data));
+            model.addAttribute("year", year);
             model.addAttribute("month", IDCardUtil.getMonthFromIdCard(data));
             model.addAttribute("day", IDCardUtil.getDayFromIdCard(data));
             model.addAttribute("sex", IDCardUtil.getSexFromIdCard(data));
             model.addAttribute("area", IDCardUtil.getAreaFromIdCard(data));
+            model.addAttribute("shengXiao", DestinyUtil.getShengXiao(Integer.parseInt(year)));
+            model.addAttribute("ganZhi", DestinyUtil.getYearColumn(Integer.parseInt(year)));
             if (data.length() == 15) {
                 model.addAttribute("to18", IDCardUtil.convert15To18(data));
             } else {
@@ -488,5 +491,44 @@ public class ToolsController extends BaseController {
         } catch (Exception e) {
             return "不是合法的文件，请文明使用。" + e.getMessage();
         }
+    }
+
+    /**
+     * 八字五行
+     *
+     * @return
+     */
+    @RequestMapping(value = "bazi", method = RequestMethod.GET)
+    public String bazi() {
+        return getPathRoot() + "/bazi";
+    }
+
+    /**
+     * 八字五行
+     *
+     * @param lunar
+     * @param year
+     * @param month
+     * @param day
+     * @param hour
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "bazi", method = RequestMethod.POST)
+    public String bazi(@RequestParam(value = "lunar", required = false, defaultValue = "1") String lunar,
+                       @RequestParam("year") int year,
+                       @RequestParam("month") int month,
+                       @RequestParam("day") int day,
+                       @RequestParam("hour") int hour,
+                       Model model) {
+        String result;
+        try {
+            result = toolService.getBaZi(lunar, year, month, day, hour);
+        } catch (Exception e) {
+            result = e.getMessage();
+        }
+
+        model.addAttribute("result", result);
+        return getPathRoot() + "/bazi";
     }
 }
