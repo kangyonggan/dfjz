@@ -6,13 +6,12 @@ import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
-import javax.websocket.server.ServerEndpoint;
 
 /**
  * @author kangyonggan
  * @since 7/14/17
  */
-@ServerEndpoint("chat/server")
+//@ServerEndpoint("chat/server")
 @Log4j2
 public class WebSocketServer {
 
