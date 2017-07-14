@@ -536,4 +536,15 @@ public class ToolsController extends BaseController {
         model.addAttribute("result", result);
         return getPathRoot() + "/bazi";
     }
+
+    /**
+     * 智能小胖
+     *
+     * @return
+     */
+    @RequestMapping(value = "chat", method = RequestMethod.GET)
+    public String chat() {
+        return getPathRoot() + "/chat";
+    }
+
 }

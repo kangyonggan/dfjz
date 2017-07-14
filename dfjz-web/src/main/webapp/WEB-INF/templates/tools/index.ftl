@@ -103,6 +103,12 @@
             <p>八字、五行</p>
         </a>
     </div>
+    <div class="item">
+        <a href="#tools/chat">
+            <img src="${ctx}/static/app/images/tools/chat.png"/>
+            <p>智能小胖</p>
+        </a>
+    </div>
 </div>
 
 <script>

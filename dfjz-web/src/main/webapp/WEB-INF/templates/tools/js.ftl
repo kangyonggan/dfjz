@@ -6,8 +6,6 @@
 
 <h2 class="visit-title">${title}</h2>
 
-<h2 class="visit-title">JS压缩</h2>
-
 <div>
     <h4>待压缩的JS：</h4>
     <form action="#tools/js" method="post" id="js-fromat-form">
