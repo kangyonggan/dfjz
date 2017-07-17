@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
@@ -107,6 +108,66 @@ public class BookServiceImpl extends BaseService<Book> implements BookService {
             }
 
             redisService.delete(prefix + "bookEngine");
+        }
+    }
+
+    @Override
+    public void genNMHNRss(int pageNum) {
+        Document bookDoc = HtmlUtil.parseUrl("http://www.shengyan.org/book/108171.html");
+        Elements chapterElements = bookDoc.select(".listmain dl dd a");
+
+        StringBuilder rss = new StringBuilder();
+        rss.append("<feed xmlns=\"http://www.w3.org/2005/Atom\"><title>").append("农门悍女掌家小厨娘").append("</title>");
+        rss.append("<link href=\"/rss/nmhn.xml\" rel=\"self\"/>").append("<link href=\"https://www.kangyonggan.com/\"/>");
+        rss.append("<updated>").append(DateUtil.toXmlDateTime(new Date())).append("</updated>");
+        rss.append("<id>https://www.kangyonggan.com/</id>");
+        rss.append("<author><name>昕玥格</name></author>");
+
+        for (int i = 12 + (pageNum - 1) * 100; i < 12 + pageNum * 100 && i < chapterElements.size(); i++) {
+            Element chapterElement = chapterElements.get(i);
+            String chapterUrl = chapterElement.attr("href");
+            Document chapterDoc = HtmlUtil.parseUrl("http://www.shengyan.org/" + chapterUrl);
+
+            if (chapterDoc == null) {
+                return;
+            }
+
+            String title = chapterDoc.select(".content h1").html().trim();
+            log.info(title);
+            String content = chapterDoc.getElementById("content").html();
+
+            rss.append("<entry>");
+            rss.append("<title>").append(title).append("</title>");
+            rss.append("<link href=\"").append("http://www.shengyan.org/" + chapterUrl).append("\"/>");
+            rss.append("<id>").append("http://www.shengyan.org/" + chapterUrl).append("</id>");
+            rss.append("<published>").append(DateUtil.toXmlDateTime(new Date())).append("</published>");
+            rss.append("<updated>").append(DateUtil.toXmlDateTime(new Date())).append("</updated>");
+            rss.append("<content type=\"html\"><![CDATA[").append(content).append("]]></content>");
+            if (content.length() > 50) {
+                rss.append("<summary type=\"html\"><![CDATA[").append(content.substring(0, 50)).append("]]></summary>");
+            } else {
+                rss.append("<summary type=\"html\"><![CDATA[").append(content).append("]]></summary>");
+            }
+            rss.append("<category term=\"").append("书籍").append("\" scheme=\"").append("http://www.shengyan.org/book/108171.html").append("\"/>");
+            rss.append("</entry>");
+            log.info("=============" + i + "===============");
+        }
+
+        rss.append("</feed>");
+        try {
+            FileWriter writer = new FileWriter("/Users/kyg/Desktop/农门悍女掌家小厨娘(" + (1 + (pageNum - 1) * 100) + "-" + (pageNum * 100) + ").xml");
+            writer.write(rss.toString());
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        BookServiceImpl bookService = new BookServiceImpl();
+        for (int i = 1; i <= 9; i++) {
+            bookService.genNMHNRss(i);
         }
     }
 

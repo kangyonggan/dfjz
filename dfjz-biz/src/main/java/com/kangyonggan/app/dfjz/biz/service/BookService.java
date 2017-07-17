@@ -15,4 +15,10 @@ public interface BookService {
      */
     void genBookRssByPage(Long id, int pageNum, int startNum);
 
+    /**
+     * 生成农门悍女
+     * @param pageNum
+     */
+    void genNMHNRss(int pageNum);
+
 }
