@@ -18,25 +18,30 @@
             <p>网站地图</p>
         </a>
     </div>
-<#list rssMap?keys as key>
-    <div class="item">
-        <a href="${ctx}/rss/${rssMap[key]}" target="_blank">
-            <#if key?substring(0,4)=='不死武尊'>
-                <img src="${ctx}/static/app/images/1337.jpg" class="book-pic"/>
-                <p class="book-name">${key}</p>
-            <#elseif key?substring(0,4)=='逆天邪神'>
-                <img src="${ctx}/static/app/images/2722.jpg" class="book-pic"/>
-                <p class="book-name">${key}</p>
-            <#elseif key?substring(0,4)=='绝世战魂'>
-                <img src="${ctx}/static/app/images/18612.jpg" class="book-pic"/>
-                <p class="book-name">${key}</p>
-            <#else>
-                <img src="${ctx}/static/app/images/book.png"/>
-                <p>${key}</p>
-            </#if>
-        </a>
-    </div>
-</#list>
+    <#list rssMap?keys as key>
+        <div class="item">
+            <a href="${ctx}/rss/${rssMap[key]}" target="_blank">
+                <#if key?length gte 4>
+                    <#if key?substring(0,4)=='不死武尊'>
+                        <img src="${ctx}/static/app/images/1337.jpg" class="book-pic"/>
+                        <p class="book-name">${key}</p>
+                    <#elseif key?substring(0,4)=='逆天邪神'>
+                        <img src="${ctx}/static/app/images/2722.jpg" class="book-pic"/>
+                        <p class="book-name">${key}</p>
+                    <#elseif key?substring(0,4)=='绝世战魂'>
+                        <img src="${ctx}/static/app/images/18612.jpg" class="book-pic"/>
+                        <p class="book-name">${key}</p>
+                    <#else>
+                        <img src="${ctx}/static/app/images/book.png"/>
+                        <p>${key}</p>
+                    </#if>
+                <#else>
+                    <img src="${ctx}/static/app/images/nmhn.jpg" class="book-pic"/>
+                    <p class="book-name">农门悍女掌家小厨娘(${(key?number - 1) * 100 + 1}-${key?number * 100}章)</p>
+                </#if>
+            </a>
+        </div>
+    </#list>
 </div>
 
 </@override>
