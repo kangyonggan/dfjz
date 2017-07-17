@@ -34,4 +34,19 @@ public class BookController extends BaseController {
         return "ok";
     }
 
+    /**
+     * 生成书籍农门悍女rss
+     *
+     * @return
+     */
+    @RequestMapping(value = "nmhn", method = RequestMethod.GET)
+    @ResponseBody
+    public String genNmhnRss() {
+        for (int i = 1; i <= 9; i++) {
+            bookService.genNMHNRss(i);
+        }
+
+        return "ok";
+    }
+
 }

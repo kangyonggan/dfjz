@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
@@ -117,7 +116,7 @@ public class BookServiceImpl extends BaseService<Book> implements BookService {
         Elements chapterElements = bookDoc.select(".listmain dl dd a");
 
         StringBuilder rss = new StringBuilder();
-        rss.append("<feed xmlns=\"http://www.w3.org/2005/Atom\"><title>").append("农门悍女掌家小厨娘").append("</title>");
+        rss.append("<feed xmlns=\"http://www.w3.org/2005/Atom\"><title>").append("农门悍女掌家小厨娘(" + ((pageNum - 1) * 100 + 1) + "-" + (100 * pageNum) + ")").append("</title>");
         rss.append("<link href=\"/rss/nmhn.xml\" rel=\"self\"/>").append("<link href=\"https://www.kangyonggan.com/\"/>");
         rss.append("<updated>").append(DateUtil.toXmlDateTime(new Date())).append("</updated>");
         rss.append("<id>https://www.kangyonggan.com/</id>");
@@ -155,19 +154,12 @@ public class BookServiceImpl extends BaseService<Book> implements BookService {
 
         rss.append("</feed>");
         try {
-            FileWriter writer = new FileWriter("/Users/kyg/Desktop/农门悍女掌家小厨娘(" + (1 + (pageNum - 1) * 100) + "-" + (pageNum * 100) + ").xml");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(PropertiesUtil.getProperties("file.root.path") + "rss/" + pageNum + ".xml"));
             writer.write(rss.toString());
             writer.flush();
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    public static void main(String[] args) {
-        BookServiceImpl bookService = new BookServiceImpl();
-        for (int i = 1; i <= 9; i++) {
-            bookService.genNMHNRss(i);
         }
     }
 
