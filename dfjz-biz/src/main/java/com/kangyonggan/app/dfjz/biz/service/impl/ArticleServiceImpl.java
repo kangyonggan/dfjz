@@ -355,7 +355,7 @@ public class ArticleServiceImpl extends BaseService<Article> implements ArticleS
         String replacement = "<span class='red'>" + question + "</span>";
         for (Article article : articles) {
             article.setTitle(article.getTitle().replaceAll("(?i)" + question, replacement));
-            article.setContent(article.getContent().replaceAll("(?i)" + question, replacement));
+//            article.setContent(article.getContent().replaceAll("(?i)" + question, replacement));
         }
     }
 
