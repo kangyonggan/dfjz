@@ -15,4 +15,14 @@ public interface AppConstants {
      * 未删除
      */
     byte IS_DELETED_NO = 0;
+
+    /**
+     * 文件根路径的key
+     */
+    String FILE_PATH_ROOT = "file.root.path";
+
+    /**
+     * 文件上传路径
+     */
+    String FILE_UPLOAD = "upload/";
 }

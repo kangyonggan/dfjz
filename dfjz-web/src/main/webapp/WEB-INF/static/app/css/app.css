@@ -995,6 +995,15 @@ table a {
     margin-top: 10px;
 }
 
+.file-add {
+    color: #f00;
+    font-size: 14px;
+}
+
+#files input {
+    margin-top: 10px;
+}
+
 .mt-30 {
     margin-top: 30px;
 }
