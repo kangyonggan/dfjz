@@ -5,6 +5,7 @@ import com.kangyonggan.app.dfjz.biz.service.ArticleService;
 import com.kangyonggan.app.dfjz.biz.service.DictionaryService;
 import com.kangyonggan.app.dfjz.biz.util.PropertiesUtil;
 import com.kangyonggan.app.dfjz.model.vo.Article;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/")
+@Log4j2
 public class IndexController extends BaseController {
 
     @Autowired
@@ -126,6 +128,7 @@ public class IndexController extends BaseController {
 
     /**
      * 导航
+     *
      * @param model
      * @return
      */
@@ -133,6 +136,22 @@ public class IndexController extends BaseController {
     public String nav(Model model) {
         model.addAttribute("navs", dictionaryService.findDictionariesByType("NAV"));
         return getPathRoot() + "/nav";
+    }
+
+    /**
+     * 测试icbc3
+     */
+    @RequestMapping("test/icbc3")
+    public void testIcbc3() {
+        log.info("进入icbc3测试方法");
+
+        try {
+            Thread.sleep(1000 * 60 * 60 * 1);// 1小时
+        } catch (Exception e) {
+            log.warn("sleep异常了", e);
+        }
+
+        log.info("离开icbc3测试方法");
     }
 
 }
