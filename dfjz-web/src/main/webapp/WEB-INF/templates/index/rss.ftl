@@ -31,6 +31,9 @@
                     <#elseif key?substring(0,4)=='绝世战魂'>
                         <img src="${ctx}/static/app/images/18612.jpg" class="book-pic"/>
                         <p class="book-name">${key}</p>
+                    <#elseif key?substring(0,4)=='嫡女重生'>
+                        <img src="${ctx}/static/app/images/14141.jpg" class="book-pic"/>
+                        <p class="book-name">${key}</p>
                     <#else>
                         <img src="${ctx}/static/app/images/book.png"/>
                         <p>${key}</p>
