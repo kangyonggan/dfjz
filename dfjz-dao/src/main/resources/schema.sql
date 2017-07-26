@@ -238,3 +238,6 @@ INSERT INTO book (name, author, intro, picture, url)
 
 INSERT INTO book (name, author, intro, picture, url)
   VALUE ('绝世战魂', '极品妖孽', '家族少主，天生废魂，在机缘巧合之下，觉醒了太古神秘的战神之魂，从此之后，一路逆袭，邂逅仙姿美女，碾压九界天才，无所不战，无所不胜！', 'http://www.biquge.cn/cover/18/18612/18612s.jpg', '18612');
+
+INSERT INTO book (name, author, intro, picture, url)
+  VALUE ('嫡女重生记', '六月浩雪', '在家是小透明，嫁人后是摆设，最后葬身火海尸骨无存，这是韩玉熙上辈子的写照。重活一世，韩玉熙努力上进，只愿不再做陪衬与花瓶，然后觅得如意郎君，平安富贵过一生。可惜事与愿违，嫁了个身负血海深仇的郎君，韩玉熙的人生开始翻天覆地，但她新的人生却是好事多磨，苦尽甘来。', 'http://www.biquge.cn/cover/14/14141/14141s.jpg', '14141');
