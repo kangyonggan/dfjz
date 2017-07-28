@@ -24,7 +24,7 @@ public class WXController {
     private WXService wxService;
 
     /**
-     * 验证开发者服务器
+     * 自动回复
      *
      * @return
      */
@@ -42,6 +42,26 @@ public class WXController {
 
         wxService.writeResponse(response, respXml);
         return "success";
+    }
+
+    /**
+     * 验证开发者服务器
+     *
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET)
+    public String handle(HttpServletRequest request) {
+        String signature = request.getParameter("signature");
+        String timestamp = request.getParameter("timestamp");
+        String nonce = request.getParameter("nonce");
+        String echostr = request.getParameter("echostr");
+
+        log.info("signature:" + signature);
+        log.info("timestamp:" + timestamp);
+        log.info("nonce:" + nonce);
+        log.info("echostr:" + echostr);
+
+        return echostr;
     }
 
 }
