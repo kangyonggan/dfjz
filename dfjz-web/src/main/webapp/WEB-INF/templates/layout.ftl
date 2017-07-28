@@ -29,10 +29,10 @@
 
 <#include "footer.ftl">
 
-<div class="scroll-bar hidden">
-    <a href="javascript:scroll(0,0)" class="top">&uarr;</a>
-    <a href="javascript:scroll(0, 9999999999)" class="bottom">&darr;</a>
-</div>
+<#--<div class="scroll-bar hidden">-->
+    <#--<a href="javascript:scroll(0,0)" class="top">&uarr;</a>-->
+    <#--<a href="javascript:scroll(0, 9999999999)" class="bottom">&darr;</a>-->
+<#--</div>-->
 
 <script src="${ctx}/static/app/js/simpage.js"></script>
 <script src="${ctx}/static/app/js/app.js"></script>
