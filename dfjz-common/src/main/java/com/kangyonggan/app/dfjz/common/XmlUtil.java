@@ -1,13 +1,17 @@
 package com.kangyonggan.app.dfjz.common;
 
 import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.net.URL;
 
 
 /**
@@ -15,6 +19,8 @@ import java.io.StringWriter;
  * @since 2017/4/22 0022
  */
 public class XmlUtil {
+
+    private static final SAXReader reader = new SAXReader();
 
     /**
      * xml格式化
@@ -53,5 +59,21 @@ public class XmlUtil {
                 }
             }
         }
+    }
+
+    public static Document read(String filename) throws DocumentException {
+        return reader.read(new File(filename));
+    }
+
+    public static Document read(File file) throws DocumentException {
+        return reader.read(file);
+    }
+
+    public static Document read(URL url) throws DocumentException {
+        return reader.read(url);
+    }
+
+    public static Document parseText(String xml) throws DocumentException {
+        return DocumentHelper.parseText(xml);
     }
 }
