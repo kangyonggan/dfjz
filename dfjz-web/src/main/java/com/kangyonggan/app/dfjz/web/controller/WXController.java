@@ -33,6 +33,9 @@ public class WXController {
         log.info("========= 微信订阅号后台收到一个请求 =========");
 
         AutoReplyRequestDto requestDto = wxService.getRequestDtoFromRequest(request);
+        if (requestDto == null) {
+            return "error";
+        }
 
         String respXml = wxService.getResponseXml(requestDto.getFromUserName(), requestDto.getToUserName(), requestDto.getContent());
         log.info("响应报文：{}", respXml);

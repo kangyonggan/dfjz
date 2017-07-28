@@ -44,7 +44,7 @@ public class WXService {
             xml = IOUtil.read(request.getInputStream());
             log.info("接收到的xml：{}", xml);
         } catch (IOException e) {
-            log.error("读取输入流异常", e);
+            log.warn("读取输入流异常", e);
             return null;
         }
 
@@ -53,7 +53,7 @@ public class WXService {
             doc = XmlUtil.parseText(xml);
             log.info("xml解析成功");
         } catch (DocumentException e) {
-            log.error("xml解析异常", e);
+            log.warn("xml解析异常", e);
             return null;
         }
 
@@ -73,7 +73,7 @@ public class WXService {
             requestDto.setCreateTime(createTime);
             requestDto.setContent(content);
         } catch (Exception e) {
-            log.error("提取requestDto异常", e);
+            log.warn("提取requestDto异常", e);
             return null;
         }
 
@@ -103,7 +103,7 @@ public class WXService {
         try {
             IOUtil.write(response.getOutputStream(), respXml);
         } catch (IOException e) {
-            log.error("写响应失败", e);
+            log.warn("写响应失败", e);
         }
     }
 
