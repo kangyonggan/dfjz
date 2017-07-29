@@ -275,12 +275,8 @@ CREATE TABLE repository
   COMMENT '知识库表';
 CREATE UNIQUE INDEX id_UNIQUE
   ON repository (id);
-# CREATE UNIQUE INDEX question_UNIQUE
-#   ON repository (question);
-
-alter table repository drop INDEX question_UNIQUE;
 
 INSERT INTO repository
 (question, answer, weight)
 VALUES
-  ('你叫什么名字？', '我叫智能小胖', 9999);
+  ('你叫什么名字？', '我叫小胖', 9999);
