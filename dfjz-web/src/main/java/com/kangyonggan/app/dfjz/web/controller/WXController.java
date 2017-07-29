@@ -37,7 +37,9 @@ public class WXController {
             return "error";
         }
 
-        String respXml = wxService.getResponseXml(requestDto.getFromUserName(), requestDto.getToUserName(), requestDto.getContent());
+        String content = wxService.getResponseContent(requestDto);
+
+        String respXml = wxService.getResponseXml(requestDto.getFromUserName(), requestDto.getToUserName(), requestDto.getMsgType(), content);
         log.info("响应报文：{}", respXml);
 
         wxService.writeResponse(response, respXml);

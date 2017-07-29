@@ -25,7 +25,7 @@ public class WXService {
             "<ToUserName><![CDATA[%s]]></ToUserName>" +
             "<FromUserName><![CDATA[%s]]></FromUserName>" +
             "<CreateTime>%d</CreateTime>" +
-            "<MsgType><![CDATA[text]]></MsgType>" +
+            "<MsgType><![CDATA[%s]]></MsgType>" +
             "<Content><![CDATA[%s]]></Content>" +
             "</xml>";
 
@@ -85,11 +85,12 @@ public class WXService {
      *
      * @param toUserName
      * @param fromUserName
+     * @param msgType
      * @param content
      * @return
      */
-    public String getResponseXml(String toUserName, String fromUserName, String content) {
-        return String.format(RESP_XML_TEMPLATE, toUserName, fromUserName, System.currentTimeMillis(), content);
+    public String getResponseXml(String toUserName, String fromUserName, String msgType, String content) {
+        return String.format(RESP_XML_TEMPLATE, toUserName, fromUserName, System.currentTimeMillis(), msgType, content);
     }
 
     /**
@@ -107,4 +108,38 @@ public class WXService {
         }
     }
 
+    /**
+     * 获取回复信息
+     *
+     * @param requestDto
+     * @return
+     */
+    public String getResponseContent(AutoReplyRequestDto requestDto) {
+        String content = requestDto.getContent();
+        String result;
+
+        if (content.equals("你好")) {
+            result = content;
+        } else {
+            result = getMenus();
+        }
+
+        return result;
+    }
+
+    private String getMenus() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("自助菜单:\n\n");
+        sb.append("1. 身份证查询\n");
+        sb.append("2. 生成八字推算\n");
+        sb.append("3. 二维码生成\n");
+        sb.append("4. 逆天邪神\n");
+        sb.append("5. Java后台\n");
+        sb.append("6. Web前端\n");
+        sb.append("7. 系统运维\n");
+        sb.append("8. 代码片段\n");
+        sb.append("9. 综合\n\n");
+        sb.append("回复编号，即可打开内容！");
+        return sb.toString();
+    }
 }
