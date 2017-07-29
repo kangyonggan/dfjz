@@ -13,6 +13,8 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -127,6 +129,7 @@ public class WXService {
      * @param requestDto
      * @return
      */
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public String getResponseXml(AutoReplyRequestDto requestDto) {
         if (!requestDto.getMsgType().equals("text")) {
             return buildTextMsg(requestDto, "我暂时只能看懂文字，更强大的功能小胖正在开发，敬请期待吧！");
