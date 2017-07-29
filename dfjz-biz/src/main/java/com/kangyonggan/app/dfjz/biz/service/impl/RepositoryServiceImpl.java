@@ -29,7 +29,7 @@ public class RepositoryServiceImpl extends BaseService<Repository> implements Re
         example.createCriteria().andLike("question", StringUtil.toLikeString(question));
         example.setOrderByClause("weight desc");
 
-        PageHelper.offsetPage(1, 1);
+        PageHelper.offsetPage(0, 1);
         List<Repository> repositories = super.selectByExample(example);
         if (repositories.isEmpty()) {
             return null;
