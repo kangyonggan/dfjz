@@ -188,7 +188,7 @@ public class WXService {
         String result;
 
         if (repository == null) {
-            result = buildTextMsg(requestDto, "我是一枚刚出生的婴儿，不会这个问题，你可以教我，下次我就会了, 有时候可能要多教几遍。\n\n教我步骤, 回复: \n“教你:问题描述==答案”\n\n例如回复：\n教你:你叫什么名字==小胖");
+            result = buildTextMsg(requestDto, "我暂时还不会这个问题，你可以教我，下次我就会了, 有时候可能要多教几遍。\n\n教我步骤, 回复: \n“教你:问题描述==答案”\n\n例如回复：\n教你:你叫什么名字==小胖");
         } else {
             result = buildTextMsg(requestDto, repository.getAnswer());
         }
