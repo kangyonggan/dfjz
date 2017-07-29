@@ -135,7 +135,7 @@ CREATE TABLE dictionary
   COMMENT '类型',
   code         VARCHAR(16)                           NOT NULL
   COMMENT '代码',
-  name         VARCHAR(1024)                           NOT NULL
+  name         VARCHAR(1024)                         NOT NULL
   COMMENT '名称',
   sort         INTEGER(11)                           NOT NULL
   COMMENT '排序',
@@ -168,6 +168,10 @@ CREATE TABLE category
   COMMENT '栏目代码',
   name          VARCHAR(32)                           NOT NULL
   COMMENT '栏目名称',
+  description   VARCHAR(64)                           NOT NULL
+  COMMENT '描述',
+  picture       VARCHAR(128)                          NOT NULL
+  COMMENT '封面图片地址',
   sort          INTEGER(11)                           NOT NULL
   COMMENT '栏目排序',
   article_count INTEGER(11)                           NOT NULL                    DEFAULT 0
@@ -185,14 +189,14 @@ CREATE UNIQUE INDEX uid_code
 CREATE INDEX id_created_time
   ON category (created_time);
 
-INSERT INTO category (code, name, sort)
+INSERT INTO category (code, name, description, picture, sort)
 VALUES
-  ('java', 'Java后台', 0),
-  ('web', 'Web前端', 1),
-  ('db', '数据库', 2),
-  ('code', '代码片段', 3),
-  ('linux', '系统运维', 4),
-  ('other', '综合', 5);
+  ('java', 'Java后台', 'Java、Spring、MyBatis、Redis、Dubbo等', '/static/app/images/wx/java.png', 0),
+  ('web', 'Web前端', 'Html、Css、js、jQuery、Bootstrap等', '/static/app/images/wx/web.png', 1),
+  ('db', '数据库', 'MySQL、主从复制、读写分离等', '/static/app/images/wx/db.png', 2),
+  ('code', '代码片段', '经常使用但又记不住的或者太长的代码片段', '/static/app/images/wx/code.png', 3),
+  ('linux', '系统运维', 'Linux下各种软件的安装、环境变量的配置、以及使用等', '/static/app/images/wx/linux.png', 4),
+  ('other', '综合', 'SSH免密登录、内网穿透、网站升级到Https等', '/static/app/images/wx/other.png', 5);
 
 -- ----------------------------
 --  Table structure for book
@@ -237,7 +241,10 @@ INSERT INTO book (name, author, intro, picture, url)
   VALUE ('逆天邪神', '火星引力', '掌天毒之珠，承邪神之血，修逆天之力，一代邪神，君临天下！', 'http://www.biquge.cn/cover/2/2722/2722s.jpg', '2722');
 
 INSERT INTO book (name, author, intro, picture, url)
-  VALUE ('绝世战魂', '极品妖孽', '家族少主，天生废魂，在机缘巧合之下，觉醒了太古神秘的战神之魂，从此之后，一路逆袭，邂逅仙姿美女，碾压九界天才，无所不战，无所不胜！', 'http://www.biquge.cn/cover/18/18612/18612s.jpg', '18612');
+  VALUE ('绝世战魂', '极品妖孽', '家族少主，天生废魂，在机缘巧合之下，觉醒了太古神秘的战神之魂，从此之后，一路逆袭，邂逅仙姿美女，碾压九界天才，无所不战，无所不胜！',
+         'http://www.biquge.cn/cover/18/18612/18612s.jpg', '18612');
 
 INSERT INTO book (name, author, intro, picture, url)
-  VALUE ('嫡女重生记', '六月浩雪', '在家是小透明，嫁人后是摆设，最后葬身火海尸骨无存，这是韩玉熙上辈子的写照。重活一世，韩玉熙努力上进，只愿不再做陪衬与花瓶，然后觅得如意郎君，平安富贵过一生。可惜事与愿违，嫁了个身负血海深仇的郎君，韩玉熙的人生开始翻天覆地，但她新的人生却是好事多磨，苦尽甘来。', 'http://www.biquge.cn/cover/14/14141/14141s.jpg', '14141');
+  VALUE ('嫡女重生记', '六月浩雪',
+         '在家是小透明，嫁人后是摆设，最后葬身火海尸骨无存，这是韩玉熙上辈子的写照。重活一世，韩玉熙努力上进，只愿不再做陪衬与花瓶，然后觅得如意郎君，平安富贵过一生。可惜事与愿违，嫁了个身负血海深仇的郎君，韩玉熙的人生开始翻天覆地，但她新的人生却是好事多磨，苦尽甘来。',
+         'http://www.biquge.cn/cover/14/14141/14141s.jpg', '14141');
