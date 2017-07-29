@@ -141,8 +141,27 @@ public class WXService {
         if (index > -1) {
             Category category = categories.get(index);
             respXml = String.format(NEWS_XML_TEMPLATE, requestDto.getFromUserName(), requestDto.getToUserName(), System.currentTimeMillis(), category.getName(), category.getDescription(), "https://kangyonggan.com" + category.getPicture(), "https://kangyonggan.com/#category/" + category.getCode());
-        } else if ("菜单".equals(content)) {
+        } else if ("博客".equals(content)) {
             respXml = buildTextMsg(requestDto, getMenus());
+        } else if (content.trim().startsWith("教你:") || content.trim().equals("教你：")) {
+            content = content.substring(3);
+            String arr[] = content.split("==");
+            if (arr != null && arr.length == 2) {
+                if (repositoryService.existQuestion(arr[0])) {
+                    Repository repository = new Repository();
+                    repository.setQuestion(arr[0]);
+                    repositoryService.updateRepositoryWeight(repository);
+                } else {
+                    Repository repository = new Repository();
+                    repository.setQuestion(arr[0]);
+                    repository.setAnswer(arr[1]);
+                    repositoryService.saveRepository(repository);
+                }
+
+                respXml = "我已经学习成功了";
+            } else {
+                return buildTextMsg(requestDto, "你输入的格式不对，我无法学习，请重新尝试！");
+            }
         } else {
             // 智能小胖
             respXml = getXiaoPangResp(requestDto);

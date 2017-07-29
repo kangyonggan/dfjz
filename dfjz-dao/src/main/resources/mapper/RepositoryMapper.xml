@@ -13,4 +13,8 @@
         <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP"/>
         <result column="answer" property="answer" jdbcType="LONGVARCHAR"/>
     </resultMap>
+
+    <update id="updateRepositoryWeight" parameterType="String">
+      UPDATE repository SET weight = weight + 1 WHERE question = #{question}
+    </update>
 </mapper>
