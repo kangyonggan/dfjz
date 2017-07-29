@@ -21,12 +21,34 @@ import java.io.IOException;
 @Log4j2
 public class WXService {
 
-    private static String RESP_XML_TEMPLATE = "<xml>" +
+    /**
+     * 文本信息模板
+     */
+    private static String TEXT_XML_TEMPLATE = "<xml>" +
             "<ToUserName><![CDATA[%s]]></ToUserName>" +
             "<FromUserName><![CDATA[%s]]></FromUserName>" +
             "<CreateTime>%d</CreateTime>" +
-            "<MsgType><![CDATA[%s]]></MsgType>" +
+            "<MsgType><![CDATA[text]]></MsgType>" +
             "<Content><![CDATA[%s]]></Content>" +
+            "</xml>";
+
+    /**
+     * 图文信息模板
+     */
+    private static String NEWS_XML_TEMPLATE = "<xml>\n" +
+            "<ToUserName><![CDATA[%s]]></ToUserName>\n" +
+            "<FromUserName><![CDATA[%s]]></FromUserName>\n" +
+            "<CreateTime>%d</CreateTime>\n" +
+            "<MsgType><![CDATA[news]]></MsgType>\n" +
+            "<ArticleCount>1</ArticleCount>\n" +
+            "<Articles>\n" +
+            "<item>\n" +
+            "<Title><![CDATA[%s]]></Title> \n" +
+            "<Description><![CDATA[%s]]></Description>\n" +
+            "<PicUrl><![CDATA[%s]]></PicUrl>\n" +
+            "<Url><![CDATA[%s]]></Url>\n" +
+            "</item>\n"+
+            "</Articles>\n" +
             "</xml>";
 
     /**
@@ -83,14 +105,20 @@ public class WXService {
     /**
      * 组装响应报文
      *
-     * @param toUserName
-     * @param fromUserName
-     * @param msgType
-     * @param content
+     * @param requestDto
      * @return
      */
-    public String getResponseXml(String toUserName, String fromUserName, String msgType, String content) {
-        return String.format(RESP_XML_TEMPLATE, toUserName, fromUserName, System.currentTimeMillis(), msgType, content);
+    public String getResponseXml(AutoReplyRequestDto requestDto) {
+        String content = requestDto.getContent();
+        String respXml;
+
+        if (content.equals("1")) {
+            respXml = String.format(NEWS_XML_TEMPLATE, requestDto.getFromUserName(), requestDto.getToUserName(), System.currentTimeMillis(), "身份证查询", "输入身份证号码可以查询你省份、地区、性别、生肖等", "https://kangyonggan.com/static/app/images/tools/idcard.png", "https://kangyonggan.com/#tools/idcard");
+        } else {
+            respXml = String.format(TEXT_XML_TEMPLATE, requestDto.getFromUserName(), requestDto.getToUserName(), System.currentTimeMillis(), getMenus());
+        }
+
+        return respXml;
     }
 
     /**
@@ -108,29 +136,10 @@ public class WXService {
         }
     }
 
-    /**
-     * 获取回复信息
-     *
-     * @param requestDto
-     * @return
-     */
-    public String getResponseContent(AutoReplyRequestDto requestDto) {
-        String content = requestDto.getContent();
-        String result;
-
-        if (content.equals("你好")) {
-            result = content;
-        } else {
-            result = getMenus();
-        }
-
-        return result;
-    }
-
     private String getMenus() {
         StringBuilder sb = new StringBuilder();
         sb.append("自助菜单:\n\n");
-        sb.append("1. 身份证查询\n");
+        sb.append("1. <a href='https://kangyonggan.com/#tools/idcard'>身份证查询</a>\n");
         sb.append("2. 生成八字推算\n");
         sb.append("3. 二维码生成\n");
         sb.append("4. 逆天邪神\n");
