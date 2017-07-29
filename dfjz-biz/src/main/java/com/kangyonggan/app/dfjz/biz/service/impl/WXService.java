@@ -134,7 +134,7 @@ public class WXService {
 
     private int getCategoryIndex(String content, int size) {
         for (int i = 1; i <= size; i++) {
-            if (content.equals(i)) {
+            if (content.equals(String.valueOf(i))) {
                 return i - 1;
             }
         }
@@ -164,10 +164,10 @@ public class WXService {
         List<Category> categories = categoryService.findAllCategories();
         int sort = 0;
         for (Category category : categories) {
-            sb.append(++sort).append(" <a href='https://kangyonggan.com/#category/").append(category.getCode()).append("'>").append(category.getName()).append("</a>\n");
+            sb.append(++sort).append(". <a href='https://kangyonggan.com/#category/").append(category.getCode()).append("'>").append(category.getName()).append("</a>\n");
         }
 
-        sb.append("回复或点击栏目编号，即可进入栏目列表！");
+        sb.append("\n回复栏目编号，即可进入栏目列表！");
         return sb.toString();
     }
 }
