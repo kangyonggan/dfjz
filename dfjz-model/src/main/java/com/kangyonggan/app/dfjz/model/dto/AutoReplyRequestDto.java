@@ -37,6 +37,11 @@ public class AutoReplyRequestDto {
     private String content;
 
     /**
+     * 图片url
+     */
+    private String picUrl;
+
+    /**
      * 消息id，64位整型
      */
     private String msgId;

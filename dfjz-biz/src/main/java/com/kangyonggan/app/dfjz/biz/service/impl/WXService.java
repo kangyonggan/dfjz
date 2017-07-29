@@ -1,10 +1,12 @@
 package com.kangyonggan.app.dfjz.biz.service.impl;
 
 import com.kangyonggan.app.dfjz.biz.service.CategoryService;
+import com.kangyonggan.app.dfjz.biz.service.RepositoryService;
 import com.kangyonggan.app.dfjz.common.IOUtil;
 import com.kangyonggan.app.dfjz.common.XmlUtil;
 import com.kangyonggan.app.dfjz.model.dto.AutoReplyRequestDto;
 import com.kangyonggan.app.dfjz.model.vo.Category;
+import com.kangyonggan.app.dfjz.model.vo.Repository;
 import lombok.extern.log4j.Log4j2;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -27,6 +29,9 @@ public class WXService {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private RepositoryService repositoryService;
 
     /**
      * 文本信息模板
@@ -92,7 +97,15 @@ public class WXService {
             String fromUserName = root.element("FromUserName").getTextTrim();// 发送方帐号（一个OpenID）
             String createTime = root.element("CreateTime").getTextTrim();// 消息创建时间 （整型）
             String msgType = root.element("MsgType").getTextTrim();// text
-            String content = root.element("Content").getTextTrim();// 文本消息内容
+            if ("text".equals(msgType)) {
+                String content = root.element("Content").getTextTrim();// 文本消息内容
+                requestDto.setContent(content);
+            } else if ("image".equals(msgType)) {
+                String picUrl = root.element("PicUrl").getTextTrim();// 图片url
+                requestDto.setPicUrl(picUrl);
+            } else if ("voice".equals(msgType)) {
+                // TODO 语言消息
+            }
             String msgId = root.element("MsgId").getTextTrim();// 消息id，64位整型
 
             requestDto.setMsgId(msgId);
@@ -100,7 +113,6 @@ public class WXService {
             requestDto.setMsgType(msgType);
             requestDto.setFromUserName(fromUserName);
             requestDto.setCreateTime(createTime);
-            requestDto.setContent(content);
         } catch (Exception e) {
             log.warn("提取requestDto异常", e);
             return null;
@@ -116,20 +128,50 @@ public class WXService {
      * @return
      */
     public String getResponseXml(AutoReplyRequestDto requestDto) {
+        if (!requestDto.getMsgType().equals("text")) {
+            return buildTextMsg(requestDto, "我暂时只能看到文字，更强大的功能小胖正在开发，敬请期待吧！");
+        }
+
         String content = requestDto.getContent();
         String respXml;
 
         List<Category> categories = categoryService.findAllCategories();
-
         int index = getCategoryIndex(content, categories.size());
+
         if (index > -1) {
             Category category = categories.get(index);
             respXml = String.format(NEWS_XML_TEMPLATE, requestDto.getFromUserName(), requestDto.getToUserName(), System.currentTimeMillis(), category.getName(), category.getDescription(), "https://kangyonggan.com" + category.getPicture(), "https://kangyonggan.com/#category/" + category.getCode());
+        } else if ("菜单".equals(content)) {
+            respXml = buildTextMsg(requestDto, getMenus());
         } else {
-            respXml = String.format(TEXT_XML_TEMPLATE, requestDto.getFromUserName(), requestDto.getToUserName(), System.currentTimeMillis(), getMenus());
+            // 智能小胖
+            respXml = getXiaoPangResp(requestDto);
         }
 
         return respXml;
+    }
+
+    private String buildTextMsg(AutoReplyRequestDto requestDto, String content) {
+        return String.format(TEXT_XML_TEMPLATE, requestDto.getFromUserName(), requestDto.getToUserName(), System.currentTimeMillis(), content);
+    }
+
+    /**
+     * 智能小胖回复
+     *
+     * @param requestDto
+     * @return
+     */
+    private String getXiaoPangResp(AutoReplyRequestDto requestDto) {
+        Repository repository = repositoryService.findAnswerByQuestion(requestDto.getContent());
+        String result;
+
+        if (repository == null) {
+            result = buildTextMsg(requestDto, "我是一枚刚出生的婴儿，不会这个问题，你可以教我，下次我就会了, 有时候可能要多教几遍。\n\n教我步骤, 回复: \n“教你:问题描述==答案”\n\n例如回复：\n教你:你叫什么名字==小胖");
+        } else {
+            result = buildTextMsg(requestDto, repository.getAnswer());
+        }
+
+        return result;
     }
 
     private int getCategoryIndex(String content, int size) {
@@ -159,7 +201,7 @@ public class WXService {
 
     private String getMenus() {
         StringBuilder sb = new StringBuilder();
-        sb.append("文章栏目:\n\n");
+        sb.append("文章栏目:\n");
 
         List<Category> categories = categoryService.findAllCategories();
         int sort = 0;
@@ -167,7 +209,7 @@ public class WXService {
             sb.append(++sort).append(". <a href='https://kangyonggan.com/#category/").append(category.getCode()).append("'>").append(category.getName()).append("</a>\n");
         }
 
-        sb.append("\n回复栏目编号，即可进入栏目列表！");
+        sb.append("\n回复编号，享你所想！");
         return sb.toString();
     }
 }

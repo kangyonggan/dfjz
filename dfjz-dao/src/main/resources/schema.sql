@@ -248,3 +248,37 @@ INSERT INTO book (name, author, intro, picture, url)
   VALUE ('嫡女重生记', '六月浩雪',
          '在家是小透明，嫁人后是摆设，最后葬身火海尸骨无存，这是韩玉熙上辈子的写照。重活一世，韩玉熙努力上进，只愿不再做陪衬与花瓶，然后觅得如意郎君，平安富贵过一生。可惜事与愿违，嫁了个身负血海深仇的郎君，韩玉熙的人生开始翻天覆地，但她新的人生却是好事多磨，苦尽甘来。',
          'http://www.biquge.cn/cover/14/14141/14141s.jpg', '14141');
+
+-- ----------------------------
+--  Table structure for repository
+-- ----------------------------
+DROP TABLE
+IF EXISTS repository;
+
+CREATE TABLE repository
+(
+  id           BIGINT(20) PRIMARY KEY AUTO_INCREMENT NOT NULL
+  COMMENT '主键, 自增',
+  question     VARCHAR(256)                          NOT NULL
+  COMMENT '问题',
+  answer       LONGTEXT                              NOT NULL
+  COMMENT '答案',
+  weight       INTEGER                               NOT NULL                    DEFAULT 0
+  COMMENT '权重',
+  is_deleted   TINYINT                               NOT NULL                    DEFAULT 0
+  COMMENT '逻辑删除:{0:未删除, 1:已删除}',
+  created_time TIMESTAMP                             NOT NULL                    DEFAULT CURRENT_TIMESTAMP
+  COMMENT '创建时间',
+  updated_time TIMESTAMP                             NOT NULL                    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  COMMENT '更新时间'
+)
+  COMMENT '知识库表';
+CREATE UNIQUE INDEX id_UNIQUE
+  ON repository (id);
+CREATE UNIQUE INDEX question_UNIQUE
+  ON repository (question);
+
+INSERT INTO repository
+(question, answer, weight)
+VALUES
+  ('你叫什么名字？', '我叫智能小胖', 9999);
