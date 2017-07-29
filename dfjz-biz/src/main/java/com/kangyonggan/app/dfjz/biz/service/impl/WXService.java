@@ -143,7 +143,7 @@ public class WXService {
             respXml = String.format(NEWS_XML_TEMPLATE, requestDto.getFromUserName(), requestDto.getToUserName(), System.currentTimeMillis(), category.getName(), category.getDescription(), "https://kangyonggan.com" + category.getPicture(), "https://kangyonggan.com/#category/" + category.getCode());
         } else if ("博客".equals(content)) {
             respXml = buildTextMsg(requestDto, getMenus());
-        } else if (content.trim().startsWith("教你:") || content.trim().equals("教你：")) {
+        } else if (content.trim().startsWith("教你:") || content.trim().startsWith("教你：")) {
             content = content.substring(3);
             String arr[] = content.split("==");
             if (arr != null && arr.length == 2) {
