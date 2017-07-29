@@ -275,8 +275,10 @@ CREATE TABLE repository
   COMMENT '知识库表';
 CREATE UNIQUE INDEX id_UNIQUE
   ON repository (id);
-CREATE UNIQUE INDEX question_UNIQUE
-  ON repository (question);
+# CREATE UNIQUE INDEX question_UNIQUE
+#   ON repository (question);
+
+alter table repository drop INDEX question_UNIQUE;
 
 INSERT INTO repository
 (question, answer, weight)

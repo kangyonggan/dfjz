@@ -27,9 +27,10 @@ public interface RepositoryService {
      * 判断此问题是否存在
      *
      * @param question
+     * @param answer
      * @return
      */
-    boolean existQuestion(String question);
+    boolean existQuestion(String question, String answer);
 
     /**
      * 问题的权重加1

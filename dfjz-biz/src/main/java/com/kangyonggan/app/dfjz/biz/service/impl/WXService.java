@@ -150,9 +150,10 @@ public class WXService {
             content = content.substring(3);
             String arr[] = content.split("==");
             if (arr != null && arr.length == 2) {
-                if (repositoryService.existQuestion(arr[0])) {
+                if (repositoryService.existQuestion(arr[0], arr[1])) {
                     Repository repository = new Repository();
                     repository.setQuestion(arr[0]);
+                    repository.setAnswer(arr[1]);
                     repositoryService.updateRepositoryWeight(repository);
                 } else {
                     Repository repository = new Repository();

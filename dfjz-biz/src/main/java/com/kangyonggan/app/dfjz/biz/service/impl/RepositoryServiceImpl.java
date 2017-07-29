@@ -46,9 +46,10 @@ public class RepositoryServiceImpl extends BaseService<Repository> implements Re
 
     @Override
     @LogTime
-    public boolean existQuestion(String question) {
+    public boolean existQuestion(String question, String answer) {
         Repository repository = new Repository();
         repository.setQuestion(question);
+        repository.setAnswer(answer);
 
         return repositoryMapper.selectCount(repository) == 1;
     }
