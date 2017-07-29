@@ -57,6 +57,6 @@ public class RepositoryServiceImpl extends BaseService<Repository> implements Re
     @Override
     @LogTime
     public void updateRepositoryWeight(Repository repository) {
-        repositoryMapper.updateRepositoryWeight(repository.getQuestion());
+        repositoryMapper.updateRepositoryWeight(repository.getQuestion(), repository.getAnswer());
     }
 }

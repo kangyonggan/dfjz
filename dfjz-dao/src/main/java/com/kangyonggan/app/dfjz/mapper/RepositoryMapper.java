@@ -10,6 +10,7 @@ public interface RepositoryMapper extends MyMapper<Repository> {
      * 问题权重加1
      *
      * @param question
+     * @param answer
      */
-    void updateRepositoryWeight(@Param("question") String question);
+    void updateRepositoryWeight(@Param("question") String question, @Param("answer") String answer);
 }

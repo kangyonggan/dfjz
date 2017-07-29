@@ -14,7 +14,7 @@
         <result column="answer" property="answer" jdbcType="LONGVARCHAR"/>
     </resultMap>
 
-    <update id="updateRepositoryWeight" parameterType="String">
-      UPDATE repository SET weight = weight + 1 WHERE question = #{question}
+    <update id="updateRepositoryWeight">
+      UPDATE repository SET weight = weight + 1 WHERE question = #{question} AND answer = #{answer}
     </update>
 </mapper>
