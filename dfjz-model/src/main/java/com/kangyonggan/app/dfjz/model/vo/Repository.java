@@ -6,6 +6,7 @@ import javax.persistence.*;
 import lombok.Data;
 
 @Data
+@Table(name = "repository")
 public class Repository implements Serializable {
     /**
      * 主键, 自增

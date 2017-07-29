@@ -129,7 +129,7 @@ public class WXService {
      */
     public String getResponseXml(AutoReplyRequestDto requestDto) {
         if (!requestDto.getMsgType().equals("text")) {
-            return buildTextMsg(requestDto, "我暂时只能看到文字，更强大的功能小胖正在开发，敬请期待吧！");
+            return buildTextMsg(requestDto, "我暂时只能看懂文字，更强大的功能小胖正在开发，敬请期待吧！");
         }
 
         String content = requestDto.getContent();
