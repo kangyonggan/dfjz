@@ -161,7 +161,7 @@ public class WXService {
                     repositoryService.saveRepository(repository);
                 }
 
-                respXml = "我已经学习成功了";
+                respXml = buildTextMsg(requestDto, "我已经学习成功了");
             } else {
                 return buildTextMsg(requestDto, "你输入的格式不对，我无法学习，请重新尝试！");
             }
