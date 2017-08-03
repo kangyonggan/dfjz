@@ -20,16 +20,14 @@ public class BookController extends BaseController {
      * 生成书籍rss
      *
      * @param id
-     * @param pageNum
      * @param startNum
      * @return
      */
     @RequestMapping(value = "{id:[\\d]+}", method = RequestMethod.GET)
     @ResponseBody
     public String genRss(@PathVariable("id") Long id,
-                         @RequestParam(value = "p", required = false, defaultValue = "1") int pageNum,
                          @RequestParam(value = "s", required = false, defaultValue = "0") int startNum) {
-        bookService.genBookRssByPage(id, pageNum, startNum);
+        bookService.genBookRssByPage(id, startNum);
 
         return "ok";
     }
@@ -42,9 +40,7 @@ public class BookController extends BaseController {
     @RequestMapping(value = "nmhn", method = RequestMethod.GET)
     @ResponseBody
     public String genNmhnRss() {
-        for (int i = 1; i <= 9; i++) {
-            bookService.genNMHNRss(i);
-        }
+        bookService.genNMHNRss();
 
         return "ok";
     }

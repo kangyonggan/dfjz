@@ -48,7 +48,6 @@
         <property name="dfjz.slow.interface.time" description="慢接口时间(秒)" defaultValue="2"/>
         <property name="dfjz.cache.open" description="是否开启缓存,Y:开启,N:不开启" defaultValue="Y"/>
         <property name="dfjz.white.ip" description="刷新任务的ip白名单（以逗号分隔）" defaultValue="0:0:0:0:0:0:0:1"/>
-        <property name="dfjz.book.update.ops" description="更新书籍选项，以逗号分隔多本书" defaultValue="2_9_1"/>
     </group>
     <script>
         <generate template="applicationContext-datasource.xml" charset="UTF-8"/>

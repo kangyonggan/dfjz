@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @author kangyonggan
  * @since 2017/4/10 0010
  */
-@Component
+//@Component
 @Log4j2
 public class RssTask {
 
@@ -24,7 +24,7 @@ public class RssTask {
     @Scheduled(cron = "0 0/40 * * * *")
     public void execute() {
         log.info("定时任务自动生成RSS开始...");
-        articleService.genBlogRss();
+//        articleService.genBlogRss();
         log.info("定时任务自动生成RSS结束!");
     }
 

@@ -37,7 +37,7 @@ public class BookServiceImpl extends BaseService<Book> implements BookService {
     private RedisService redisService;
 
     @Override
-    public void genBookRssByPage(Long id, int pageNum, int startNum) {
+    public void genBookRssByPage(Long id, int startNum) {
         // 判断是否重复执行
         if (isExecuting()) {
             log.warn("书籍执行引擎正在执行中, 不可重复执行!");
@@ -54,6 +54,8 @@ public class BookServiceImpl extends BaseService<Book> implements BookService {
             return;
         }
 
+        String rssName = book.getName();
+
         // 抓取第书籍章节列表
         Document bookDoc = HtmlUtil.parseUrl(BOOK_BASE_URL + "/book/" + book.getUrl());
         if (bookDoc == null) {
@@ -63,14 +65,9 @@ public class BookServiceImpl extends BaseService<Book> implements BookService {
             return;
         }
 
-        int start = (pageNum - 1) * 100 + 1;
-        int end = (pageNum - 1) * 100 + 100;
-
-        String rssName = book.getName() + "(" + start + "章-" + end + "章)";
-
         // 章节列表
         Elements chapterElements = bookDoc.select("#list dl dd a");
-        log.info("{}书籍总共{}章节, 现在抓取{}-{}章节", book.getName(), chapterElements.size(), start, end);
+        log.info("{}书籍总共{}章节", book.getName(), chapterElements.size());
 
         StringBuilder rss = new StringBuilder();
         // 把开头信息写入
@@ -81,7 +78,7 @@ public class BookServiceImpl extends BaseService<Book> implements BookService {
         rss.append("<author><name>").append(book.getAuthor()).append("</name></author>");
 
         // 写入章节信息
-        for (int i = start - 1 + startNum; i < end + startNum && i < chapterElements.size(); i++) {
+        for (int i = startNum; i < chapterElements.size(); i++) {
             Element chapterElement = chapterElements.get(i);
             processChapter(rss, book, chapterElement);
         }
@@ -111,18 +108,18 @@ public class BookServiceImpl extends BaseService<Book> implements BookService {
     }
 
     @Override
-    public void genNMHNRss(int pageNum) {
+    public void genNMHNRss() {
         Document bookDoc = HtmlUtil.parseUrl("http://www.shengyan.org/book/108171.html");
         Elements chapterElements = bookDoc.select(".listmain dl dd a");
 
         StringBuilder rss = new StringBuilder();
-        rss.append("<feed xmlns=\"http://www.w3.org/2005/Atom\"><title>").append("农门悍女掌家小厨娘(" + ((pageNum - 1) * 100 + 1) + "-" + (100 * pageNum) + ")").append("</title>");
+        rss.append("<feed xmlns=\"http://www.w3.org/2005/Atom\"><title>").append("农门悍女掌家小厨娘").append("</title>");
         rss.append("<link href=\"/rss/nmhn.xml\" rel=\"self\"/>").append("<link href=\"https://www.kangyonggan.com/\"/>");
         rss.append("<updated>").append(DateUtil.toXmlDateTime(new Date())).append("</updated>");
         rss.append("<id>https://www.kangyonggan.com/</id>");
         rss.append("<author><name>昕玥格</name></author>");
 
-        for (int i = 12 + (pageNum - 1) * 100; i < 12 + pageNum * 100 && i < chapterElements.size(); i++) {
+        for (int i = 12; i < chapterElements.size(); i++) {
             Element chapterElement = chapterElements.get(i);
             String chapterUrl = chapterElement.attr("href");
             Document chapterDoc = HtmlUtil.parseUrl("http://www.shengyan.org/" + chapterUrl);
@@ -154,7 +151,7 @@ public class BookServiceImpl extends BaseService<Book> implements BookService {
 
         rss.append("</feed>");
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(PropertiesUtil.getProperties("file.root.path") + "rss/" + pageNum + ".xml"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(PropertiesUtil.getProperties("file.root.path") + "rss/农门悍女掌家小厨娘.xml"));
             writer.write(rss.toString());
             writer.flush();
             writer.close();

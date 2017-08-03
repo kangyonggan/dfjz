@@ -10,15 +10,13 @@ public interface BookService {
      * 生成书籍rss订阅源
      *
      * @param id
-     * @param pageNum
      * @param startNum
      */
-    void genBookRssByPage(Long id, int pageNum, int startNum);
+    void genBookRssByPage(Long id, int startNum);
 
     /**
      * 生成农门悍女
-     * @param pageNum
      */
-    void genNMHNRss(int pageNum);
+    void genNMHNRss();
 
 }
