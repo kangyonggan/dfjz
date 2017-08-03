@@ -196,7 +196,8 @@ VALUES
   ('db', '数据库', 'MySQL、主从复制、读写分离等', '/static/app/images/wx/db.png', 2),
   ('code', '代码片段', '经常使用但又记不住的或者太长的代码片段', '/static/app/images/wx/code.png', 3),
   ('linux', '系统运维', 'Linux下各种软件的安装、环境变量的配置、以及使用等', '/static/app/images/wx/linux.png', 4),
-  ('other', '综合', 'SSH免密登录、内网穿透、网站升级到Https等', '/static/app/images/wx/other.png', 5);
+  ('other', '综合', 'SSH免密登录、内网穿透、网站升级到Https等', '/static/app/images/wx/other.png', 5),
+  ('ios', 'iOS开发', '记录学习swift的一些笔记、开发记录', '/static/app/images/wx/other.png', 6);
 
 -- ----------------------------
 --  Table structure for book
